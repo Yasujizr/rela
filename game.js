@@ -1592,6 +1592,9 @@ class NewPlayer {
                             this.hunger = Math.min(this.maxHunger, (this.hunger + LISTITEMS[item_].use.info));
                             this.inventory.remove([{ item: item_, amount: 1 }]);
                         }
+                        if(LISTITEMS[item_].use.responseItem) {
+                            this.inventory.add(LISTITEMS[item_].use.responseItem);
+                        }
                         break;
                     case (USE_BUILD):
                         this.currentBuild = {

@@ -290,6 +290,7 @@ let
      * use{}: The Usage of the Item
      * use{}.type: What can the Item be used for
      * use{}.info: The specific Value for the Usage 
+     * use{}.responseItem: The Item, which will return into the Player's inventory
      * ]
      * [
      * tool: The Item that should be added to the Equipment, if this item is equiped
@@ -308,8 +309,8 @@ let
         { name: "Stick", color: "#805200" },
         { name: "Blueberry", use: { type: USE_EAT, info: 10 }, color: "#35486c" },
         { name: "Raspberry", use: { type: USE_EAT, info: 10 }, color: "#bb0720" },
-        { name: "Apple", use: { type: USE_EAT, info: 15 }, color: "#d50000" },
-        {},
+        { name: "Apple", use: { type: USE_EAT, info: 15, responseItem: 6 }, color: "#d50000" },
+        { name: "Apple Junk", color: "#cace9c" },
         {},
         {},
         {},
