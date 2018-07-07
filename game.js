@@ -1875,7 +1875,7 @@ function createNPCs() {
                     delY = (ypos - Landscape.objectList[objectIterator].y),
                     distance = Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2));
 
-                if (distance <= 200) {
+                if (distance <= (50 + Landscape.objectList[objectIterator].size)) {
                     canbePlaced = false;
                     break;
                 }
@@ -2101,7 +2101,7 @@ class NewMap {
                         delY = (ypos - this.objectList[objectIterator].y),
                         distance = Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2));
 
-                    if (distance <= 200) {
+                    if (distance <= (this.objectList[objectIterator].size + LISTOBJECTS[currentObject.object].size - 20)) {
                         canbePlaced = false;
                         break;
                     }
