@@ -79,8 +79,11 @@ let
             cs: 300,
             list: [{ "name": "Base", "shape": 1, "size": 148, "position": [150, 150], "fillStyle": "#ffa54f", "strokeStyle": "#8b5a2b", "lineWidth": "7" }]
         },
-        
-        { cs: 0, list: [] },
+        // BOWL
+        {
+             cs: 60, 
+             list: [{"name":"Bottom","shape":1,"size":27,"position":30,"fillStyle":"#824100","strokeStyle":"#552b00","lineWidth":"4"},{"name":"Top","shape":1,"size":13,"position":30,"fillStyle":"#c16100","strokeStyle":"#6f3700","lineWidth":"4"}]
+        },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
@@ -224,7 +227,16 @@ let
             position: 0,
             sprite: 6
         },
-        {},
+        {
+            obj: "BOWL",
+            passable: false,
+            size: 30,
+            breakSize: 24,
+            damaging: 0.5,
+            position: 0,
+            storage: 3,
+            sprite: 11
+        },
         {},
         {},
         {},
@@ -441,7 +453,7 @@ let
         { object: 3, amount: 500, minPos: 400, maxPos: (99 * 400) },
         { object: 4, amount: 750, minPos: 400, maxPos: (99 * 400) },
         { object: 5, amount: 750, minPos: 400, maxPos: (99 * 400) },
-        { object: 6, amount: 25 }
+        { object: 6, amount: 50, minPos: 400, maxPos: (99 * 400) }
     ],
 
     /**
