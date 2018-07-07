@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- This whole project is an homage to my first Girlfriend! -->
+
+    <title>RecursiveLaughter</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="language" content="en">
+
+    <meta name="google-site-verification" content="gbi-sGkZlGI2TYVpgceIjR-5DVAcYk3EXmbutaiWeMs" />
+    <meta name="author" content="Woody Guthrie">
+    <meta name="keywords" content="recursive laughter, recursion,game,harvesting,evolution,html,css,javascript,dynamic">
+
+    <meta name="description" content="Build a World. Be the one Hero.">
+
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+</head>
+
+<body oncontextmenu="return (false);">
+    <div>
+        <span id="loadingDiv">
+            <div id="loadingAnimation"></div>
+            Loading...
+        </span>
+    </div>
+
+    <div id="game" class="whole-window window-frame">
+        <div id="initialMenu" class="whole-window window-frame" style="display: none;">
+            <p id="daysLeft" style="position: absolute; top: 0.1em; left: 0.3em; color: #fff;">
+                <script>
+                    let ele = document.getElementById("daysLeft"),
+                        initialDate = new Date("2018-05-23T00:00:00"),
+                        initialdateUTC = Date.UTC(initialDate.getFullYear(), initialDate.getMonth(), initialDate.getDate()),
+                        currentDate = new Date(Date.now()),
+                        currentDateUTC = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+
+                    ele.innerHTML = " - " + (275 - ((((currentDateUTC - initialdateUTC) / 1000) / 3600) / 24)) + " Days left - " +
+                        "Last Update: 06. July 2018 -";
+                </script>
+            </p>
+
+            <div class="logo-text-div">
+                <p class="logo-text" style="color:#c9c9c9">RECURSIVE</p>
+                <p class="logo-text" style="color:#1fc702">LAUGHTER</p>
+            </div>
+
+            <div class="initial-menu-list">
+                <div class="initial-menu-screens initial-menu-screens-hide" style="color: white;text-align: left;">
+                    <h2 style="margin-top: 5px; margin-bottom: 5px;">How to play:</h2>
+                    <ul>
+                        <li style="margin-top: 5px;">
+                            <b>Walk:</b>
+                            <b>W, A, S, D</b>
+                        </li>
+                        <li style="margin-top: 5px;">
+                            <b>Punch:</b>
+                            <b>Left Mouse-Button</b>
+                        </li>
+                        <li style="margin-top: 8px;">
+                            <b>Basic Game-Mechanic:</b>
+                            <p>Every time you discover a new Item, you get
+                                <b>ExperiencePoints</b>. With enough
+                                <b>ExperiencePoints</b> you can buy a new
+                                <b>Evolution</b>, to get more Evolutions, Recipes and Constructions.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="initial-menu-screens">
+                    <div id="gameButtons">
+                        <button style="width: 100%;" class="init-buttons" onclick="startGame();">New Game!</button>
+
+                        <p style="font-family: Verdana, monospace; color: white; font-size: 0.8em; font-weight: bold;">- or -</p>
+                        <button style="width: 49%;" class="init-buttons" onclick="loadLocalStorage();">Continue</button>
+                        <button style="width: 49%;" class="init-buttons">
+                            <label for="loadFileInput">Load</label>
+                        </button>
+                    </div>
+
+                    <input onchange="loadJSONFile(this.files[0]);" accept=".json" type="file" id="loadFileInput" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;"
+                    />
+                    <p id="loadingMessages"></p>
+                </div>
+
+                <div class="initial-menu-screens initial-menu-screens-hide" style="color: white;">
+                    <h2 style="margin-top: 5px; margin-bottom: 5px;">Personalize the Game!</h2>
+
+                    <p>Your bored of the normal Game? Then add some new Modifications and make it
+                        <b>YOUR</b> Game.</p>
+
+                    <a onclick="focusElement('description');" style="margin-top: 5px; text-decoration: underline; cursor: pointer;">Set your Modifications!</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameDiv">
+            <header id="gameHeader"></header>
+
+            <canvas id="AnimationCanvas" class="whole-window window-frame"></canvas>
+
+            <canvas id="EffectCanvas" class="whole-window window-frame"></canvas>
+
+            <span id="menuButtons" style="display: none;">
+                <button id="open_a" style="position: absolute; top: 0.5em; right: 0.75em; width: 4em; height: 4em;" class="menu-button change-window-button"
+                    title="Menu (Esc)"></button>
+
+                <div class="menu-buttons">
+                    <button id="open_b" class="menu-button change-window-button" title="Inventory (E)">I</button>
+                    <button id="open_c" class="menu-button change-window-button" title="Recipes (R)">R</button>
+                    <button id="open_d" class="menu-button change-window-button" title="Constructions (C)">C</button>
+                    <button id="open_e" class="menu-button change-window-button" title="Evolutions (F)">E</button>
+                    <button id="open_f" class="menu-button change-window-button" title="Equipment (T)">F</button>
+                </div>
+            </span>
+
+            <div id="windows">
+                <div name="Menu" id="a" style="display: none; z-index: 12;" class="menu-div">
+                    <ul id="aheader" class="window-header" style="display: inline-block; text-align: left; cursor: default; height: 6%; margin-bottom: 0.2em;">
+                        <li id="close_a" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Menu:</li>
+                    </ul>
+                    <div class="window-content" style="height: 94%; padding: 1em 0;">
+                        <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="saveGameToJSON();">Save Game!</button>
+                        <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="window.location.reload();">Exit</button>
+
+                        <!-- <div>
+                            <h3>Options:</h3>
+                            <button onclick="changeControl();">Change Control</button>
+                            <label id="currentControlMode"></label>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div name="Inventory" id="b" style="display: none;" class="window-div draggable">
+                    <ul id="bheader" class="window-header" style="display: inline-block; text-align: left;">
+                        <li id="close_b" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Inventory:</li>
+                    </ul>
+                    <div class="window-content">
+                        <ul id="itemList" class="window-list" style="display: block; height: 100%;"></ul>
+                    </div>
+                </div>
+                <div name="Recipe" id="c" style="display: none; top: 13em;" class="window-div draggable">
+                    <ul id="cheader" class="window-header" style="display: inline-block; text-align: left;">
+                        <li id="close_c" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Recipes:</li>
+                    </ul>
+                    <div class="window-content">
+                        <ul id="recipeList" class="window-list" style="display: block; height: 100%;"></ul>
+                    </div>
+                </div>
+                <div name="Construction" id="d" style="display: none; top: 26em;" class="window-div draggable">
+                    <ul id="dheader" class="window-header" style="display: inline-block; text-align: left;">
+                        <li id="close_d" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Build:</li>
+                    </ul>
+                    <div class="window-content">
+                        <ul id="constructionList" class="window-list" style="display: block; height: 100%;"></ul>
+                    </div>
+                </div>
+                <div name="Evolutions" id="e" style="display: none; left: 10em;" class="window-div draggable">
+                    <ul id="eheader" class="window-header" style="display: inline-block; text-align: left;">
+                        <li id="close_e" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Evolutions:</li>
+                    </ul>
+                    <div class="window-content">
+                        <p id="evolutionPoints" style="height: 10%;"></p>
+                        <ul id="evolutionList" class="window-list" style="display: block; height: 90%;"></ul>
+                    </div>
+                </div>
+                <div name="Equipment" id="f" style="display: none; top: 13em; left: 10em;" class="window-div draggable">
+                    <ul id="fheader" class="window-header" style="display: inline-block; text-align: left;">
+                        <li id="close_f" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Equiped:</li>
+                    </ul>
+                    <div class="window-content">
+                        <ul id="equipedList" class="window-list" style="display: block; height: 100%;"></ul>
+                    </div>
+                </div>
+
+                <div name="Storage" id="g" style="display: none; top: 13em; left: 20em;" class="window-div draggable">
+                    <ul id="gheader" class="window-header" style="display: inline-block; text-align: left;">
+                        <li id="close_g" class="change-window-button window-close-button">[X]</li>
+                        <li class="window-title">Storage:</li>
+                    </ul>
+                    <div class="window-content">
+                        <ul id="storageList" class="window-list" style="display: block; height: 100%;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="description" class="whole-window window-frame" style="top: 100%;">
+        <style>
+            #description-window-list {
+                display: flex;
+                width: 100%;
+                height: 90%;
+                border-bottom: 1px solid;
+                justify-content: space-around;
+            }
+
+            .description-window-list-list {
+                display: inline-block;
+                width: 27%;
+                height: 90%;
+                margin-top: 2%;
+                border: 1px solid;
+            }
+
+            .description-window-list-list-list {
+                display: block;
+                width: 100%;
+                height: 100%;
+                overflow-y: auto;
+            }
+
+            .description-draggable-list.over {
+                background-color: #c9c9c9;
+            }
+
+            .description-window-list-list-element {
+                display: block;
+                width: 100%;
+                height: 33%;
+                margin-bottom: 5%;
+            }
+
+            .description-window-list-list-element-header {
+                display: block;
+                width: 100%;
+                height: 30%;
+            }
+
+            .description-window-list-list-element-header-title {
+                position: relative;
+                left: 5%;
+                top: 20%;
+                color: white;
+                font-size: 1.5em;
+                font-family: Verdana, monospace;
+            }
+
+            .description-window-list-list-element-header-button {
+                float: right;
+                margin-right: 5%;
+                width: 2em;
+                height: 2em;
+                margin-top: 3%;
+                border-radius: 100%;
+                border: none;
+                background: #e6e6e6;
+                font-weight: bold;
+                font-family: impact;
+            }
+
+            .description-window-list-list-element-content {
+                display: block;
+                width: 100%;
+                height: 70%;
+                background-color: #3c3c3c;
+                box-shadow: 0px 0px 20px 2px #4c4a4a;
+            }
+
+            .description-window-list-list-element-content-description {
+                width: 80%;
+                height: 70%;
+                padding-top: 2%;
+                padding-left: 5%;
+                text-align: left;
+                color: white;
+                font-size: 1em;
+                font-family: 'America', sans-serif;
+            }
+
+            .description-window-list-list-element-content-code {
+                display: block;
+                width: 90%;
+                height: 1.5em;
+                margin: auto;
+                background-color: transparent;
+                border: none;
+                color: white;
+                font-family: Consolas;
+            }
+        </style>
+
+        <ul id="description-window-list">
+            <li class="description-window-list-list" style="width: 33%">
+                <ul id="activeList" class="description-window-list-list-list description-draggable-list">
+                </ul>
+            </li>
+
+            <li class="description-window-list-list" style="width: 32%">
+                <ul id="availablelist" class="description-window-list-list-list description-draggable-list">
+                    <li class="description-window-list-list-element" style="background-color: blue;" draggable="true">
+                        <header class="description-window-list-list-element-header">
+                            <span class="description-window-list-list-element-header-title">Speed Boost</span>
+                        </header>
+                        <div class="description-window-list-list-element-content">
+                            <p class="description-window-list-list-element-content-description">
+                                Is walking to slow for you?
+                                <br> Then add this Mod and you're character starts running and keeps on running.
+                            </p>
+                            <input class="description-window-list-list-element-content-code" type="text" autocomplete="off" autocorrect="off" autocapitalize="off"
+                                spellcheck="false" value="Player.acceleration = 0.8; Player.maxVelocity = 1.5;" />
+                        </div>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="description-window-list-list" style="width: 26%">
+                <iframe style="width: 100%; height: 100%;" src="http://recursivelaughter.com/news.html"></iframe>
+            </li>
+        </ul>
+
+        <a onclick="focusElement('game');" style="text-decoration: underline; cursor: pointer;">Go Back!</a>
+
+        <script>
+            /**
+             * Update the Elements in the Lists and define new Element-IDs and Classes.
+            */
+            function updateLists() {
+                let activeList = document.getElementById("activeList").children;
+                for (let elementIterator = 0; elementIterator < activeList.length; elementIterator++) {
+                    activeList[elementIterator].id = "active_" + elementIterator;
+                    document.querySelector("#active_" + elementIterator + " .description-window-list-list-element-content .description-window-list-list-element-content-code").classList.add("activeCode")
+                }
+
+                let availablelist = document.getElementById("availablelist").children;
+                for (let elementIterator = 0; elementIterator < availablelist.length; elementIterator++) {
+                    availablelist[elementIterator].id = "available_" + elementIterator;
+                    document.querySelector("#available_" + elementIterator + " .description-window-list-list-element-content .description-window-list-list-element-content-code").classList.remove("activeCode")
+                }
+            } // updateLists
+
+            /**
+             * Get all Lines of Code, that are active.
+             *
+             * @returns {Array} All active Lines of Code
+            */
+            function getActiveCode() {
+                let codeInputList = document.getElementsByClassName("activeCode"),
+                    codeList = [];
+
+                for (let codeIterator = 0; codeIterator < codeInputList.length; codeIterator++) {
+                    codeList.push(codeInputList[codeIterator].value);
+                }
+
+                return (codeList);
+            } // getActiveCode
+
+            /**
+             * Initialize all Event-Listener.
+            */
+            function initEventsDescription() {
+                let elementList = document.getElementsByClassName("description-window-list-list-element");
+                for (let elementIterator = 0; elementIterator < elementList.length; elementIterator++) {
+                    elementList[elementIterator].addEventListener("dragstart", (e) => {
+                        e.dataTransfer.setData("text/html", e.target.id);
+                        e.target.style.opacity = 0.4;
+                    });
+                }
+
+                let listList = document.getElementsByClassName("description-draggable-list");
+                for (let listIterator = 0; listIterator < listList.length; listIterator++) {
+                    listList[listIterator].addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        return (false);
+                    });
+
+                    listList[listIterator].addEventListener("dragenter", (e) => {
+                        e.target.classList.add("over");
+                    });
+
+                    listList[listIterator].addEventListener("dragleave", (e) => {
+                        e.target.classList.remove("over");
+                    });
+
+                    listList[listIterator].addEventListener("drop", (e) => {
+                        if (e.target.id == "activeList" || e.target.id == "availablelist") {
+                            document.getElementById(e.dataTransfer.getData("text/html")).style.opacity = "1";
+                            e.srcElement.appendChild(document.getElementById(e.dataTransfer.getData("text/html")));
+                        }
+
+                        updateLists();
+
+                        e.target.classList.remove("over");
+                    });
+                }
+            } // initEventsDescription
+
+            /**
+             * Execute all Commands, as Javascript-Functions.
+            */
+            function executeModifications() {
+                let activeCode = getActiveCode();
+                let finalCode = "";
+
+                for (let i = 0; i < activeCode.length; i++) {
+                    finalCode += "try { " + activeCode[i] + "} catch(e) {console.log(e);}";
+                }
+
+                window.location = "javascript: (function() {" + finalCode + "}) ();";
+            } // executeModifications
+
+            initEventsDescription();
+            updateLists();
+        </script>
+    </div>
+
+    <div id="endcard" class="whole-window window-frame" style="display: none;">
+        <h1 style="margin-top: 4%; color: red;font-size: 5em;">Game Over!</h1>
+        <a href="/" style="color: white; font-size: 1.5em; text-decoration: none;">- Go Back -</a>
+
+        <h3 style="margin-top: 5%; color: white;">Here's a video to cheer you up!</h3>
+        <div id="videoPart" style="width: 100%; height: fit-content;"></div>
+    </div>
+
+    <script src="/resource.js"></script>
+    <script src='/game.js'></script>
+</body>

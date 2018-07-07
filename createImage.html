@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Image-Creator!</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="language" content="en">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #backButton {
+            padding: 5px;
+        }
+
+        #windowParts {
+            display: inline-flex;
+            width: 100%;
+            height: 70%;
+
+            margin-top: 2%;
+            padding-bottom: 2%;
+
+            border-bottom: 2px solid;
+
+            justify-content: space-between;
+        }
+
+        .window-part {
+            display: inline-block;
+            width: 28%;
+            height: 100%;
+
+            padding: 2%;
+
+            border: 1px solid black;
+        }
+
+        #drawingCanvas {
+            display: block;
+            width: 64px;
+            height: 64px;
+
+            margin-bottom: 10%;
+
+            border: 1px solid;
+        }
+
+        .shape-list-element {
+            margin-top: 0.5em;
+            padding-bottom: 0.3em;
+
+            border-bottom: 1px solid gray;
+        }
+
+        #resetButton {
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .final-menu-button {
+            width: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="windowParts">
+        <li class="window-part" style="text-align: -webkit-center">
+            <input id="canvasSize" type="number">
+            <button onclick="resizeCanvas()">Set Canvas Size</button>
+
+            <canvas id="drawingCanvas" width="64" height="64" style="margin-top: 1em; background-color: #206b2c;"></canvas>
+        </li>
+
+        <li class="window-part">
+            <h3>Create a new Shape:</h3>
+            <form id="createForm">
+                <ul>
+                    <li style="margin-top: 10px;">Size:
+                        <input id="size" type="number">
+                    </li>
+                    <li style="margin-top: 10px;">Position:
+                        <input id="xposition" type="number" style="width: 6em">
+                        <input id="yposition" type="number" style="width: 6em">
+                    </li>
+                    <li style="margin-top: 10px;">fillStyle:
+                        <input id="fillStyle" type="text">
+                        <input id="colorPicker1" onchange="document.getElementById('fillStyle').value = document.getElementById('colorPicker1').value;"
+                            type="color">
+                    </li>
+                    <li style="margin-top: 10px;">strokeStyle:
+                        <input id="strokeStyle" type="text">
+                        <input id="colorPicker2" onchange="document.getElementById('strokeStyle').value = document.getElementById('colorPicker2').value;"
+                            type="color">
+                    </li>
+                    <li style="margin-top: 10px;">lineWidth:
+                        <input id="lineWidth" type="text">
+                    </li>
+                    <li style="margin-top: 10px;">Start-X:
+                        <input id="startX" type="number">
+                    </li>
+                    <li style="margin-top: 10px;">Start-Y:
+                        <input id="startY" type="number">
+                    </li>
+                    <li style="margin-top: 10px;">End-X:
+                        <input id="endX" type="number">
+                    </li>
+                    <li style="margin-top: 10px;">End-Y:
+                        <input id="endY" type="number">
+                    </li>
+                </ul>
+            </form>
+
+            <div style="margin-top: 5%;">
+                <div style="display: flex; width: 100%; justify-content: space-around; margin-bottom: 2%;">
+                    <button onclick="createRect();">Create Rect!</button>
+                    <button onclick="createCircle();">Create Circle!</button>
+                    <button onclick="createLine();">Create Line!</button>
+                    <button onclick="createHexagon();">Create Hexagon!</button>
+                </div>
+
+                <button onclick="document.getElementById('createForm').reset();" id="resetButton">Reset!</button>
+            </div>
+        </li>
+
+        <li class="window-part">
+            <h3> Current Shapes:</h3>
+            <ul id="shapeList" style="margin-bottom: 5%;"></ul>
+
+            <input id="finalOutput" type="text" style="width: 100%;"></input>
+            <div style="text-align: center; margin-top: 5%;">
+                <button class="final-menu-button" onclick="shapeList = JSON.parse(document.getElementById('finalOutput').value); updateShapes();">Load</button>
+                <button class="final-menu-button" onclick="shapeList=[]; updateShapes();">Clear</button>
+                <button class="final-menu-button" onclick="document.getElementById('finalOutput').select(); document.execCommand('copy'); console.log('copied!');">Copy</button>
+            </div>
+        </li>
+    </ul>
+
+    <a id="backButton" href="/">Go back</a>
+</body>
+
+<script>
+    let
+        canvas = document.getElementById("drawingCanvas"),
+        context = canvas.getContext("2d"),
+
+        shapeList = [],
+
+        sizeIn = document.getElementById("size"),
+        xPositionIn = document.getElementById("xposition"),
+        yPositionIn = document.getElementById("yposition"),
+        fillIn = document.getElementById("fillStyle"),
+        strokeIn = document.getElementById("strokeStyle"),
+        lineIn = document.getElementById("lineWidth"),
+        startXIn = document.getElementById("startX"),
+        startYIn = document.getElementById("startY"),
+        endXIn = document.getElementById("endX"),
+        endYIn = document.getElementById("endY");
+
+    /**
+     * Resize the Canvas.
+    */
+    function resizeCanvas() {
+        let size = Number(document.getElementById('canvasSize').value);
+
+        canvas.width = size;
+        canvas.height = size;
+
+        canvas.style.width = size + 'px';
+        canvas.style.height = size + 'px';
+    } // resizeCanvas
+
+    /**
+     * Create a new Rectangle.
+    */
+    function createRect() {
+        let newObject = {};
+        newObject.name = "Shape_" + shapeList.length;
+        newObject.shape = 0;
+        newObject.size = Number(sizeIn.value);
+        newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
+        if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
+        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
+        else { newObject.lineWidth = "1"; }
+        shapeList.push(newObject);
+
+        updateShapes();
+    } // createRect
+
+    /**
+     * Create a new Circle.
+    */
+    function createCircle() {
+        let newObject = {};
+        newObject.name = "Shape_" + shapeList.length;
+        newObject.shape = 1;
+        newObject.size = Number(sizeIn.value);
+        newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
+        if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
+        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
+        else { newObject.lineWidth = "1"; }
+        shapeList.push(newObject);
+
+        updateShapes();
+    } // createCircle
+
+    /**
+     * Create a new Line.
+    */
+    function createLine() {
+        let newObject = {};
+        newObject.name = "Shape_" + shapeList.length;
+        newObject.shape = 2;
+        newObject.startX = Number(startXIn.value);
+        newObject.startY = Number(startYIn.value);
+        newObject.endX = Number(endXIn.value);
+        newObject.endY = Number(endYIn.value);
+        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
+        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
+        else { newObject.lineWidth = "1"; }
+        shapeList.push(newObject);
+
+        updateShapes();
+    } // createLine
+
+    /**
+     * Create a new Hexagon.
+    */
+    function createHexagon() {
+        let newObject = {};
+        newObject.name = "Shape_" + shapeList.length;
+        newObject.shape = 3;
+        newObject.size = Number(sizeIn.value);
+        newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
+        if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
+        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
+        else { newObject.lineWidth = "1"; }
+        shapeList.push(newObject);
+
+        updateShapes();
+    } // createLine
+
+
+    /**
+     * Move an element in an array.
+     * 
+     * @returns The new Array
+     * 
+     * @param {number} old_index - The Index to move from
+     * @param {number} new_index - The Index to move to
+    */
+    function array_move(old_index, new_index) {
+        shapeList.splice(new_index, 0, shapeList.splice(old_index, 1)[0]).join(',');
+        updateShapes();
+    } // array_move
+
+    /**
+     * Set the Values in the Input-Fields to edit a shape.
+     * 
+     * @param {number} index_ - The Index of the shape to edit
+    */
+    function editShape(index_) {
+        document.getElementById('createForm').reset();
+
+        let currentShape = shapeList[index_];
+
+        if (currentShape.size != undefined) sizeIn.value = currentShape.size;
+        if (currentShape.position != undefined) { xPositionIn.value = currentShape.position[0]; yPositionIn.value = currentShape.position[1]; }
+        if (currentShape.fillStyle != undefined) fillIn.value = currentShape.fillStyle;
+        if (currentShape.strokeStyle != undefined) strokeIn.value = currentShape.strokeStyle;
+        if (currentShape.lineWidth != undefined) lineIn.value = currentShape.lineWidth;
+        if (currentShape.startX != undefined) startXIn.value = currentShape.startX;
+        if (currentShape.startY != undefined) startYIn.value = currentShape.startY;
+        if (currentShape.endX != undefined) endXIn.value = currentShape.endX;
+        if (currentShape.endY != undefined) endYIn.value = currentShape.endY;
+    } // editShape
+
+    /**
+     * Update the Shapes-List.
+    */
+    function updateShapes() {
+        let listText = "";
+
+        for (let currentShapeIndex = (shapeList.length - 1); currentShapeIndex >= 0; currentShapeIndex--) {
+            try {
+                listText +=
+                    "<li class='shape-list-element'> <input onchange='shapeList[" + currentShapeIndex + "].name = this.value; updateShapes();' value='" + shapeList[currentShapeIndex].name + "' type='text'/>" + shapeList[currentShapeIndex].shape + " - ";
+
+                listText += "<button onclick='shapeList.splice(" + currentShapeIndex + ", 1); updateShapes();'>Remove</button>";
+
+                listText += "<button style='margin-right: 0.3em;' onclick='editShape(" + currentShapeIndex + ");'>Edit</button>";
+
+                if (currentShapeIndex != 0) {
+                    listText += "<button onclick='array_move(" + currentShapeIndex + ", " + (currentShapeIndex - 1) + ");'>DOWN</button>";
+                }
+                if (currentShapeIndex != (shapeList.length - 1)) {
+                    listText += "<button onclick='array_move(" + currentShapeIndex + ", " + (currentShapeIndex + 1) + ");'>UP</button>";
+                }
+
+
+                listText +=
+                    "</li>";
+            } catch (e) { }
+        }
+
+        document.getElementById("shapeList").innerHTML = listText;
+        document.getElementById("finalOutput").value = JSON.stringify(shapeList);
+    } // updateShapes
+
+    let drawingLoop = setInterval(() => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let currentShapeIndex in shapeList) {
+            context.save();
+            context.beginPath();
+
+            let size = shapeList[currentShapeIndex].size,
+                position = shapeList[currentShapeIndex].position,
+                xPosition = (typeof (position) == typeof []) ? (position[0]) : (position),
+                yPosition = (typeof (position) == typeof []) ? (position[1]) : (position);
+
+            switch (shapeList[currentShapeIndex].shape) {
+                // Draw a Rectangle
+                case (0):
+                    context.rect(xPosition, yPosition, size, size);
+                    break;
+                // Draw a Circle
+                case (1):
+                    context.arc(xPosition, yPosition, size, 0, (2 * Math.PI));
+                    break;
+                // Draw a Line
+                case (2):
+                    context.moveTo(shapeList[currentShapeIndex].startX, shapeList[currentShapeIndex].startY);
+                    context.lineTo(shapeList[currentShapeIndex].endX, shapeList[currentShapeIndex].endY);
+                    break;
+                // Draw a Hexagon
+                case (3):
+                    let delX = (Math.cos((1 / 3) * Math.PI) * size),
+                        delY = (Math.sin((1 / 3) * Math.PI) * size);
+
+                    context.moveTo(xPosition - size, yPosition);
+                    context.lineTo(xPosition - delX, yPosition - delY);
+                    context.lineTo(delX + xPosition, yPosition - delY);
+                    context.lineTo(size + xPosition, yPosition);
+                    context.lineTo(delX + xPosition, delY + yPosition);
+                    context.lineTo(xPosition - delX, delY + yPosition);
+                    context.lineTo(xPosition - size, yPosition);
+
+                    break;
+            }
+
+            if (shapeList[currentShapeIndex].fillStyle) {
+                context.fillStyle = shapeList[currentShapeIndex].fillStyle;
+                context.fill();
+            }
+
+            if (shapeList[currentShapeIndex].strokeStyle) {
+                context.strokeStyle = shapeList[currentShapeIndex].strokeStyle;
+
+                if (shapeList[currentShapeIndex].lineWidth) {
+                    context.lineWidth = shapeList[currentShapeIndex].lineWidth;
+                }
+
+                context.stroke();
+            }
+
+            context.closePath();
+            context.restore();
+        }
+    }, (1000 / 30));
+</script>

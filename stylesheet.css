@@ -1,0 +1,332 @@
+/*
+ *	GENERAL
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+}
+
+body {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    text-align: center;
+    font-size: 100%;
+    overflow: hidden;
+}
+
+li {
+    list-style: none;
+}
+
+/*
+ *  CLASSES
+*/
+
+.center-element {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.whole-window {
+    width: 100%;
+    height: 100%;
+}
+
+.window-frame {
+    display: block;
+    position: absolute;
+}
+
+.logo-text-div {
+    margin: 5% auto 5% auto;
+}
+
+.logo-text {
+    font-size: 5em;
+    font-family: Verdana, monospace;
+    text-shadow: 8px 5px 0px black;
+}
+
+.initial-menu-list {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.initial-menu-screens {
+    display: inline-block;
+    width: 26%;
+    height: fit-content;
+    padding: 0 1em 0.5em 1em;
+    border: 3px solid rgba(61, 30, 30, 0.582);
+    border-radius: 20px;
+    background-color: rgba(70, 39, 39, 0.582);
+}
+
+.init-buttons {
+    height: 2.5em;
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+    border: none;
+    border-radius: 2px;
+    background-color: #83af50;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Verdana, monospace;
+    color: #fff;
+    box-shadow: 0 2px #536f32;
+    transition-duration: 200ms;
+}
+
+.init-buttons:hover {
+    background-color: #6c973b;
+}
+
+.menu-buttons {
+    display: block;
+    width: fit-content;
+    height: 3em;
+    position: absolute;
+    right: 1em;
+    bottom: 0.5em;
+    z-index: 12;
+}
+
+.menu-button {
+    width: 3.2em;
+    height: 3.2em;
+    margin-left: 0.5em;
+    background-size: 100% 100%;
+    border: 2px solid #000;
+    border-radius: 100%;
+    float: right;
+    z-index: 12;
+}
+
+.menu-button:hover, .menu-button:focus {
+    border: 3px solid #000;
+}
+
+.menu-div {
+    width: 30%;
+    height: 50;
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    z-index: 12;
+    background-color: #f1f1f1;
+    border: 1px solid #000;
+    text-align: center;
+    overflow: hidden;
+}
+
+.window-div {
+    width: 10em;
+    height: 13em;
+    position: absolute;
+    z-index: 12;
+    padding: 0;
+    background-color: #f1f1f1;
+    border: 1px solid #000;
+    text-align: center;
+    overflow: hidden;
+}
+
+.window-header {
+    width: 100%;
+    height: 9%;
+    cursor: move;
+}
+
+.change-window-button {
+    cursor: pointer;
+}
+
+.window-title {
+    display: inline;
+    margin-left: 10px;
+    font-family: monospace, fantasy;
+    font-weight: bold;
+}
+
+.window-close-button {
+    display: inline;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+.window-content {
+    display: block;
+    height: 91%;
+    background-color: #c3c3c3;
+}
+
+.window-list {
+    overflow-y: auto;
+}
+
+.window-list-element {
+    margin-top: 0.15em;
+    padding: 0.1em 0 0.15em 0.3em;
+    border-bottom: 1px solid #b1b1b1;
+    text-align: left;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+.window-list-element-item {
+    color: white;
+}
+
+.window-list-element-button {
+    margin-left: 4%;
+    background-color: lightgray;
+    border: 1px solid white;
+    padding: 0 5px;
+    font-family: monospace;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.change-view-button {
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    cursor: pointer;
+    transition-duration: 600ms;
+}
+
+.change-view-button:hover {
+    text-decoration: underline;
+}
+
+/*
+ *  ELEMENTS
+*/
+
+#loadingDiv {
+    position: absolute;
+    left: 1%;
+    top: 1%;
+    z-index: 666;
+    color: white;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loadingAnimation {
+    width: 2em;
+    height: 2em;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 100%;
+    animation: spin 1s linear infinite;
+}
+
+#initialMenu {
+    z-index: 20;
+}
+
+#initHeader {
+    width: 100%;
+    position: absolute;
+    background-color: #222;
+    font-size: 1.1em;
+    font-family: monospace;
+    color: #e2e2e2;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+#gameButtons {
+    width: 80%;
+    margin: auto;
+    padding: 1em;
+    text-align: center;
+    justify-content: space-between
+}
+
+#loadingMessages {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+#EffectCanvas {
+    z-index: 11;
+    background-color: #000;
+    pointer-events: none;
+    transition-duration: 300ms;
+}
+
+#AnimationCanvas {
+    z-index: 10;
+    background-color: #206b2c;
+}
+
+#gameHeader {
+    width: 100%;
+    position: absolute;
+    z-index: 13;
+    margin-top: 1.8%;
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.8em;
+    pointer-events: none;
+}
+
+#information-header {
+    background-color: #fff;
+}
+
+#endcard {
+    z-index: 666;
+    text-align: center;
+}
+
+/*
+ *  @media-RULES
+*/
+
+@media (max-width: 900px) {
+    body {
+        font-size: 90%;
+    }
+    .initial-menu-screens {
+        width: 28%;
+        padding: 0 0.2em 0.25em 0.2em;
+    }
+}
+
+@media (max-width: 750px) {
+    body {
+        font-size: 90%;
+    }
+    .initial-menu-screens-hide {
+        display: none;
+    }
+    .initial-menu-screens {
+        width: 50%;
+        padding: 0 0.5em 0.75em 0.5em;
+    }
+}
