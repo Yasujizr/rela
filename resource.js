@@ -229,22 +229,15 @@ let
             position: 0,
             sprite: 6
         },
-        {
-            obj: "BOWL",
-            passable: false,
-            size: 30,
-            breakSize: 24,
-            damaging: 0.5,
-            position: 0,
-            storage: 3,
-            sprite: 11
-        },
+
         {},
         {},
         {},
         {},
         {},
         {},
+        {},
+        
         {
             obj: "BASKET",
             passable: false,
