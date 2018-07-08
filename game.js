@@ -751,28 +751,30 @@ class newText {
  * Draw Lights.
 */
 function renderLight() {
-    Effects.clear();
+    try {
+        Effects.clear();
 
-    Effects.canvas.style.opacity = Math.abs(MAXOPACITY * Math.sin(Player.clockTime));
+        Effects.canvas.style.opacity = Math.abs(MAXOPACITY * Math.sin(Player.clockTime));
 
-    Effects.context.translate((-Player.x + (Effects.width / 2)), (-Player.y + (Effects.height / 2)));
+        Effects.context.translate((-Player.x + (Effects.width / 2)), (-Player.y + (Effects.height / 2)));
 
-    for (let objectIterator in Landscape.visibleObjects) {
-        if (LISTOBJECTS[Landscape.objectList[Landscape.visibleObjects[objectIterator]].type].light) {
-            Effects.context.beginPath();
-            Effects.context.arc(
-                Landscape.objectList[Landscape.visibleObjects[objectIterator]].x,
-                Landscape.objectList[Landscape.visibleObjects[objectIterator]].y,
-                LISTOBJECTS[Landscape.objectList[Landscape.visibleObjects[objectIterator]].type].light,
-                0,
-                (2 * Math.PI));
-            Effects.context.fillStyle = "#fdf0c3eb";
-            Effects.context.fill();
-            Effects.context.closePath();
+        for (let objectIterator in Landscape.visibleObjects) {
+            if (LISTOBJECTS[Landscape.objectList[Landscape.visibleObjects[objectIterator]].type].light) {
+                Effects.context.beginPath();
+                Effects.context.arc(
+                    Landscape.objectList[Landscape.visibleObjects[objectIterator]].x,
+                    Landscape.objectList[Landscape.visibleObjects[objectIterator]].y,
+                    LISTOBJECTS[Landscape.objectList[Landscape.visibleObjects[objectIterator]].type].light,
+                    0,
+                    (2 * Math.PI));
+                Effects.context.fillStyle = "#fdf0c3eb";
+                Effects.context.fill();
+                Effects.context.closePath();
+            }
         }
-    }
 
-    Effects.context.translate((Player.x - (Effects.width / 2)), (Player.y - (Effects.height / 2)));
+        Effects.context.translate((Player.x - (Effects.width / 2)), (Player.y - (Effects.height / 2)));
+    } catch (e) { }
 } // renderLight
 
 // ===============================================================================================
@@ -1551,7 +1553,7 @@ class NewPlayer {
                                     this.inventory.add(LISTOBJECTS[currentObjectType].item[itemGatherIterator].item);
                                 }
                                 else {
-                                    Landscape.droppedItems.push({ x: Player.x, y: Player.y, item: LISTOBJECTS[currentObjectType].item[itemGatherIterator].item });
+                                    Landscape.droppedItems.push({ x: Player.x, y: Player.y, item: LISTOBJECTS[currentObjectType].item[itemGatherIterator].item, time: Date.now() });
                                     textManager.addText("I can't carry more!", (Canvas.width / 2 - 95), (Canvas.height / 2 - 50), 400);
                                 }
                             }
@@ -1571,7 +1573,7 @@ class NewPlayer {
      * @param {number} item_ - The Type of Item to drop
     */
     dropItem(item_) {
-        Landscape.droppedItems.push({ x: this.x, y: this.y, item: item_ });
+        Landscape.droppedItems.push({ x: this.x, y: this.y, item: item_, time: Date.now() });
         this.inventory.remove([{ item: item_, amount: 1 }]);
         this.updateWindows();
     } // dropItem
@@ -1591,8 +1593,8 @@ class NewPlayer {
                         if (this.hunger < this.maxHunger) {
                             this.hunger = Math.min(this.maxHunger, (this.hunger + LISTITEMS[item_].use.info));
                             this.inventory.remove([{ item: item_, amount: 1 }]);
-                        
-                            if(LISTITEMS[item_].use.responseItem) {
+
+                            if (LISTITEMS[item_].use.responseItem) {
                                 this.inventory.add(LISTITEMS[item_].use.responseItem);
                             }
                         }
@@ -1972,6 +1974,8 @@ class NewMap {
     /**
      * Add a new Object to the World.
      * 
+     * @returns {number} The Index of the Object
+     * 
      * @param {number} object_ - The Object to create
      * @param {number} x_ - The X-Position of the new Object
      * @param {number} y_ - The Y-Position of the new Object
@@ -1990,6 +1994,8 @@ class NewMap {
         else {
             this.objectList.push(newObject);
         }
+
+        return (this.objectList.length - 1);
     } // addObject
 
     /**
@@ -2112,8 +2118,26 @@ class NewMap {
                 }
 
                 if (canbePlaced) {
-                    this.addObject(currentObject.object, xpos, ypos);
-                    this.addObject(currentObject.object, ((FIELD_SIZE * FIELD_AMOUNT) - xpos), ((FIELD_SIZE * FIELD_AMOUNT) - ypos));
+                    let newObject = { type: currentObject.object, x: xpos, y: ypos, size: LISTOBJECTS[currentObject.object].size };
+
+                    if (LISTOBJECTS[currentObject.object].storage) {
+                        newObject.storage = [];
+
+                        if (LISTOBJECTS[currentObject.object].loot) {
+                            for (let currentItemIterator in LISTOBJECTS[currentObject.object].loot) {
+                                if (Math.random() >= LISTOBJECTS[currentObject.object].loot[currentItemIterator].get) {
+                                    newObject.storage.push(LISTOBJECTS[currentObject.object].loot[currentItemIterator].item);
+                                }
+                            }
+                        }
+                    }
+
+                    if (LISTOBJECTS[currentObject.object].position == 0) {
+                        this.objectList.unshift(newObject);
+                    }
+                    else {
+                        this.objectList.push(newObject);
+                    }
 
                     currentObjectAmount++;
                 }
@@ -2205,7 +2229,10 @@ class NewMap {
         for (let itemIterator = (this.droppedItems.length - 1); itemIterator >= 0; itemIterator--) {
             let currentItem = this.droppedItems[itemIterator];
 
-            if (Player.checkIfNearPlayer(currentItem.x, currentItem.y)) {
+            if ((Date.now() - currentItem.time) >= 5000) {
+                this.droppedItems.splice(itemIterator, 1);
+            }
+            else {
                 Canvas.context.beginPath();
                 Canvas.context.arc(currentItem.x, currentItem.y, DROPPED_SIZE, 0, 2 * Math.PI);
                 Canvas.context.fillStyle = LISTITEMS[currentItem.item].color;
@@ -2214,9 +2241,6 @@ class NewMap {
                 Canvas.context.fill();
                 Canvas.context.stroke();
                 Canvas.context.closePath();
-            }
-            else {
-                this.droppedItems.splice(itemIterator, 1);
             }
         }
 
@@ -2321,13 +2345,16 @@ class NewMap {
     */
     checkRadiusForObject(x_, y_, r_) {
         for (let objectIterator in this.visibleObjects) {
-            let deltaX = (x_ - this.objectList[this.visibleObjects[objectIterator]].x),
-                deltaY = (y_ - this.objectList[this.visibleObjects[objectIterator]].y),
-                distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+            try {
+                let deltaX = (x_ - this.objectList[this.visibleObjects[objectIterator]].x),
+                    deltaY = (y_ - this.objectList[this.visibleObjects[objectIterator]].y),
+                    distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 
-            if (distance <= (this.objectList[this.visibleObjects[objectIterator]].size + r_)) {
-                return (this.visibleObjects[objectIterator]);
+                if (distance <= (this.objectList[this.visibleObjects[objectIterator]].size + r_)) {
+                    return (this.visibleObjects[objectIterator]);
+                }
             }
+            catch (e) { }
         }
 
         return (-1);

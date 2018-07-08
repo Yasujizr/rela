@@ -41,7 +41,7 @@ let
         // APPLE TREE
         {
             cs: 240,
-            list: [{"name":"Stump","shape":1,"size":40,"position":120,"fillStyle":"#805200","strokeStyle":"#644100","lineWidth":"4"},{"name":"Leaves","shape":1,"size":110,"position":120,"fillStyle":"#366e3fb4","strokeStyle":"#24492A","lineWidth":"4"},{"name":"Apple_1","shape":1,"size":12,"position":[65,55],"fillStyle":"#d50000b4","strokeStyle":"#aa00002A","lineWidth":"3"},{"name":"Apple_2","shape":1,"size":12,"position":[125,200],"fillStyle":"#d50000b4","strokeStyle":"#aa00002A","lineWidth":"3"},{"name":"Apple_3","shape":1,"size":12,"position":[200,110],"fillStyle":"#d50000b4","strokeStyle":"#aa00002A","lineWidth":"3"},{"name":"Apple_4","shape":1,"size":12,"position":[40,170],"fillStyle":"#d50000b4","strokeStyle":"#aa00002A","lineWidth":"3"},{"name":"Apple_5","shape":1,"size":12,"position":[140,50],"fillStyle":"#d50000b4","strokeStyle":"#aa00002A","lineWidth":"3"}]
+            list: [{ "name": "Stump", "shape": 1, "size": 40, "position": 120, "fillStyle": "#805200", "strokeStyle": "#644100", "lineWidth": "4" }, { "name": "Leaves", "shape": 1, "size": 110, "position": 120, "fillStyle": "#366e3fb4", "strokeStyle": "#24492A", "lineWidth": "4" }, { "name": "Apple_1", "shape": 1, "size": 12, "position": [65, 55], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_2", "shape": 1, "size": 12, "position": [125, 200], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_3", "shape": 1, "size": 12, "position": [200, 110], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_4", "shape": 1, "size": 12, "position": [40, 170], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_5", "shape": 1, "size": 12, "position": [140, 50], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }]
         },
 
         // BLUEBERRY_BUSCH
@@ -54,6 +54,12 @@ let
         {
             cs: 64,
             list: [{ "name": "Bush", "shape": 1, "size": 30, "position": [32, 32], "fillStyle": "#176635", "strokeStyle": "#24492A", "lineWidth": "2" }, { "name": "Berry_3", "shape": 1, "size": 5, "position": [45, 40], "fillStyle": "#bb0720", "strokeStyle": "#000077", "lineWidth": "2" }, { "name": "Berry_2", "shape": 1, "size": 5, "position": [21, 37], "fillStyle": "#bb0720", "strokeStyle": "#000077", "lineWidth": "2" }, { "name": "Berry_1", "shape": 1, "size": 5, "position": [35, 16], "fillStyle": "#bb0720", "strokeStyle": "#000077", "lineWidth": "2" }]
+        },
+
+        // POT
+        {
+            cs: 64,
+            list: [{"name":"Bottom","shape":1,"size":28,"position":[32,32],"fillStyle":"#824100","strokeStyle":"#552b00","lineWidth":"4"},{"name":"Top","shape":1,"size":14,"position":[32,32],"fillStyle":"#c16100","strokeStyle":"#6f3700","lineWidth":"4"}]
         },
 
         // CAMPFIRE
@@ -79,8 +85,7 @@ let
             cs: 300,
             list: [{ "name": "Base", "shape": 1, "size": 148, "position": [150, 150], "fillStyle": "#ffa54f", "strokeStyle": "#8b5a2b", "lineWidth": "7" }]
         },
-        
-        { cs: 0, list: [] },
+
         { cs: 0, list: [] },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
@@ -231,7 +236,17 @@ let
         {},
         {},
         {},
-        {},
+        {
+            obj: "BASKET",
+            passable: false,
+            size: 28,
+            breakSize: 25,
+            damaging: 0.5,
+            position: 0,
+            storage: 7,
+            loot: [{ item: 1, get: 0 }],
+            sprite: 7
+        },
         {
             obj: "CAMPFIRE",
             passable: false,
@@ -240,7 +255,7 @@ let
             damaging: 0.5,
             light: 210,
             position: 0,
-            sprite: 7
+            sprite: 8
         },
         {
             obj: "BARREL",
@@ -250,7 +265,7 @@ let
             damaging: 0.5,
             position: 0,
             storage: 10,
-            sprite: 8
+            sprite: 9
         },
         {
             obj: "WOOD_WALL",
@@ -259,7 +274,7 @@ let
             breakSize: 15,
             damaging: 0.1,
             position: 1,
-            sprite: 9
+            sprite: 10
         },
         {},
         {},
@@ -278,7 +293,7 @@ let
             breakSize: 148,
             damaging: 0.1,
             position: 0,
-            sprite: 10
+            sprite: 11
         }
     ],
 
@@ -317,7 +332,7 @@ let
         {},
         { name: "Acorn", use: { type: USE_BUILD, info: 1 }, color: "#722b09" },
         { name: "Beech Seed", use: { type: USE_BUILD, info: 2 }, color: "#ae6928" },
-        { name: "Apple Seed", use: { type: USE_BUILD, info: 3}, color: "#c64103" },
+        { name: "Apple Seed", use: { type: USE_BUILD, info: 3 }, color: "#c64103" },
         { name: "Seedling", use: { type: USE_BUILD, info: 4 }, color: "#19548c" },
         { name: "Seedling", use: { type: USE_BUILD, info: 5 }, color: "#fe5f71" },
         {},
@@ -359,12 +374,12 @@ let
         {
             name: "Fire",
             neededPoints: 20,
-            improvements: [{ type: IMPROV_EVOL, index: 1 }, { type: IMPROV_EVOL, index: 2 }, { type: IMPROV_EVOL, index: 3 }, { type: IMPROV_CONS, index: 0 }]
+            improvements: [{ type: IMPROV_EVOL, index: 1 }, { type: IMPROV_EVOL, index: 2 }, { type: IMPROV_EVOL, index: 3 }, { type: IMPROV_CONS, index: 1 }]
         },
         {
             name: "Lumberjacking",
             neededPoints: 20,
-            improvements: [{ type: IMPROV_RECI, index: 0 }, { type: IMPROV_RECI, index: 1 }, { type: IMPROV_RECI, index: 2 }, { type: IMPROV_RECI, index: 3 }, { type: IMPROV_CONS, index: 1 }]
+            improvements: [{ type: IMPROV_RECI, index: 0 }, { type: IMPROV_RECI, index: 1 }, { type: IMPROV_RECI, index: 2 }, { type: IMPROV_RECI, index: 3 }, { type: IMPROV_CONS, index: 0 }, { type: IMPROV_CONS, index: 2 }]
         },
         {
             name: "Hunting",
@@ -374,7 +389,7 @@ let
         {
             name: "Basic Architecture",
             neededPoints: 40,
-            improvements: [{ type: IMPROV_CONS, index: 2 }, { type: IMPROV_CONS, index: 3 }]
+            improvements: [{ type: IMPROV_CONS, index: 3 }, { type: IMPROV_CONS, index: 4 }]
         }
     ],
 
@@ -387,6 +402,7 @@ let
      * necessary[].amount: The Amount of this specific Item
     */
     LISTCONSTRUCTIONS = [
+        { object: 13, necessary: [{ item: 2, amount: 2 }] },
         { object: 14, necessary: [{ item: 2, amount: 5 }] },
         { object: 15, necessary: [{ item: 2, amount: 8 }] },
         { object: 16, necessary: [{ item: 2, amount: 1 }] },
@@ -435,13 +451,14 @@ let
      * ]
     */
     createObjectList = [
-        { object: 0, amount: 500, minPos: 400, maxPos: (99 * 400) },
-        { object: 1, amount: 625, minPos: 400, maxPos: (99 * 400) },
-        { object: 2, amount: 450, minPos: 400, maxPos: (99 * 400) },
-        { object: 3, amount: 500, minPos: 400, maxPos: (99 * 400) },
-        { object: 4, amount: 750, minPos: 400, maxPos: (99 * 400) },
-        { object: 5, amount: 750, minPos: 400, maxPos: (99 * 400) },
-        { object: 6, amount: 25 }
+        { object: 0, amount: 800, minPos: 400, maxPos: (99 * 400) },
+        { object: 1, amount: 650, minPos: 400, maxPos: (99 * 400) },
+        { object: 2, amount: 500, minPos: 400, maxPos: (99 * 400) },
+        { object: 3, amount: 600, minPos: 400, maxPos: (99 * 400) },
+        { object: 4, amount: 900, minPos: 400, maxPos: (99 * 400) },
+        { object: 5, amount: 900, minPos: 400, maxPos: (99 * 400) },
+        { object: 13, amount: 1000 },
+        { object: 14, amount: 50 }
     ],
 
     /**
