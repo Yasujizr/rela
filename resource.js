@@ -85,7 +85,7 @@ let
             cs: 300,
             list: [{ "name": "Base", "shape": 1, "size": 148, "position": [150, 150], "fillStyle": "#ffa54f", "strokeStyle": "#8b5a2b", "lineWidth": "7" }]
         },
-
+        
         { cs: 0, list: [] },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
@@ -229,7 +229,16 @@ let
             position: 0,
             sprite: 6
         },
-        {},
+        {
+            obj: "BOWL",
+            passable: false,
+            size: 30,
+            breakSize: 24,
+            damaging: 0.5,
+            position: 0,
+            storage: 3,
+            sprite: 11
+        },
         {},
         {},
         {},
