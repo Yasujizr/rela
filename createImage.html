@@ -11,6 +11,11 @@
         * {
             margin: 0;
             padding: 0;
+            outline: none;
+        }
+
+        li {
+            list-style: none;
         }
 
         #backButton {
@@ -57,13 +62,63 @@
             border-bottom: 1px solid gray;
         }
 
-        #resetButton {
+        .input-list-element {
+            margin-top: 10px;
+        }
+
+        .menu-operation-buttons {
             width: 100%;
+            margin: 1% auto auto 0;
+            font-weight: bold;
+            border: none;
+            padding: 1%;
+            transition-duration: 200ms;
+        }
+
+        .menu-operation-buttons:hover,
+        .menu-operation-buttons:focus {
+            width: 96%;
+            border-radius: 20px;
+        }
+
+        .shape-choose-buttons {
+            width: 100%;
+
+            padding: 2% 0 2% 0;
+
+            border: 1px solid gray;
+
+            text-align: center;
+            justify-content: space-around;
+        }
+
+        .shape-choose-button {
+            display: inline-block;
+            width: 22%;
+            border: none;
+        }
+
+        .shape-choose-button:focus,
+        .shape-choose-button:hover {
             font-weight: bold;
         }
 
+
         .final-menu-button {
             width: 25%;
+            border: 1px solid darkgray;
+        }
+
+        @media (max-width: 800px) {
+            #windowParts {
+                display: block;
+            }
+
+            .window-part {
+                display: block;
+                width: 90%;
+                margin: 0 auto 0 auto;
+            }
         }
     </style>
 </head>
@@ -78,53 +133,62 @@
         </li>
 
         <li class="window-part">
-            <h3>Create a new Shape:</h3>
+            <div class="shape-choose-buttons">
+                <button id="shapeButton_0" title="rectangle" class="shape-choose-button" onclick="changeShape(0);">
+                    rect
+                </button>
+
+                <button id="shapeButton_1" title="cirlce" class="shape-choose-button" onclick="changeShape(1);">
+                    circ
+                </button>
+
+                <button id="shapeButton_2" title="line" class="shape-choose-button" onclick="changeShape(2);">
+                    line
+                </button>
+
+                <button id="shapeButton_3" title="hexagon" class="shape-choose-button" onclick="changeShape(3);">
+                    hexa
+                </button>
+            </div>
+
             <form id="createForm">
                 <ul>
-                    <li style="margin-top: 10px;">Size:
+                    <li id="a" class="input-list-element">Size:
                         <input id="size" type="number">
                     </li>
-                    <li style="margin-top: 10px;">Position:
-                        <input id="xposition" type="number" style="width: 6em">
-                        <input id="yposition" type="number" style="width: 6em">
+                    <li id="b" class="input-list-element">Position:
+                        <div style="display: inline-block; width: 70%;">
+                            <input id="xposition" type="number" style="width: 40%;">
+                            <input id="yposition" type="number" style="width: 40%;">
+                        </div>
                     </li>
-                    <li style="margin-top: 10px;">fillStyle:
+                    <li id="c" class="input-list-element">fillStyle:
                         <input id="fillStyle" type="text">
-                        <input id="colorPicker1" onchange="document.getElementById('fillStyle').value = document.getElementById('colorPicker1').value;"
-                            type="color">
                     </li>
-                    <li style="margin-top: 10px;">strokeStyle:
+                    <li id="d" class="input-list-element">strokeStyle:
                         <input id="strokeStyle" type="text">
-                        <input id="colorPicker2" onchange="document.getElementById('strokeStyle').value = document.getElementById('colorPicker2').value;"
-                            type="color">
                     </li>
-                    <li style="margin-top: 10px;">lineWidth:
+                    <li id="e" class="input-list-element">lineWidth:
                         <input id="lineWidth" type="text">
                     </li>
-                    <li style="margin-top: 10px;">Start-X:
-                        <input id="startX" type="number">
+                    <li id="f" class="input-list-element">Start:
+                        <div style="display: inline-block; width: 70%;">
+                            <input id="startX" type="number" style="width: 40%;">
+                            <input id="startY" type="number" style="width: 40%;">
+                        </div>
                     </li>
-                    <li style="margin-top: 10px;">Start-Y:
-                        <input id="startY" type="number">
-                    </li>
-                    <li style="margin-top: 10px;">End-X:
-                        <input id="endX" type="number">
-                    </li>
-                    <li style="margin-top: 10px;">End-Y:
-                        <input id="endY" type="number">
+                    <li id="g" class="input-list-element">End:
+                        <div style="display: inline-block; width: 70%;">
+                            <input id="endX" type="number" style="width: 40%;">
+                            <input id="endY" type="number" style="width: 40%;">
+                        </div>
                     </li>
                 </ul>
             </form>
 
-            <div style="margin-top: 5%;">
-                <div style="display: flex; width: 100%; justify-content: space-around; margin-bottom: 2%;">
-                    <button onclick="createRect();">Create Rect!</button>
-                    <button onclick="createCircle();">Create Circle!</button>
-                    <button onclick="createLine();">Create Line!</button>
-                    <button onclick="createHexagon();">Create Hexagon!</button>
-                </div>
-
-                <button onclick="document.getElementById('createForm').reset();" id="resetButton">Reset!</button>
+            <div style="margin-top: 2%; text-align: center;">
+                <button style="background-color: #60ff60;" onclick="createShape();" class="menu-operation-buttons">Create!</button>
+                <button style="background-color: #ff5f5f;" onclick="document.getElementById('createForm').reset();" class="menu-operation-buttons">Reset!</button>
             </div>
         </li>
 
@@ -133,10 +197,10 @@
             <ul id="shapeList" style="margin-bottom: 5%;"></ul>
 
             <input id="finalOutput" type="text" style="width: 100%;"></input>
-            <div style="text-align: center; margin-top: 5%;">
-                <button class="final-menu-button" onclick="shapeList = JSON.parse(document.getElementById('finalOutput').value); updateShapes();">Load</button>
-                <button class="final-menu-button" onclick="shapeList=[]; updateShapes();">Clear</button>
-                <button class="final-menu-button" onclick="document.getElementById('finalOutput').select(); document.execCommand('copy'); console.log('copied!');">Copy</button>
+            <div class="shape-choose-buttons" style="text-align: center; margin-top: 5%;">
+                <button class="final-menu-button shape-choose-button" onclick="shapeList = JSON.parse(document.getElementById('finalOutput').value); updateShapeList();">Load</button>
+                <button class="final-menu-button shape-choose-button" onclick="shapeList=[]; updateShapeList();">Clear</button>
+                <button class="final-menu-button shape-choose-button" onclick="document.getElementById('finalOutput').select(); document.execCommand('copy'); console.log('copied!');">Copy</button>
             </div>
         </li>
     </ul>
@@ -150,6 +214,7 @@
         context = canvas.getContext("2d"),
 
         shapeList = [],
+        createShapeType = 0,
 
         sizeIn = document.getElementById("size"),
         xPositionIn = document.getElementById("xposition"),
@@ -176,78 +241,61 @@
     } // resizeCanvas
 
     /**
-     * Create a new Rectangle.
+     * Change the Type of Shape.
+     * 
+     * @param {number} shapeType_ - The new Type of Shape
     */
-    function createRect() {
-        let newObject = {};
-        newObject.name = "Shape_" + shapeList.length;
-        newObject.shape = 0;
-        newObject.size = Number(sizeIn.value);
-        newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
-        if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
-        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
-        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
-        else { newObject.lineWidth = "1"; }
-        shapeList.push(newObject);
+    function changeShape(shapeType_) {
+        let showList_ = "abcde";
+        if (shapeType_ == 2) { showList_ = "defg"; }
 
-        updateShapes();
-    } // createRect
+        document.getElementById("shapeButton_" + createShapeType).style.border = "none";
+
+        createShapeType = shapeType_;
+
+        document.getElementById("shapeButton_" + createShapeType).style.border = "2px solid black";
+
+        for (let inputIterator = 0; inputIterator < 7; inputIterator++) {
+            let currentChar = String.fromCharCode(97 + inputIterator);
+
+            document.getElementById(currentChar).style.display = "none";
+
+            for (let i in showList_) {
+                if (showList_[i] == currentChar) {
+                    document.getElementById(currentChar).style.display = "block";
+                }
+            }
+        }
+    } // changeShape
 
     /**
-     * Create a new Circle.
+     * Create a new Shape.
     */
-    function createCircle() {
+    function createShape() {
         let newObject = {};
         newObject.name = "Shape_" + shapeList.length;
-        newObject.shape = 1;
-        newObject.size = Number(sizeIn.value);
-        newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
-        if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+        newObject.shape = createShapeType;
+
+        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3) {
+            newObject.size = Number(sizeIn.value);
+            newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
+            if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+        }
+        else if (createShapeType == 2) {
+            newObject.startX = Number(startXIn.value);
+            newObject.startY = Number(startYIn.value);
+            newObject.endX = Number(endXIn.value);
+            newObject.endY = Number(endYIn.value);
+        }
+
         if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
         if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
         else { newObject.lineWidth = "1"; }
+
         shapeList.push(newObject);
 
-        updateShapes();
-    } // createCircle
-
-    /**
-     * Create a new Line.
-    */
-    function createLine() {
-        let newObject = {};
-        newObject.name = "Shape_" + shapeList.length;
-        newObject.shape = 2;
-        newObject.startX = Number(startXIn.value);
-        newObject.startY = Number(startYIn.value);
-        newObject.endX = Number(endXIn.value);
-        newObject.endY = Number(endYIn.value);
-        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
-        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
-        else { newObject.lineWidth = "1"; }
-        shapeList.push(newObject);
-
-        updateShapes();
-    } // createLine
-
-    /**
-     * Create a new Hexagon.
-    */
-    function createHexagon() {
-        let newObject = {};
-        newObject.name = "Shape_" + shapeList.length;
-        newObject.shape = 3;
-        newObject.size = Number(sizeIn.value);
-        newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
-        if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
-        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
-        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
-        else { newObject.lineWidth = "1"; }
-        shapeList.push(newObject);
-
-        updateShapes();
-    } // createLine
-
+        updateShapeList();
+    } // createShape
 
     /**
      * Move an element in an array.
@@ -259,7 +307,7 @@
     */
     function array_move(old_index, new_index) {
         shapeList.splice(new_index, 0, shapeList.splice(old_index, 1)[0]).join(',');
-        updateShapes();
+        updateShapeList();
     } // array_move
 
     /**
@@ -268,6 +316,7 @@
      * @param {number} index_ - The Index of the shape to edit
     */
     function editShape(index_) {
+        changeShape(shapeList[index_].shape);
         document.getElementById('createForm').reset();
 
         let currentShape = shapeList[index_];
@@ -286,15 +335,15 @@
     /**
      * Update the Shapes-List.
     */
-    function updateShapes() {
+    function updateShapeList() {
         let listText = "";
 
         for (let currentShapeIndex = (shapeList.length - 1); currentShapeIndex >= 0; currentShapeIndex--) {
             try {
                 listText +=
-                    "<li class='shape-list-element'> <input onchange='shapeList[" + currentShapeIndex + "].name = this.value; updateShapes();' value='" + shapeList[currentShapeIndex].name + "' type='text'/>" + shapeList[currentShapeIndex].shape + " - ";
+                    "<li class='shape-list-element'> <input onchange='shapeList[" + currentShapeIndex + "].name = this.value; updateShapeList();' value='" + shapeList[currentShapeIndex].name + "' type='text'/>" + shapeList[currentShapeIndex].shape + " - ";
 
-                listText += "<button onclick='shapeList.splice(" + currentShapeIndex + ", 1); updateShapes();'>Remove</button>";
+                listText += "<button onclick='shapeList.splice(" + currentShapeIndex + ", 1); updateShapeList();'>Remove</button>";
 
                 listText += "<button style='margin-right: 0.3em;' onclick='editShape(" + currentShapeIndex + ");'>Edit</button>";
 
@@ -313,7 +362,7 @@
 
         document.getElementById("shapeList").innerHTML = listText;
         document.getElementById("finalOutput").value = JSON.stringify(shapeList);
-    } // updateShapes
+    } // updateShapeList
 
     let drawingLoop = setInterval(() => {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -376,4 +425,14 @@
             context.restore();
         }
     }, (1000 / 30));
+
+
+    window.addEventListener('keypress', (e) => {
+        // console.log(e.keyCode);
+
+        // PRESS "."
+        if (e.keyCode === 46) { document.getElementsByClassName("shape-choose-button")[0].focus(); }
+    });
+
+    changeShape(0);
 </script>
