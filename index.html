@@ -10,8 +10,8 @@
     <meta http-equiv="language" content="en">
 
     <meta name="google-site-verification" content="gbi-sGkZlGI2TYVpgceIjR-5DVAcYk3EXmbutaiWeMs" />
-    <meta name="author" content="Woody Guthrie">
-    <meta name="keywords" content="recursive laughter, recursion,game,harvesting,evolution,html,css,javascript,dynamic">
+    <meta name="author" content="unrealGuthrie">
+    <meta name="keywords" content="recursive laughter, recursion, game, harvesting, evolution, html, css, javascript, dynamic, rela. unrelGruthrie">
 
     <meta name="description" content="Build a World. Be the one Hero.">
 
@@ -20,7 +20,7 @@
 
 <body oncontextmenu="return (false);">
     <div>
-        <span id="loadingDiv">
+        <span id="loadingAnimationDiv">
             <div id="loadingAnimation"></div>
             Loading...
         </span>
@@ -28,7 +28,7 @@
 
     <div id="game" class="whole-window window-frame">
         <div id="initialMenu" class="whole-window window-frame" style="display: none;">
-            <p id="daysLeft" style="position: absolute; top: 0.1em; left: 0.3em; color: #fff;">
+            <p id="daysLeft">
                 <script>
                     let ele = document.getElementById("daysLeft"),
                         initialDate = new Date("2018-05-23T00:00:00"),
@@ -37,7 +37,7 @@
                         currentDateUTC = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
                     ele.innerHTML = " - " + (275 - ((((currentDateUTC - initialdateUTC) / 1000) / 3600) / 24)) + " Days left - " +
-                        "Last Update: 06. July 2018 -";
+                        "Last Update: 13. July 2018 -";
                 </script>
             </p>
 

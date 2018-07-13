@@ -21,6 +21,7 @@
  * - t_p: PLAYER                The Player-Class
  * - t_q: GENERAL FUNCTIONS     General Functions
  * - t_r: DYNAMIC_OBJECTS       Dynamic Objects, like Carts and Vehicles
+ * - t_s: SAVE                  Manage Saving and Loading the Game
  * - t_t: TEXT                  Create and Manage Texts on the Canvas
  * - t_u: MOUSE                 Manage and Control Mouse-Inputs
  * - t_v: GLOBAL/CONSTANT       Global and Constant Variables, like the Framerate
@@ -89,6 +90,29 @@ let
 function getEle(elementId_) {
     return (document.getElementById(elementId_));
 } // getEle
+
+/**
+ * Set the CSS-Style of an Element.
+ * 
+ * @param {string} elementId_ - The ID of the HTML-Element
+ * @param {string} cssStyle_ - The CSS-Attribute to modify
+ * @param {string} newValue_ - The new Value of this CSS-Style
+*/
+function setCSS(elementId_, cssStyle_, newValue_) {
+    let element = (typeof(elementId_) == typeof("")) ? getEle(elementId_) : (elementId_);
+    element.style[cssStyle_] = newValue_;
+} // setCSS
+
+/**
+ * Get the CSS-Style of an Element.
+ * 
+ * @param {string} elementId_ - The ID of the HTML-Element
+ * @param {string} cssStyle_ - The CSS-Attribute
+*/
+function getCSS(elementId_, cssStyle_) {
+    let element = (typeof(elementId_) == typeof("")) ? getEle(elementId_) : (elementId_);
+    return (element.style[cssStyle_]);
+} // getCSS
 
 /**
  * Set innerHTML-Text of a DOM-Element.
@@ -464,8 +488,8 @@ class NewCanvas {
     updateResolution() {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
-        this.canvas.style.width = this.width + 'px';
-        this.canvas.style.height = this.height + 'px';
+        setCSS(this.canvas, "width", this.width + "px");
+        setCSS(this.canvas, "height", this.height + "px");
         // Scale Canvas
         this.canvas.width = Math.round(this.width * CANVAS_SCALING_FACTOR);
         this.canvas.height = Math.round(this.height * CANVAS_SCALING_FACTOR);
@@ -489,12 +513,11 @@ class NewCanvas {
  * @param {string} elementId_ - The ID of the Element
 */
 function changeWindowVisibility(elementId_) {
-    let element = getEle(elementId_);
-    if (element.style.display == "block") {
-        element.style.display = "none";
+    if (getCSS(elementId_, "display") == "block") {
+        setCSS(elementId_, "display", "none");
     }
     else {
-        element.style.display = "block";
+        setCSS(elementId_, "display", "block");
     }
 } // changeWindowVisibility
 
@@ -536,8 +559,8 @@ function makeElementDraggable(element_) {
         startX = e_.clientX;
         startY = e_.clientY;
 
-        element_.style.top = (element_.offsetTop - finalY) + "px";
-        element_.style.left = (element_.offsetLeft - finalX) + "px";
+        setCSS(element_, "top", (element_.offsetTop - finalY) + "px");
+        setCSS(element_, "left", (element_.offsetLeft - finalX) + "px");
     } // elementDrag
 
     // Finish Dragging the Element
@@ -608,7 +631,7 @@ function initializeButtons() {
 
     for (let buttonIterator = 0; buttonIterator < LIST_MENUBUTTONS.length; buttonIterator++) {
         let image = "url(" + createImage(100, LIST_MENUBUTTONS[buttonIterator]).toDataURL("image/png") + ")"
-        getEle("open_" + String.fromCharCode(buttonIterator + 97)).style.backgroundImage = image;
+        setCSS("open_" + String.fromCharCode(buttonIterator + 97), "backgroundImage", image);
     }
 } // initializeButtons
 
@@ -755,7 +778,7 @@ function renderLight() {
     try {
         Effects.clear();
 
-        Effects.canvas.style.opacity = Math.abs(MAXOPACITY * Math.sin(Player.clockTime));
+        setCSS(Effects.canvas, "opacity", Math.abs(MAXOPACITY * Math.sin(Player.clockTime)));
 
         Effects.context.translate((-Player.x + (Effects.width / 2)), (-Player.y + (Effects.height / 2)));
 
@@ -879,7 +902,10 @@ class NewCart {
             if (distance > minimalDistance) {
                 if (this.x != Player.x) {
                     if (Math.abs(deltaX) >= Player.maxVelocity) {
-                        if () {
+                        if (deltaX < 0) {
+
+                        }
+                        else if (deltaX > 0) {
 
                         }
                     }
@@ -906,7 +932,6 @@ class NewCart {
         Canvas.context.restore();
     } // render
 } // NewCart
-
 
 /**
  * Render all visible Verhicles and Carts.
@@ -1131,8 +1156,13 @@ class NewPlayer {
 
             this.processMovement();
 
-            if (this.harvest != -1 && Landscape.objectList[this.harvest] == undefined) { this.harvest = HARVESTING_NOTHING; this.updateWindows(); }
-            if (this.harvest != HARVESTING_NOTHING) { this.checkHarvestObject(); }
+            if (this.harvest != -1 && Landscape.objectList[this.harvest] == undefined) {
+                this.harvest = HARVESTING_NOTHING;
+            }
+
+            if (this.harvest != HARVESTING_NOTHING) {
+                this.checkHarvestObject();
+            }
         }
         else {
             this.lastMovementTimer = Date.now();
@@ -1359,7 +1389,9 @@ class NewPlayer {
         else if (PRESSED_KEYLIST[65] || PRESSED_KEYLIST[37]) {
             if (this.velX > (-this.maxVelocity)) this.velX -= this.acceleration;
         }
-        // Left-Mouse-Button or "Space"-Key
+        
+        
+        // Left- Mouse-Button or "Space"-Key
         if ((PRESSED_KEYLIST[32] || Mouse.pressedMouseButtons[1]) && Mouse.overCanvas) {
             this.gatherItem();
             this.collectDropped();
@@ -1399,10 +1431,8 @@ class NewPlayer {
             this.harvest = HARVESTING_NOTHING;
             setHTML("gameHeader", "");
 
-            getEle("g").style.display = "none";
+            setCSS("g", "display", "none");
             setHTML("storageList", "");
-
-            this.updateWindows();
         }
     } // checkHarvestObject
 
@@ -1466,7 +1496,6 @@ class NewPlayer {
         let constructionsInnerHtml = "";
 
         for (let constructionIterator in this.constructions) {
-            // Get the Title
             let titleText = "";
             for (let itemIterator in LISTCONSTRUCTIONS[this.constructions[constructionIterator]].necessary) {
                 let nessecary = LISTCONSTRUCTIONS[this.constructions[constructionIterator]].necessary[itemIterator];
@@ -1487,7 +1516,6 @@ class NewPlayer {
         let recipesInnerHtml = "";
 
         for (let recipeIterator in this.recipes) {
-            // Get the Title
             let titleText = "";
             for (let itemIterator in LISTRECIPES[this.recipes[recipeIterator]].necessaryItems) {
                 let nessecary = LISTRECIPES[this.recipes[recipeIterator]].necessaryItems[itemIterator];
@@ -1495,12 +1523,9 @@ class NewPlayer {
                     LISTITEMS[nessecary.item].name + "  ");
             }
 
-            // Create a new Element in the List
             recipesInnerHtml +=
-                // Create a new List-Point
                 "<li class='window-list-element' title='" + titleText + "'>" +
                 LISTITEMS[LISTRECIPES[this.recipes[recipeIterator]].item].name +
-                // Create a button to Craft this Item
                 "<button class='window-list-element-button' onclick='Player.craftItem(" + this.recipes[recipeIterator] + ")'>Craft</button>" +
                 "</li>";
         }
@@ -1543,9 +1568,9 @@ class NewPlayer {
      * Open a Storage near the Player.
     */
     openStorage() {
-        getEle("b").style.display = "block";
-        getEle("g").style.display = "block";
-
+        setCSS("b", "display", "block");
+        setCSS("g", "display", "block");
+        
         let itemsInStorage = Landscape.objectList[this.harvest].storage,
             storageInnerHtml = "";
 
@@ -1563,8 +1588,6 @@ class NewPlayer {
         }
 
         setHTML("storageList", storageInnerHtml);
-
-        Player.updateWindows();
     } // openStorage
 
     /**
@@ -1658,6 +1681,7 @@ class NewPlayer {
     dropItem(item_) {
         Landscape.droppedItems.push({ x: this.x, y: this.y, item: item_, time: Date.now() });
         this.inventory.remove([{ item: item_, amount: 1 }]);
+
         this.updateWindows();
     } // dropItem
 
@@ -1714,6 +1738,7 @@ class NewPlayer {
         this.checkIfDiscovered(LISTRECIPES[recipe_].item);
         this.inventory.remove(LISTRECIPES[recipe_].necessaryItems);
         this.inventory.add(LISTRECIPES[recipe_].item);
+
         this.updateWindows();
     } // craftItem
 
@@ -1756,6 +1781,7 @@ class NewPlayer {
 
         this.resetEffects();
         this.inventory.reset();
+
         this.updateWindows();
     } // unequipItem
 
@@ -2619,10 +2645,10 @@ function startGame() {
         makeElementDraggable(elementList[elementIterator]);
     }
 
-    getEle("initialMenu").style.display = "none";
-    getEle("windows").style.display = "block";
-    getEle("menuButtons").style.display = "block";
-    getEle("description").style.display = "none";
+    setCSS("initialMenu", "display", "none");
+    setCSS("windows", "display", "block");
+    setCSS("menuButtons", "display", "block");
+    setCSS("description", "display", "none");
 
     initializeButtons();
 
@@ -2711,36 +2737,8 @@ function renderGame() {
 } // renderGame
 
 // ===============================================================================================
-// START/END t_n
+// SAVE t_s
 // ===============================================================================================
-/**
- * Setup Menu-Screen.
-*/
-function startMenuScreen() {
-    Canvas.clear();
-    Effects.clear();
-
-    getEle("loadingDiv").style.display = " block";
-    Effects.canvas.style.opacity = 1;
-    Effects.canvas.style.backgroundColor = "#000";
-
-    getEle("initialMenu").style.display = "block";
-    getEle("windows").style.display = "none";
-    getEle("menuButtons").style.display = "none";
-    getEle("endcard").style.display = "none";
-
-    getEle("description").style.display = "block";
-
-    initializeGame();
-
-    Landscape.render();
-    Landscape.renderObjects(0);
-    Landscape.renderObjects(1);
-
-    getEle("loadingDiv").style.display = "none";
-    Effects.canvas.style.opacity = 0;
-} // startMenuScreen
-
 /**
  * Load Game from LocalStorage.
 */
@@ -2823,6 +2821,36 @@ function saveGameToJSON() {
     a.click();
 } // saveGame
 
+// ===============================================================================================
+// START/END t_n
+// ===============================================================================================
+/**
+ * Setup Menu-Screen.
+*/
+function startMenuScreen() {
+    Canvas.clear();
+    Effects.clear();
+
+    setCSS("loadingAnimationDiv", "display", "block");
+    setCSS(Effects.canvas, "opacity", 1);
+    setCSS(Effects.canvas, "backgroundColor", "#000");
+
+    setCSS("initialMenu", "display", "block");
+    setCSS("windows", "display", "none");
+    setCSS("menuButtons", "display", "none");
+    setCSS("endcard", "display", "none");
+    setCSS("description", "display", "block");
+
+    initializeGame();
+
+    Landscape.render();
+    Landscape.renderObjects(0);
+    Landscape.renderObjects(1);
+
+    setCSS("loadingAnimationDiv", "display", "none");
+    setCSS(Effects.canvas, "opacity", 0);
+} // startMenuScreen
+
 /**
  * Start the EndCard.
 */
@@ -2832,13 +2860,12 @@ function startEndCard() {
     Canvas.clear();
     Effects.clear();
 
-    Effects.canvas.style.opacity = 1;
-    Effects.canvas.style.backgroundColor = "#131313";
-    Effects.canvas.style.transitionDuration = "0ms";
-    getEle("windows").style.display = "none";
-    getEle("menuButtons").style.display = "none";
-
-    getEle("endcard").style.display = "block";
+    setCSS(Effects.canvas, "opacity", 1);
+    setCSS(Effects.canvas, "backgroundColor", "#131313");
+    setCSS(Effects.canvas, "transitionDuration", "0ms");
+    setCSS("window", "display", "none");
+    setCSS("menuButtons", "display", "none");
+    setCSS("endcard", "display", "block");
 
     /**
      * Load the YT-Video.

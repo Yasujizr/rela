@@ -64,9 +64,8 @@ li {
 }
 
 .initial-menu-screens {
-    display: inline-block;
+    display: table;
     width: 26%;
-    height: fit-content;
     padding: 0 1em 0.5em 1em;
     border: 3px solid rgba(61, 30, 30, 0.582);
     border-radius: 20px;
@@ -215,7 +214,7 @@ li {
  *  ELEMENTS
 */
 
-#loadingDiv {
+#loadingAnimationDiv {
     position: absolute;
     left: 1%;
     top: 1%;
@@ -223,13 +222,13 @@ li {
     color: white;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+#daysLeft {
+    position: absolute; 
+    top: 0.1em; 
+    left: 0.3em; 
+    color: #fff;
+    font-size: 0.9em;
+    font-family: Consolas, monospace;
 }
 
 #loadingAnimation {
@@ -308,13 +307,12 @@ li {
  *  @media-RULES
 */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     body {
-        font-size: 90%;
+        font-size: 80%;
     }
     .initial-menu-screens {
-        width: 28%;
-        padding: 0 0.2em 0.25em 0.2em;
+        width: 29%;
     }
 }
 
@@ -330,3 +328,20 @@ li {
         padding: 0 0.5em 0.75em 0.5em;
     }
 }
+
+/*
+ *  Keyframe
+*/
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+ *  Test
+*/
