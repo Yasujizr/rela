@@ -59,7 +59,7 @@ let
         // POT
         {
             cs: 64,
-            list: [{"name":"Bottom","shape":1,"size":28,"position":[32,32],"fillStyle":"#824100","strokeStyle":"#552b00","lineWidth":"4"},{"name":"Top","shape":1,"size":14,"position":[32,32],"fillStyle":"#c16100","strokeStyle":"#6f3700","lineWidth":"4"}]
+            list: [{ "name": "Bottom", "shape": 1, "size": 28, "position": [32, 32], "fillStyle": "#824100", "strokeStyle": "#552b00", "lineWidth": "4" }, { "name": "Top", "shape": 1, "size": 14, "position": [32, 32], "fillStyle": "#c16100", "strokeStyle": "#6f3700", "lineWidth": "4" }]
         },
 
         // CAMPFIRE
@@ -85,7 +85,7 @@ let
             cs: 300,
             list: [{ "name": "Base", "shape": 1, "size": 148, "position": [150, 150], "fillStyle": "#ffa54f", "strokeStyle": "#8b5a2b", "lineWidth": "7" }]
         },
-        
+
         { cs: 0, list: [] },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
@@ -125,6 +125,12 @@ let
         {
             cs: 94,
             list: [{ "name": "Body", "shape": 2, "startX": 70, "startY": 22, "endX": 70, "endY": 72, "strokeStyle": "#000", "lineWidth": "6" }, { "name": "Middle", "shape": 2, "startX": 80, "startY": 22, "endX": 80, "endY": 72, "strokeStyle": "#804000", "lineWidth": "14" }, { "name": "Left", "shape": 2, "startX": 70, "startY": 72, "endX": 88, "endY": 72, "strokeStyle": "#000", "lineWidth": "5" }, { "name": "Right", "shape": 2, "startX": 70, "startY": 22, "endX": 88, "endY": 22, "strokeStyle": "#000", "lineWidth": "5" }, { "name": "Shape_4", "shape": 2, "startX": 89, "startY": 22, "endX": 89, "endY": 72, "strokeStyle": "#000", "lineWidth": "4" }]
+        },
+
+        // WOODEN_CART
+        {
+            cs: 200,
+            list: [{ "name": "Left_Holding", "shape": 2, "startX": 5, "startY": 130, "endX": 80, "endY": 130, "strokeStyle": "#1d1400", "lineWidth": "10" }, { "name": "Right_Holding", "shape": 2, "startX": 5, "startY": 70, "endX": 80, "endY": 70, "strokeStyle": "#1d1400", "lineWidth": "10" }, { "name": "Left_Wheel", "shape": 2, "startX": 80, "startY": 155, "endX": 140, "endY": 155, "strokeStyle": "#3b230f", "lineWidth": "30" }, { "name": "Right_Wheel", "shape": 2, "startX": 80, "startY": 45, "endX": 140, "endY": 45, "strokeStyle": "#3b230f", "lineWidth": "30" }, { "name": "Base", "shape": 0, "size": 110, "position": [45, 45], "fillStyle": "#ab6740", "strokeStyle": "#4d1d02", "lineWidth": "10" }]
         }
     ],
 
@@ -237,7 +243,7 @@ let
         {},
         {},
         {},
-        
+
         {
             obj: "BASKET",
             passable: false,
@@ -428,6 +434,13 @@ let
         { item: 22, position: 1, sprite: 29, effects: [{ type: EFFECT_HARVESTINCREASE, info: { f: 1, i: [1, 2] } }] },
         { item: 23, position: 2, sprite: 30 },
         { item: 24, position: 3, sprite: 31, effects: [{ type: EFFECT_INVENTORY, info: 8 }] }
+    ],
+
+    /**
+     * All dynamic Objects, which can be moved.
+    */
+    LISTDYNAMIC = [
+        { name: "WOODEN_CART", size: 110, sprite: 32, draggable: true }
     ],
 
     /**

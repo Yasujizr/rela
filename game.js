@@ -20,6 +20,7 @@
  * - t_o: GENERATE              Create all Resources, Set all Lists and Generate the Sprites
  * - t_p: PLAYER                The Player-Class
  * - t_q: GENERAL FUNCTIONS     General Functions
+ * - t_r: DYNAMIC_OBJECTS       Dynamic Objects, like Carts and Vehicles
  * - t_t: TEXT                  Create and Manage Texts on the Canvas
  * - t_u: MOUSE                 Manage and Control Mouse-Inputs
  * - t_v: GLOBAL/CONSTANT       Global and Constant Variables, like the Framerate
@@ -272,13 +273,13 @@ function changeControl() {
     Player.aimY = Player.y;
 
     if (Game.controlType == CONTROL_NORMAL) {
-        setHTML("currentControlMode", "Touch-Mode");
+        // setHTML("currentControlMode", "Touch-Mode");
         Game.controlType = CONTROL_TOUCH;
 
         initializeMobileControl();
     }
     else if (Game.controlType == CONTROL_TOUCH) {
-        setHTML("currentControlMode", "Normal-Mode");
+        // setHTML("currentControlMode", "Normal-Mode");
         Game.controlType = CONTROL_NORMAL;
 
         initializeComputerControl();
@@ -835,6 +836,87 @@ class NewProjectile {
 
     } // checkForCollision
 } // NewProjectile
+
+// ===============================================================================================
+// DYNAMIC_OBJECTS t_r
+// ===============================================================================================
+// The Cart-Class
+class NewCart {
+    /**
+     * Creating a new Cart, which be dragged around.
+     * 
+     * @param {type} type_ - The Type of Cart
+     * @param {number} x_ - The X-Position
+     * @param {number} y_ - The Y-Position
+    */
+    constructor(type_, x_, y_) {
+        this.type = type_;
+
+        this.x = x_;
+        this.y = y_;
+
+        this.rotation = 0;
+        this.sprite = LISTDYNAMIC[type_].sprite;
+
+        this.size = LISTDYNAMIC[type_].size;
+
+        this.isDragged = LISTDYNAMIC[type_].draggable;
+    } // constructor
+
+    /**
+     * Update this Cart.
+    */
+    update() {
+        if (this.isDragged) {
+            this.rotation = Math.atan2((this.y - Player.y), (this.x - Player.x));
+            if (this.rotation < 0) this.rotation = ((2 * Math.PI) + this.rotation);
+
+            let deltaX = this.x - Player.x,
+                deltaY = this.y - Player.y,
+                distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)),
+                minimalDistance = (this.size + 30);
+
+            if (distance > minimalDistance) {
+                if (this.x != Player.x) {
+                    if (Math.abs(deltaX) >= Player.maxVelocity) {
+                        if () {
+
+                        }
+                    }
+                }
+            }
+        }
+    } // update
+
+    /**
+     * Render this Cart, with the current Rotation.
+    */
+    render() {
+        Canvas.context.save();
+
+        let xpos = ((-Player.x + (Canvas.width / 2)) + this.x),
+            ypos = ((-Player.y + (Canvas.height / 2)) + this.y);
+
+        Canvas.context.translate(xpos, ypos);
+
+        Canvas.context.rotate(this.rotation);
+
+        renderImage(LIST_SPRITES[this.sprite], 0, 0, 1);
+
+        Canvas.context.restore();
+    } // render
+} // NewCart
+
+
+/**
+ * Render all visible Verhicles and Carts.
+*/
+function renderDynamic() {
+    for (let dynamicIterator in DynamicList) {
+        DynamicList[dynamicIterator].update();
+        DynamicList[dynamicIterator].render();
+    }
+} // renderDynamic
 
 // ===============================================================================================
 // CONTAINER t_l
@@ -1461,6 +1543,7 @@ class NewPlayer {
      * Open a Storage near the Player.
     */
     openStorage() {
+        getEle("b").style.display = "block";
         getEle("g").style.display = "block";
 
         let itemsInStorage = Landscape.objectList[this.harvest].storage,
@@ -2616,6 +2699,8 @@ function renderGame() {
 
     Player.render();
 
+    renderDynamic();
+
     Landscape.renderObjects(1);
 
     textManager.render();
@@ -2807,4 +2892,6 @@ let
 
     Player = new NewPlayer(),
 
-    NPCList = [];
+    NPCList = [],
+
+    DynamicList = [];
