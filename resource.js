@@ -252,7 +252,7 @@ let
             damaging: 0.5,
             position: 0,
             storage: 7,
-            loot: [{ item: 1, get: 0 }],
+            loot: [{ item: 5, get: 0.75 }, { item: 3, get: 0.75 }, { item: 4, get: 0.75 }, { item: 2, get: 0.75 }, { item: 1, get: 0.75}, { item: 21, get: 0.9}, { item: 22, get: 0.9 }, {item: 23, get: 0.9 }, {item: 24, get: 0.9 }],
             sprite: 7
         },
         {
