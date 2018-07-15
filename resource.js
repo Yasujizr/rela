@@ -284,7 +284,8 @@ let
             breakSize: 15,
             damaging: 0.1,
             position: 1,
-            sprite: 10
+            sprite: 10,
+            wall: true
         },
         {},
         {},
@@ -442,7 +443,7 @@ let
      * All dynamic Objects, which can be moved.
     */
     LISTDYNAMIC = [
-        { name: "WOODEN_CART", size: 110, sprite: 32, draggable: true }
+        { name: "WOODEN_CART", size: 55, sprite: 32, draggable: true }
     ],
 
     /**

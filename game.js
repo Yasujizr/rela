@@ -3,34 +3,33 @@
 
 /*
  * Structure (press Ctrl+F and search for the shortcuts):
- * - t_a: ANALYSER              Analyse the User
+ * - t_a: GLOBAL/CONSTANT       Global Variables
  * - t_b: BUTTONS               Initialize and Manage all Button-Events
- * - t_c: CANVAS                Manage and Control the Canvas 
- * - t_d: DEVICE                The Functions to initialize and Manage the Device
+ * - t_c: CANVAS                The Canvas-Class
+ * - t_d: DEVICE                Initialize and Manage the Device
  * - t_e: GENERAL EVENTS        General Events, like Loading the DOM or Resizing the Window
  * - t_f: FRAMEWORK             The Main Framework, for Image-Generation and Rendering
  * - t_g: GAME                  The Game-Class
  * - t_h: NPC                   The NPC-Class
- * - t_i: CREATE OBJECTS        Create all Main-Objects, like the Player or the Map
+ * - t_i: CREATE OBJECTS        Create all Main-Objects, like the Player and the Map
  * - t_j: PROJECTILES           The Projectile-Class
  * - t_k: KEYBOARD              Manage and Control Keyboard-Inputs
  * - t_l: CONTAINER             The Container-Class
  * - t_m: MAP                   The Map-Class
- * - t_n: START/END             Manage and Animate the Beginning and End of the Episode
- * - t_o: GENERATE              Create all Resources, Set all Lists and Generate the Sprites
+ * - t_n: START/END             Manage the Beginning and the End of the Episode
+ * - t_o: GENERATE              Create all Resources, set all Lists and Generate the Sprites
  * - t_p: PLAYER                The Player-Class
  * - t_q: GENERAL FUNCTIONS     General Functions
  * - t_r: DYNAMIC_OBJECTS       Dynamic Objects, like Carts and Vehicles
  * - t_s: SAVE                  Manage Saving and Loading the Game
- * - t_t: TEXT                  Create and Manage Texts on the Canvas
+ * - t_t: TEXT                  Create and Manage Texts on the Screen
  * - t_u: MOUSE                 Manage and Control Mouse-Inputs
- * - t_v: GLOBAL/CONSTANT       Global and Constant Variables, like the Framerate
- * - t_w: WINDOWS               Manage and Control Subwindows, like the inventory or the options
+ * - t_w: WINDOWS               Manage and Control Subwindows, like the Inventory
  * - t_x: EFFECTS               General Effects, like Brightening the Screen Up
 */
 
 // ===============================================================================================
-// GLOBAL/CONSTANT t_v
+// GLOBAL/CONSTANT t_a
 // ===============================================================================================
 let
     FRAMERATE = (1000 / 55),
@@ -450,11 +449,6 @@ function playSound(waveType_, x_, frequency_ = 400) {
 
     gain.gain.exponentialRampToValueAtTime(0.00001, SOUNDCONTEXT.currentTime + x_);
 } // playSound
-
-// ===============================================================================================
-// ANALYSER t_a
-// ===============================================================================================
-
 
 // ===============================================================================================
 // CANVAS t_c
@@ -887,23 +881,18 @@ class NewCart {
             this.rotation = Math.atan2((this.y - Player.y), (this.x - Player.x));
             if (this.rotation < 0) this.rotation = ((2 * Math.PI) + this.rotation);
 
-            let deltaX = this.x - Player.x,
-                deltaY = this.y - Player.y,
+            let deltaX = (Player.x - this.x),
+                deltaY = (Player.y - this.y),
                 distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)),
-                minimalDistance = (this.size + 30);
+                minimalDistance = (this.size + (Player.size / 2) + 15);
 
-            if (distance > minimalDistance) {
-                if (this.x != Player.x) {
-                    if (Math.abs(deltaX) >= Player.maxVelocity) {
-                        if (deltaX < 0) {
-
-                        }
-                        else if (deltaX > 0) {
-
-                        }
-                    }
-                }
+            // console.log(deltaX, deltaY, distance);
+            if(distance >= minimalDistance) {
+                this.x += ((deltaX / ((deltaX != 0) ? (Math.abs(deltaX)) : (0.1))) * Player.maxVelocity);
+                this.y += ((deltaY / ((deltaY != 0) ? (Math.abs(deltaY)) : (0.1))) * Player.maxVelocity);
             }
+
+            
         }
     } // update
 
