@@ -121,7 +121,7 @@
             }
 
             .menu-operation-buttons {
-                width: 60%; 
+                width: 60%;
             }
 
             .menu-operation-buttons:focus,
@@ -225,6 +225,8 @@
         shapeList = [],
         createShapeType = 0,
 
+        PRESSED_KEYLIST = [],
+
         sizeIn = document.getElementById("size"),
         xPositionIn = document.getElementById("xposition"),
         yPositionIn = document.getElementById("yposition"),
@@ -235,6 +237,26 @@
         startYIn = document.getElementById("startY"),
         endXIn = document.getElementById("endX"),
         endYIn = document.getElementById("endY");
+
+    /*
+     * If a Key is Pressed.
+    */
+    window.addEventListener("keydown", (event_) => {
+        PRESSED_KEYLIST[event_.keyCode] = true;
+
+        if (PRESSED_KEYLIST[16]) {
+            if (PRESSED_KEYLIST[67]) { createShape(); }
+            if (PRESSED_KEYLIST[82]) { document.getElementById('createForm').reset(); }
+            if (PRESSED_KEYLIST[190]) { document.getElementsByClassName("shape-choose-button")[0].focus(); }
+        }
+    }); // keydown
+
+    /*
+     * If a Key is Released.
+    */
+    window.addEventListener("keyup", (event_) => {
+        delete (PRESSED_KEYLIST[event_.keyCode]);
+    }); // keyup
 
     /**
      * Resize the Canvas.
@@ -434,14 +456,6 @@
             context.restore();
         }
     }, (1000 / 30));
-
-
-    window.addEventListener('keypress', (e) => {
-        // console.log(e.keyCode);
-
-        // PRESS "."
-        if (e.keyCode === 46) { document.getElementsByClassName("shape-choose-button")[0].focus(); }
-    });
 
     changeShape(0);
 </script>

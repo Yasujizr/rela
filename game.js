@@ -3,7 +3,7 @@
 
 /*
  * Structure (press Ctrl+F and search for the shortcuts):
- * - t_a: AUDIO                 Manage and Control Audio-Output
+ * - t_a: ANALYSER              Analyse the User
  * - t_b: BUTTONS               Initialize and Manage all Button-Events
  * - t_c: CANVAS                Manage and Control the Canvas 
  * - t_d: DEVICE                The Functions to initialize and Manage the Device
@@ -235,17 +235,8 @@ function initializeComputerControl() {
     */
     window.addEventListener("keydown", (event_) => {
         if (Game.processKeyboardInput) {
-            // If the "Enter"-Key is pressed
-            if (event_.keyCode == 13) {
-                // Skip the current Text on the Screen
-                if (textManager.textList.length > 0) {
-                    textManager.removeCurrentText();
-                    textManager.textTimer = Date.now();
-                    return;
-                }
-            }
             // If the "ESC"-Key is pressed --> Open Menu
-            else if (event_.keyCode == 27) { changeWindowVisibility("a"); }
+            if (event_.keyCode == 27) { changeWindowVisibility("a"); }
             // If the "Space"-Key is pressed --> Open Storage
             else if (event_.keyCode == 32 && Player.harvest != HARVESTING_NOTHING && Landscape.objectList[Player.harvest].storage) { Player.openStorage(); }
             // If the "C"-Key is pressed --> Open Constructions
@@ -433,9 +424,6 @@ function printMessage(prefix_, messageText_) {
     console.log("%c " + (prefix_ + " " + messageText_), "font-weight: bold; ");
 } // printMessage
 
-// ===============================================================================================
-// AUDIO t_a
-// ===============================================================================================
 /**
  * Play a specified Sound.
  * See: 
@@ -462,6 +450,11 @@ function playSound(waveType_, x_, frequency_ = 400) {
 
     gain.gain.exponentialRampToValueAtTime(0.00001, SOUNDCONTEXT.currentTime + x_);
 } // playSound
+
+// ===============================================================================================
+// ANALYSER t_a
+// ===============================================================================================
+
 
 // ===============================================================================================
 // CANVAS t_c
@@ -1433,6 +1426,8 @@ class NewPlayer {
 
             setCSS("g", "display", "none");
             setHTML("storageList", "");
+
+            this.updateWindows();
         }
     } // checkHarvestObject
 
@@ -1588,6 +1583,8 @@ class NewPlayer {
         }
 
         setHTML("storageList", storageInnerHtml);
+
+        this.updateWindows();
     } // openStorage
 
     /**
@@ -2331,7 +2328,7 @@ class NewMap {
     /**
      * Render all dropped Items.
     */
-    renderdroppedItems() {
+    renderDroppedItems() {
         Canvas.context.save();
         Canvas.context.translate((-Player.x + (Canvas.width / 2)), (-Player.y + (Canvas.height / 2)));
 
@@ -2354,7 +2351,7 @@ class NewMap {
         }
 
         Canvas.context.restore();
-    } // renderdroppedItems
+    } // renderDroppedItems
 
     /**
      * Update the Landscape and the Objects on the Map.
@@ -2648,11 +2645,8 @@ function startGame() {
     setCSS("initialMenu", "display", "none");
     setCSS("windows", "display", "block");
     setCSS("menuButtons", "display", "block");
-    setCSS("description", "display", "none");
 
     initializeButtons();
-
-    executeModifications();
 
     if (Player.health > 0) {
         Game.gameRunning = true;
@@ -2719,13 +2713,13 @@ function renderGame() {
 
     Landscape.render();
 
-    Landscape.renderdroppedItems();
+    Landscape.renderDroppedItems();
 
     Landscape.renderObjects(0);
 
-    Player.render();
-
     renderDynamic();
+
+    Player.render();
 
     Landscape.renderObjects(1);
 
@@ -2839,8 +2833,7 @@ function startMenuScreen() {
     setCSS("windows", "display", "none");
     setCSS("menuButtons", "display", "none");
     setCSS("endcard", "display", "none");
-    setCSS("description", "display", "block");
-
+    
     initializeGame();
 
     Landscape.render();

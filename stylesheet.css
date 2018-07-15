@@ -110,10 +110,12 @@ li {
     border-radius: 100%;
     float: right;
     z-index: 12;
+    transition-duration: 120ms;
 }
 
 .menu-button:hover, .menu-button:focus {
     border: 3px solid #000;
+    transform: rotate(-90deg);
 }
 
 .menu-div {
@@ -286,10 +288,10 @@ li {
     width: 100%;
     position: absolute;
     z-index: 13;
-    margin-top: 1.8%;
+    margin-top: 0.8em;
     text-align: center;
-    font-family: monospace;
-    font-weight: bold;
+    font-family: Impact, monospace;
+    font-weight: 100;
     font-size: 1.8em;
     pointer-events: none;
 }
@@ -316,6 +318,19 @@ li {
     }
 }
 
+@media (orientation: landscape) and (max-width: 1000px) {
+    body {
+        font-size: 70%;
+    }
+    .initial-menu-screens-hide {
+        display: none;
+    }
+    .initial-menu-screens {
+        width: 50%;
+        padding: 0 0.5em 0.75em 0.5em;
+    }
+}
+
 @media (max-width: 750px) {
     body {
         font-size: 90%;
@@ -326,6 +341,12 @@ li {
     .initial-menu-screens {
         width: 50%;
         padding: 0 0.5em 0.75em 0.5em;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 750px) {
+    body {
+        font-size: 70%;
     }
 }
 
