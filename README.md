@@ -2,6 +2,7 @@
 
 # What is **RecursiveLaughter?**
 **RecursiveLaughter** is a Survival-Sandbox-Browser-Game, which should run on pretty much any device with an Internet-Browser. It's main strenghts are the high Accessibility and the general Simplicity.
+Check it out at https://recursivelaughter.com
 
 # Getting Started
 **RecursiveLaughter** works both offline and online. So, you can either just run the _index.html_ file on your device, or host the whole Project on a server.
