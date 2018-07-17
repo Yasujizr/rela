@@ -2,30 +2,30 @@
 "use strict";
 
 /*
- * Structure (press Ctrl+F and search for the shortcuts):
- * - t_a: GLOBAL/CONSTANT       Global Variables
- * - t_b: BUTTONS               Initialize and Manage all Button-Events
- * - t_c: CANVAS                The Canvas-Class
- * - t_d: DEVICE                Initialize and Manage the Device
- * - t_e: GENERAL EVENTS        General Events, like Loading the DOM or Resizing the Window
- * - t_f: FRAMEWORK             The Main Framework, for Image-Generation and Rendering
- * - t_g: GAME                  The Game-Class
- * - t_h: NPC                   The NPC-Class
- * - t_i: CREATE OBJECTS        Create all Main-Objects, like the Player and the Map
- * - t_j: PROJECTILES           The Projectile-Class
- * - t_k: KEYBOARD              Manage and Control Keyboard-Inputs
- * - t_l: CONTAINER             The Container-Class
- * - t_m: MAP                   The Map-Class
- * - t_n: START/END             Manage the Beginning and the End of the Episode
- * - t_o: GENERATE              Create all Resources, set all Lists and Generate the Sprites
+ * Structure (select the Shortcut, and then Press Ctrl+D or Ctrl+F):
+ * - t_a: GLOBAL / CONSTANT     Global Variables
+ * - t_b: GENERAL FUNCTIONS     General Functions
+ * - t_c: DEVICE                Initialize and Manage the Device
+ * - t_d: FRAMEWORK             The Main Framework, for Image-Generation and Rendering
+ * - t_e: CANVAS                The Canvas-Class
+ * - t_f: WINDOWS               Manage and Control Subwindows, like the Inventory
+ * - t_g: GENERAL EVENTS        General Events, like Loading the DOM or Resizing the Window
+ * - t_h: BUTTONS               Initialize and Manage all Button-Events
+ * - t_i: MOUSE                 Manage and Control Mouse-Inputs
+ * - t_j: KEYBOARD              Manage and Control Keyboard-Inputs
+ * - t_k: TEXT                  Create and Manage Texts on the Screen
+ * - t_l: EFFECTS               General Effects, like Brightening the Screen Up
+ * - t_m: PROJECTILES           The Projectile-Class
+ * - t_n: CONTAINER             The Container-Class
+ * - t_o: DYNAMIC_OBJECTS       Dynamic Objects, like Carts and Vehicles
  * - t_p: PLAYER                The Player-Class
- * - t_q: GENERAL FUNCTIONS     General Functions
- * - t_r: DYNAMIC_OBJECTS       Dynamic Objects, like Carts and Vehicles
- * - t_s: SAVE                  Manage Saving and Loading the Game
- * - t_t: TEXT                  Create and Manage Texts on the Screen
- * - t_u: MOUSE                 Manage and Control Mouse-Inputs
- * - t_w: WINDOWS               Manage and Control Subwindows, like the Inventory
- * - t_x: EFFECTS               General Effects, like Brightening the Screen Up
+ * - t_q: NPC                   The NPC-Class
+ * - t_r: MAP                   The Map-Class
+ * - t_s: GENERATE              Create all Resources, set all Lists and Generate the Sprites
+ * - t_t: GAME                  The Game-Class
+ * - t_u: SAVE                  Manage Saving and Loading the Game
+ * - t_v: START/END             Manage the Beginning and the End of the Episode
+ * - t_w: CREATE OBJECTS        Create all Main-Objects, like the Player and the Map
 */
 
 // ===============================================================================================
@@ -66,6 +66,7 @@ let
     CLOCKTIMER = Date.now(),
 
     HOURLENGTH = 3000,
+    DROPPED_REMOVE_TIME = 10000,
 
     FIELD_SIZE = 500,
     FIELD_AMOUNT = 100,
@@ -77,7 +78,7 @@ let
     HUNGERTIMER = 8000;
 
 // ===============================================================================================
-// GENERAL FUNCTIONS t_q
+// GENERAL FUNCTIONS t_b
 // ===============================================================================================
 /**
  * Get a HTML-Element.
@@ -153,7 +154,7 @@ function changeCSSStyle(selector_, cssProp_, cssVal_) {
 } // changeCSSStyle
 
 // ===============================================================================================
-// DEVICE t_d
+// DEVICE t_c
 // ===============================================================================================
 /**
  * Check if the Device has Touch.
@@ -262,7 +263,7 @@ function initializeComputerControl() {
 } // initializeComputerControl
 
 /**
- * Initialize the Touch Controls for Tablets and Smartphones.
+ * Initialize the Touch Controls for Tablets and Smartphones, with Touch.
 */
 function initializeMobileControl() {
     Canvas.canvas.addEventListener("touchstart", (event_) => {
@@ -276,7 +277,8 @@ function initializeMobileControl() {
 } // initializeMobileControl
 
 /**
- * Change the current Control-Type to the other.
+ * Change the current Control-Type to the other. So, if the Mobile-Mode is currently active, 
+ * the Computer-Mode will be activated. And also the other way around.
 */
 function changeControl() {
     let newCanvas = Canvas.canvas.cloneNode(true);
@@ -287,13 +289,11 @@ function changeControl() {
     Player.aimY = Player.y;
 
     if (Game.controlType == CONTROL_NORMAL) {
-        // setHTML("currentControlMode", "Touch-Mode");
         Game.controlType = CONTROL_TOUCH;
 
         initializeMobileControl();
     }
     else if (Game.controlType == CONTROL_TOUCH) {
-        // setHTML("currentControlMode", "Normal-Mode");
         Game.controlType = CONTROL_NORMAL;
 
         initializeComputerControl();
@@ -302,7 +302,7 @@ function changeControl() {
 
 
 // ===============================================================================================
-// FRAMEWORK t_f
+// FRAMEWORK t_d
 // ===============================================================================================
 /**
  * This function creates a new Canvas, paints all Shapes on it and returns the Canvas.
@@ -451,7 +451,7 @@ function playSound(waveType_, x_, frequency_ = 400) {
 } // playSound
 
 // ===============================================================================================
-// CANVAS t_c
+// CANVAS t_e
 // ===============================================================================================
 // The Canvas-Class
 class NewCanvas {
@@ -492,7 +492,7 @@ class NewCanvas {
 } // NewCanvas
 
 // ===============================================================================================
-// WINDOWS t_w
+// WINDOWS t_f
 // ===============================================================================================
 /**
  * Change the Visibility of an Element.
@@ -569,7 +569,7 @@ function focusElement(elementId_) {
 } // focusElement
 
 // ===============================================================================================
-// GENERAL EVENTS t_e
+// GENERAL EVENTS t_g
 // ===============================================================================================
 /*
  * Initialize the Document, when finished loading.
@@ -602,7 +602,7 @@ window.addEventListener("resize", () => {
 }); // resize
 
 // ===============================================================================================
-// BUTTONS t_b
+// BUTTONS t_h
 // ===============================================================================================
 /**
  * Initialize all Buttons and create the Event-Listeners.
@@ -623,7 +623,7 @@ function initializeButtons() {
 } // initializeButtons
 
 // ===============================================================================================
-// MOUSE t_u
+// MOUSE t_i
 // ===============================================================================================
 // The Mouse-Class
 class NewMouse {
@@ -672,21 +672,21 @@ class NewMouse {
 } // NewMouse
 
 // ===============================================================================================
-// KEYBOARD t_k
+// KEYBOARD t_j
 // ===============================================================================================
 /**
  * Process Keyboard-Input.
 */
 function processKeyboardInput() {
     if (Player.currentBuild != BUILDING_NOTHING && PRESSED_KEYLIST[17]) {
-        alignObject();
+        alignObjectWhileSetting();
     }
 
     Mouse.calculateRelativePosition();
 } // processKeyboardInput
 
 // ===============================================================================================
-// TEXT t_t
+// TEXT t_k
 // ===============================================================================================
 // The Text-Class
 class newText {
@@ -756,7 +756,7 @@ class newText {
 } // newText
 
 // ===============================================================================================
-// EFFECTS t_x
+// EFFECTS t_l
 // ===============================================================================================
 /**
  * Draw Lights.
@@ -789,7 +789,7 @@ function renderLight() {
 } // renderLight
 
 // ===============================================================================================
-// PROJECTILE t_j
+// PROJECTILE t_m
 // ===============================================================================================
 // The Projectile-Class
 class NewProjectile {
@@ -848,85 +848,7 @@ class NewProjectile {
 } // NewProjectile
 
 // ===============================================================================================
-// DYNAMIC_OBJECTS t_r
-// ===============================================================================================
-// The Cart-Class
-class NewCart {
-    /**
-     * Creating a new Cart, which be dragged around.
-     * 
-     * @param {type} type_ - The Type of Cart
-     * @param {number} x_ - The X-Position
-     * @param {number} y_ - The Y-Position
-    */
-    constructor(type_, x_, y_) {
-        this.type = type_;
-
-        this.x = x_;
-        this.y = y_;
-
-        this.rotation = 0;
-        this.sprite = LISTDYNAMIC[type_].sprite;
-
-        this.size = LISTDYNAMIC[type_].size;
-
-        this.isDragged = LISTDYNAMIC[type_].draggable;
-    } // constructor
-
-    /**
-     * Update this Cart.
-    */
-    update() {
-        if (this.isDragged) {
-            this.rotation = Math.atan2((this.y - Player.y), (this.x - Player.x));
-            if (this.rotation < 0) this.rotation = ((2 * Math.PI) + this.rotation);
-
-            let deltaX = (Player.x - this.x),
-                deltaY = (Player.y - this.y),
-                distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)),
-                minimalDistance = (this.size + (Player.size / 2) + 15);
-
-            // console.log(deltaX, deltaY, distance);
-            if(distance >= minimalDistance) {
-                this.x += ((deltaX / ((deltaX != 0) ? (Math.abs(deltaX)) : (0.1))) * Player.maxVelocity);
-                this.y += ((deltaY / ((deltaY != 0) ? (Math.abs(deltaY)) : (0.1))) * Player.maxVelocity);
-            }
-
-            
-        }
-    } // update
-
-    /**
-     * Render this Cart, with the current Rotation.
-    */
-    render() {
-        Canvas.context.save();
-
-        let xpos = ((-Player.x + (Canvas.width / 2)) + this.x),
-            ypos = ((-Player.y + (Canvas.height / 2)) + this.y);
-
-        Canvas.context.translate(xpos, ypos);
-
-        Canvas.context.rotate(this.rotation);
-
-        renderImage(LIST_SPRITES[this.sprite], 0, 0, 1);
-
-        Canvas.context.restore();
-    } // render
-} // NewCart
-
-/**
- * Render all visible Verhicles and Carts.
-*/
-function renderDynamic() {
-    for (let dynamicIterator in DynamicList) {
-        DynamicList[dynamicIterator].update();
-        DynamicList[dynamicIterator].render();
-    }
-} // renderDynamic
-
-// ===============================================================================================
-// CONTAINER t_l
+// CONTAINER t_n
 // ===============================================================================================
 // The Container-Class
 class NewContainer {
@@ -1022,6 +944,84 @@ class NewContainer {
         return (false);
     } // isFull
 } // newContainer
+
+// ===============================================================================================
+// DYNAMIC_OBJECTS t_o
+// ===============================================================================================
+// The Cart-Class
+class NewCart {
+    /**
+     * Creating a new Cart, which be dragged around.
+     * 
+     * @param {type} type_ - The Type of Cart
+     * @param {number} x_ - The X-Position
+     * @param {number} y_ - The Y-Position
+    */
+    constructor(type_, x_, y_) {
+        this.type = type_;
+
+        this.x = x_;
+        this.y = y_;
+
+        this.rotation = 0;
+        this.sprite = LISTDYNAMIC[type_].sprite;
+
+        this.size = LISTDYNAMIC[type_].size;
+
+        this.isDragged = LISTDYNAMIC[type_].draggable;
+    } // constructor
+
+    /**
+     * Update this Cart.
+    */
+    update() {
+        if (this.isDragged) {
+            this.rotation = Math.atan2((this.y - Player.y), (this.x - Player.x));
+            if (this.rotation < 0) this.rotation = ((2 * Math.PI) + this.rotation);
+
+            let deltaX = (Player.x - this.x),
+                deltaY = (Player.y - this.y),
+                distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)),
+                minimalDistance = (this.size + (Player.size / 2) + 15);
+
+            // console.log(deltaX, deltaY, distance);
+            if(distance >= minimalDistance) {
+                this.x += ((deltaX / ((deltaX != 0) ? (Math.abs(deltaX)) : (0.1))) * Player.maxVelocity);
+                this.y += ((deltaY / ((deltaY != 0) ? (Math.abs(deltaY)) : (0.1))) * Player.maxVelocity);
+            }
+
+            
+        }
+    } // update
+
+    /**
+     * Render this Cart, with the current Rotation.
+    */
+    render() {
+        Canvas.context.save();
+
+        let xpos = ((-Player.x + (Canvas.width / 2)) + this.x),
+            ypos = ((-Player.y + (Canvas.height / 2)) + this.y);
+
+        Canvas.context.translate(xpos, ypos);
+
+        Canvas.context.rotate(this.rotation);
+
+        renderImage(LIST_SPRITES[this.sprite], 0, 0, 1);
+
+        Canvas.context.restore();
+    } // render
+} // NewCart
+
+/**
+ * Render all visible Verhicles and Carts.
+*/
+function renderDynamic() {
+    for (let dynamicIterator in DynamicList) {
+        DynamicList[dynamicIterator].update();
+        DynamicList[dynamicIterator].render();
+    }
+} // renderDynamic
 
 // ===============================================================================================
 // PLAYER t_p
@@ -1451,11 +1451,11 @@ class NewPlayer {
         for (let inventoryIterator in this.inventory.itemList) {
             inventoryInnerHtml +=
                 "<li class='window-list-element window-list-element-item' style='background-color: " + LISTITEMS[this.inventory.itemList[inventoryIterator]].color + "'> " +
-                LISTITEMS[this.inventory.itemList[inventoryIterator]].name;
+                LISTITEMS[this.inventory.itemList[inventoryIterator]].name + "<div class='window-list-element-buttons'>";
 
             if (this.harvest != -1 && Landscape.objectList[this.harvest] != undefined && Landscape.objectList[this.harvest].storage) {
                 inventoryInnerHtml +=
-                    "<button class='window-list-element-button' onclick='manageStorage(" + this.harvest + ", STORAGE_PUTIN, " + inventoryIterator + ")'>[IN]</button>";
+                    "<button class='window-list-element-button' onclick='manageStorage(" + this.harvest + ", STORAGE_PUTIN, " + inventoryIterator + ")'>>></button>";
             }
             else {
                 if (LISTITEMS[this.inventory.itemList[inventoryIterator]].use) {
@@ -1470,8 +1470,8 @@ class NewPlayer {
             }
 
             inventoryInnerHtml +=
-                "<button class='window-list-element-button' onclick='Player.dropItem(" + this.inventory.itemList[inventoryIterator] + ");'>[X]</button>" +
-                "</li>";
+                "<button class='window-list-element-button window-list-element-remove' onclick='Player.dropItem(" + this.inventory.itemList[inventoryIterator] + ");'>X</button>" +
+                "</div></li>";
         }
 
         setHTML("itemList", inventoryInnerHtml);
@@ -1564,11 +1564,11 @@ class NewPlayer {
                 LISTITEMS[itemsInStorage[storageIterator]].name;
 
             storageInnerHtml +=
-                "<button class='window-list-element-button' onclick='manageStorage(" + this.harvest + ", STORAGE_PUTOUT, " + storageIterator + ");'>[OUT]</button>";
+                "<div class='window-list-element-buttons'><button class='window-list-element-button' onclick='manageStorage(" + this.harvest + ", STORAGE_PUTOUT, " + storageIterator + ");'><<</button>";
 
             storageInnerHtml +=
-                "<button class='window-list-element-button' onclick='Landscape.objectList[" + this.harvest + "].storage.splice(" + storageIterator + ", 1);  Player.openStorage();'>[X]</button>" +
-                "</li>";
+                "<button class='window-list-element-button window-list-element-remove' onclick='Landscape.objectList[" + this.harvest + "].storage.splice(" + storageIterator + ", 1);  Player.openStorage();'>X</button>" +
+                "</div></li>";
         }
 
         setHTML("storageList", storageInnerHtml);
@@ -1849,7 +1849,7 @@ class NewPlayer {
 } // NewPlayer
 
 // ===============================================================================================
-// NPC t_h
+// NPC t_q
 // ===============================================================================================
 // The NPC-Class
 class NewNPC {
@@ -2043,7 +2043,7 @@ function renderNPCs() {
 } // renderNPCs
 
 // ===============================================================================================
-// MAP t_m
+// MAP t_r
 // ===============================================================================================
 // The Map-Class
 class NewMap {
@@ -2219,10 +2219,10 @@ class NewMap {
                         newObject.storage = [];
 
                         if (LISTOBJECTS[currentObject.object].loot) {
-                            for (let currentItemIterator in LISTOBJECTS[currentObject.object].loot) {
-                                if (Math.random() >= LISTOBJECTS[currentObject.object].loot[currentItemIterator].get) {
-                                    newObject.storage.push(LISTOBJECTS[currentObject.object].loot[currentItemIterator].item);
-                                }
+                            let itemAmount = Math.floor(LISTOBJECTS[currentObject.object].storage / 3);
+
+                            for(let itemAmountIterator = 0; itemAmountIterator < itemAmount; itemAmountIterator++) {
+                                newObject.storage.push(Math.floor(5 * Math.random()) + 1);   
                             }
                         }
                     }
@@ -2315,7 +2315,7 @@ class NewMap {
     } // renderObjects
 
     /**
-     * Render all dropped Items.
+     * Render all dropped Items, and remove them, if they were rendered for a too long time.
     */
     renderDroppedItems() {
         Canvas.context.save();
@@ -2324,7 +2324,7 @@ class NewMap {
         for (let itemIterator = (this.droppedItems.length - 1); itemIterator >= 0; itemIterator--) {
             let currentItem = this.droppedItems[itemIterator];
 
-            if ((Date.now() - currentItem.time) >= 5000) {
+            if ((Date.now() - currentItem.time) >= DROPPED_REMOVE_TIME) {
                 this.droppedItems.splice(itemIterator, 1);
             }
             else {
@@ -2457,6 +2457,20 @@ class NewMap {
 } // NewMap
 
 /**
+ * Process the In-Game-Time.
+*/
+function processTime() {
+    let passedHourTime = (Date.now() - CLOCKTIMER);
+    if (passedHourTime >= HOURLENGTH) {
+        CLOCKTIMER = (Date.now() - (passedHourTime % HOURLENGTH));
+
+        Player.clockTime = (Player.clockTime + 0.001);
+
+        Landscape.updateGrowth();
+    }
+} // processTime
+
+/**
  * Manage a Storage and Put things out of it our put something into it.
  * 
  * @param {number} objectIndex_ - The Index of the Object in objectList to interact with
@@ -2482,23 +2496,9 @@ function manageStorage(objectIndex_, action_, item_) {
 } // manageStorage
 
 /**
- * Process the In-Game-Time.
+ * Align an Object next to an other Object when building it.
 */
-function processTime() {
-    let passedHourTime = (Date.now() - CLOCKTIMER);
-    if (passedHourTime >= HOURLENGTH) {
-        CLOCKTIMER = (Date.now() - (passedHourTime % HOURLENGTH));
-
-        Player.clockTime = (Player.clockTime + 0.001);
-
-        Landscape.updateGrowth();
-    }
-} // processTime
-
-/**
- * Align an Object next to an other Object.
-*/
-function alignObject() {
+function alignObjectWhileSetting() {
     let nearestObjectIndex = Landscape.getNearestObject(Mouse.inMapXPosition, Mouse.inMapYPosition),
         xPosition = Landscape.objectList[nearestObjectIndex].x,
         yPosition = Landscape.objectList[nearestObjectIndex].y,
@@ -2520,13 +2520,13 @@ function alignObject() {
             Mouse.inCanvasXPosition = ((-Player.x + (Canvas.width / 2)) + xPosition) + ((distance + 1) * ((deltaX < 0) ? (-1) : (1)));
         }
     }
-} // alignObject
+} // alignObjectWhileSetting
 
 // ===============================================================================================
-// GENERATE t_o
+// GENERATE t_s
 // ===============================================================================================
 /**
- * Create all Sprites.
+ * Create all Sprites in LIST_SPRITES.
 */
 function createSprites() {
     printMessage(SHOW_INFORMATION, "Creating General-Sprites...");
@@ -2541,7 +2541,7 @@ function createSprites() {
 } // createSprites
 
 /**
- * Create and Generate all Fields.
+ * Create the Sprites for all Fields.
 */
 function createFields() {
     printMessage(SHOW_INFORMATION, "Generating Field-Sprites...");
@@ -2580,7 +2580,7 @@ function createFields() {
 } // createFields
 
 // ===============================================================================================
-// GAME t_g
+// GAME t_t
 // ===============================================================================================
 /*
  * The Game-Object.
@@ -2596,7 +2596,7 @@ let Game = {
 } // Game
 
 /**
- * Initialize the Game. Creating the Sprites, the Fields and setting Objects, Fields and NPCs.
+ * Initialize the Game. Creating the Sprites, the Fields and Setting Objects, Fields and NPCs.
 */
 function initializeGame() {
     createFields();
@@ -2720,7 +2720,7 @@ function renderGame() {
 } // renderGame
 
 // ===============================================================================================
-// SAVE t_s
+// SAVE t_u
 // ===============================================================================================
 /**
  * Load Game from LocalStorage.
@@ -2773,8 +2773,6 @@ function loadJSONFile(file) {
 
 /**
  * Save the Game to LocalStorage.
- * 
- * @returns {boolean} Could all data be saved to localStorage
 */
 function saveToLocalStorage() {
     if (localStorage) {
@@ -2785,27 +2783,23 @@ function saveToLocalStorage() {
         localStorage.setItem("player", JSON_savePlayer);
         localStorage.setItem("map", JSON_saveMap);
         localStorage.setItem("npc", JSON_saveNPCs);
-
-        return (true);
     }
-
-    return (false);
 } // saveToLocalStorage
 
 /**
- * Save the whole Game to an ordinary JSON-File.
+ * Save the whole Game in an ordinary JSON-File.
 */
-function saveGameToJSON() {
+function saveGameToJSONFile() {
     let a = document.createElement("a"),
         file = new Blob([JSON.stringify({ player: Player, map: Landscape, npc: NPCList })], { type: 'text/plain' });
 
     a.href = URL.createObjectURL(file);
     a.download = "save.json";
     a.click();
-} // saveGame
+} // saveGameToJSONFile
 
 // ===============================================================================================
-// START/END t_n
+// START/END t_v
 // ===============================================================================================
 /**
  * Setup Menu-Screen.
@@ -2849,45 +2843,45 @@ function startEndCard() {
     setCSS("menuButtons", "display", "none");
     setCSS("endcard", "display", "block");
 
-    /**
-     * Load the YT-Video.
-    */
-    function loadVideo() {
-        let linkList = [
-            "TkLT5krv_6c",
-            "ALZHF5UqnU4",
-            "S3fTw_D3l10",
-            "8PIPyPMNnp8"
-        ];
+    // /**
+    //  * Load the YT-Video.
+    // */
+    // function loadVideo() {
+    //     let linkList = [
+    //         "TkLT5krv_6c",
+    //         "ALZHF5UqnU4",
+    //         "S3fTw_D3l10",
+    //         "8PIPyPMNnp8"
+    //     ];
 
-        let linkIndex = Math.floor(Math.random() * linkList.length);
+    //     let linkIndex = Math.floor(Math.random() * linkList.length);
 
-        setHTML("videoPart", "<iframe id='ytVideoScreen' src='https://www.youtube-nocookie.com/embed/" + (linkList[linkIndex]) + "?autoplay=1&controls=0&showinfo=0' allow='autoplay; encrypted-media;'>");
-    } // loadVideo
+    //     setHTML("videoPart", "<iframe id='ytVideoScreen' src='https://www.youtube-nocookie.com/embed/" + (linkList[linkIndex]) + "?autoplay=1&controls=0&showinfo=0' allow='autoplay; encrypted-media;'>");
+    // } // loadVideo
 
-    /**
-     * Update the Size of the Video.
-    */
-    function updateVideoSize() {
-        let videoWidth = window.innerWidth * 0.4,
-            videoHeight = videoWidth * 0.56;
+    // /**
+    //  * Update the Size of the Video.
+    // */
+    // function updateVideoSize() {
+    //     let videoWidth = window.innerWidth * 0.4,
+    //         videoHeight = videoWidth * 0.56;
 
-        let videoElement = getEle("ytVideoScreen");
-        videoElement.width = videoWidth;
-        videoElement.height = videoHeight;
-        videoElement.style.width = videoWidth + "px";
-        videoElement.style.height = videoHeight + "px";
+    //     let videoElement = getEle("ytVideoScreen");
+    //     videoElement.width = videoWidth;
+    //     videoElement.height = videoHeight;
+    //     videoElement.style.width = videoWidth + "px";
+    //     videoElement.style.height = videoHeight + "px";
 
-    } // updateVideoSize
+    // } // updateVideoSize
 
-    loadVideo();
-    updateVideoSize();
+    // loadVideo();
+    // updateVideoSize();
 
-    window.addEventListener("resize", updateVideoSize);
+    // window.addEventListener("resize", updateVideoSize);
 } // startEndCard
 
 // ===============================================================================================
-// CREATE OBJECTS t_i
+// CREATE OBJECTS t_w
 // ===============================================================================================
 let
     Canvas = new NewCanvas("AnimationCanvas"),

@@ -190,6 +190,12 @@ li {
     color: white;
 }
 
+.window-list-element-buttons {
+    width: 40%;
+    text-align: right;
+    float: right;
+}
+
 .window-list-element-button {
     margin-left: 4%;
     background-color: lightgray;
@@ -198,6 +204,12 @@ li {
     font-family: monospace;
     font-weight: bolder;
     cursor: pointer;
+}
+
+.window-list-element-remove {
+    background-color: #ff4646;
+    border: 1px solid #000;
+    color: white;
 }
 
 .change-view-button {

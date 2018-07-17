@@ -142,8 +142,8 @@ let
         [],
         [{ "name": "Blob", "shape": 1, "size": 20, "position": [50, 70], "fillStyle": "#1cf3ff", "strokeStyle": "#000", "lineWidth": "3" }, { "name": "Shape_2", "shape": 2, "startX": 45, "startY": 30, "endX": 45, "endY": 60, "strokeStyle": "#000", "lineWidth": "3" }, { "name": "Shape_2", "shape": 2, "startX": 55, "startY": 30, "endX": 55, "endY": 60, "strokeStyle": "#000", "lineWidth": "3" }, { "name": "Shape_3", "shape": 2, "startX": 40, "startY": 30, "endX": 60, "endY": 30, "strokeStyle": "#000", "lineWidth": "6" }],
         [{ "name": "Stick_Background", "shape": 2, "startX": 22, "startY": 78, "endX": 82, "endY": 18, "strokeStyle": "#000", "lineWidth": "12" }, { "name": "Stick", "shape": 2, "startX": 25, "startY": 75, "endX": 80, "endY": 20, "strokeStyle": "#804000", "lineWidth": "9" }, { "name": "Stone_Background", "shape": 2, "startX": 62, "startY": 38, "endX": 78, "endY": 22, "strokeStyle": "#000", "lineWidth": "34" }, { "name": "Stone", "shape": 2, "startX": 65, "startY": 35, "endX": 75, "endY": 25, "strokeStyle": "#404040", "lineWidth": "30" }],
-        [{"name":"Shape_0","shape":2,"startX":70,"startY":20,"endX":40,"endY":40,"strokeStyle":"#c1bae4","lineWidth":"10"},{"name":"Shape_1","shape":2,"startX":40,"startY":40,"endX":60,"endY":50,"strokeStyle":"#c1bae4","lineWidth":"10"},{"name":"Shape_2","shape":2,"startX":60,"startY":50,"endX":30,"endY":80,"strokeStyle":"#c1bae4","lineWidth":"10"},{"name":"Shape_3","shape":2,"startX":60,"startY":50,"endX":30,"endY":80,"strokeStyle":"#fcfaff","lineWidth":"6"},{"name":"Shape_4","shape":2,"startX":40,"startY":40,"endX":60,"endY":50,"strokeStyle":"#fcfaff","lineWidth":"8"},{"name":"Shape_5","shape":2,"startX":70,"startY":20,"endX":40,"endY":40,"strokeStyle":"#fcfaff","lineWidth":"8"}],
-        [{"name":"Stick_Background","shape":2,"startX":22,"startY":78,"endX":82,"endY":18,"strokeStyle":"#000","lineWidth":"12"},{"name":"Shaft","shape":2,"startX":23,"startY":77,"endX":40,"endY":60,"strokeStyle":"#804000","lineWidth":"10"},{"name":"Blade","shape":2,"startX":40,"startY":60,"endX":81,"endY":19,"strokeStyle":"#c9c9c9","lineWidth":"10"},{"name":"Middle","shape":2,"startX":30,"startY":45,"endX":55,"endY":70,"strokeStyle":"#222","lineWidth":"8"}]
+        [{ "name": "Shape_0", "shape": 2, "startX": 70, "startY": 20, "endX": 40, "endY": 40, "strokeStyle": "#c1bae4", "lineWidth": "10" }, { "name": "Shape_1", "shape": 2, "startX": 40, "startY": 40, "endX": 60, "endY": 50, "strokeStyle": "#c1bae4", "lineWidth": "10" }, { "name": "Shape_2", "shape": 2, "startX": 60, "startY": 50, "endX": 30, "endY": 80, "strokeStyle": "#c1bae4", "lineWidth": "10" }, { "name": "Shape_3", "shape": 2, "startX": 60, "startY": 50, "endX": 30, "endY": 80, "strokeStyle": "#fcfaff", "lineWidth": "6" }, { "name": "Shape_4", "shape": 2, "startX": 40, "startY": 40, "endX": 60, "endY": 50, "strokeStyle": "#fcfaff", "lineWidth": "8" }, { "name": "Shape_5", "shape": 2, "startX": 70, "startY": 20, "endX": 40, "endY": 40, "strokeStyle": "#fcfaff", "lineWidth": "8" }],
+        [{"name":"Stick_Background","shape":2,"startX":22,"startY":78,"endX":82,"endY":18,"strokeStyle":"#000","lineWidth":"12"},{"name":"Shaft","shape":2,"startX":23,"startY":77,"endX":40,"endY":60,"strokeStyle":"#804000","lineWidth":"10"},{"name":"Blade","shape":2,"startX":40,"startY":60,"endX":81,"endY":19,"strokeStyle":"#c9c9c9","lineWidth":"10"},{"name":"Middle","shape":2,"startX":30,"startY":45,"endX":55,"endY":70,"strokeStyle":"#222","lineWidth":"8"},{"name":"End","shape":1,"size":10,"position":[25,75],"fillStyle":"#222","lineWidth":"1"}]
     ],
 
     /**
@@ -174,7 +174,7 @@ let
             size: 60,
             breakSize: 40,
             damaging: 1,
-            position: 1,
+            position: 0,
             sprite: 1
         },
         {
@@ -254,7 +254,7 @@ let
             damaging: 0.5,
             position: 0,
             storage: 7,
-            loot: [{ item: 5, get: 0.75 }, { item: 3, get: 0.75 }, { item: 4, get: 0.75 }, { item: 2, get: 0.75 }, { item: 1, get: 0.75}, { item: 21, get: 0.9}, { item: 22, get: 0.9 }, {item: 23, get: 0.9 }, {item: 24, get: 0.9 }],
+            loot: true,
             sprite: 7
         },
         {
@@ -284,8 +284,7 @@ let
             breakSize: 15,
             damaging: 0.1,
             position: 1,
-            sprite: 10,
-            wall: true
+            sprite: 10
         },
         {},
         {},
@@ -336,7 +335,7 @@ let
         { name: "Blueberry", use: { type: USE_EAT, info: 10 }, color: "#35486c" },
         { name: "Raspberry", use: { type: USE_EAT, info: 10 }, color: "#bb0720" },
         { name: "Apple", use: { type: USE_EAT, info: 15, responseItem: 6 }, color: "#d50000" },
-        { name: "Apple Junk", color: "#cace9c" },
+        { name: "Apple Junk", color: "#385621" },
         {},
         {},
         {},
@@ -441,6 +440,11 @@ let
 
     /**
      * All dynamic Objects, which can be moved.
+     * 
+     * name: The name of the dynamic Object
+     * size: The Buffer-Size of the Object
+     * sprite: The Index of the Sprite in LISTSPRITES
+     * draggable: Can the dynamic Object be dragged by the Player 
     */
     LISTDYNAMIC = [
         { name: "WOODEN_CART", size: 55, sprite: 32, draggable: true }
