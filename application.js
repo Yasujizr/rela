@@ -99,7 +99,7 @@ function getEle(elementId_) {
  * @param {string} newValue_ - The new Value of this CSS-Style
 */
 function setCSS(elementId_, cssStyle_, newValue_) {
-    let element = (typeof(elementId_) == typeof("")) ? getEle(elementId_) : (elementId_);
+    let element = (typeof (elementId_) == typeof ("")) ? getEle(elementId_) : (elementId_);
     element.style[cssStyle_] = newValue_;
 } // setCSS
 
@@ -110,7 +110,7 @@ function setCSS(elementId_, cssStyle_, newValue_) {
  * @param {string} cssStyle_ - The CSS-Attribute
 */
 function getCSS(elementId_, cssStyle_) {
-    let element = (typeof(elementId_) == typeof("")) ? getEle(elementId_) : (elementId_);
+    let element = (typeof (elementId_) == typeof ("")) ? getEle(elementId_) : (elementId_);
     return (element.style[cssStyle_]);
 } // getCSS
 
@@ -546,8 +546,13 @@ function makeElementDraggable(element_) {
         startX = e_.clientX;
         startY = e_.clientY;
 
-        setCSS(element_, "top", (element_.offsetTop - finalY) + "px");
-        setCSS(element_, "left", (element_.offsetLeft - finalX) + "px");
+        if (element_.offsetLeft - finalX > 0 && element_.offsetLeft - finalX < window.innerWidth) {
+            setCSS(element_, "left", (element_.offsetLeft - finalX) + "px");
+        }
+
+        if (element_.offsetTop - finalY > 0 && element_.offsetTop - finalY < window.innerHeight) {
+            setCSS(element_, "top", (element_.offsetTop - finalY) + "px");
+        }
     } // elementDrag
 
     // Finish Dragging the Element
@@ -985,12 +990,12 @@ class NewCart {
                 minimalDistance = (this.size + (Player.size / 2) + 15);
 
             // console.log(deltaX, deltaY, distance);
-            if(distance >= minimalDistance) {
+            if (distance >= minimalDistance) {
                 this.x += ((deltaX / ((deltaX != 0) ? (Math.abs(deltaX)) : (0.1))) * Player.maxVelocity);
                 this.y += ((deltaY / ((deltaY != 0) ? (Math.abs(deltaY)) : (0.1))) * Player.maxVelocity);
             }
 
-            
+
         }
     } // update
 
@@ -1371,8 +1376,8 @@ class NewPlayer {
         else if (PRESSED_KEYLIST[65] || PRESSED_KEYLIST[37]) {
             if (this.velX > (-this.maxVelocity)) this.velX -= this.acceleration;
         }
-        
-        
+
+
         // Left- Mouse-Button or "Space"-Key
         if ((PRESSED_KEYLIST[32] || Mouse.pressedMouseButtons[1]) && Mouse.overCanvas) {
             this.gatherItem();
@@ -1554,7 +1559,7 @@ class NewPlayer {
     openStorage() {
         setCSS("b", "display", "block");
         setCSS("g", "display", "block");
-        
+
         let itemsInStorage = Landscape.objectList[this.harvest].storage,
             storageInnerHtml = "";
 
@@ -2221,8 +2226,8 @@ class NewMap {
                         if (LISTOBJECTS[currentObject.object].loot) {
                             let itemAmount = Math.floor(LISTOBJECTS[currentObject.object].storage / 3);
 
-                            for(let itemAmountIterator = 0; itemAmountIterator < itemAmount; itemAmountIterator++) {
-                                newObject.storage.push(Math.floor(5 * Math.random()) + 1);   
+                            for (let itemAmountIterator = 0; itemAmountIterator < itemAmount; itemAmountIterator++) {
+                                newObject.storage.push(Math.floor(5 * Math.random()) + 1);
                             }
                         }
                     }
@@ -2816,7 +2821,7 @@ function startInitialScreen() {
     setCSS("windows", "display", "none");
     setCSS("menuButtons", "display", "none");
     setCSS("end", "display", "none");
-    
+
     initializeGame();
 
     Landscape.render();
