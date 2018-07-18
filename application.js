@@ -560,7 +560,7 @@ function makeElementDraggable(element_) {
 } // makeElementDraggable
 
 /**
- * Focus an Element and move it into the view.
+ * Focus an Element and move it into View.
  * 
  * @param {string} elementId_ - The ID of the Element
 */
@@ -663,12 +663,12 @@ class NewMouse {
     /**
      * Render Preview, if the Player is Building something.
     */
-    render() {
+    renderBuildPreview() {
         if (Player.currentBuild != BUILDING_NOTHING) {
             let image = LIST_SPRITES[LISTOBJECTS[Player.currentBuild.object].sprite];
             renderImage(image, this.inCanvasXPosition, this.inCanvasYPosition, RENDER_NORMALSIZE);
         }
-    } // render
+    } // renderBuildPreview
 } // NewMouse
 
 // ===============================================================================================
@@ -1451,7 +1451,7 @@ class NewPlayer {
         for (let inventoryIterator in this.inventory.itemList) {
             inventoryInnerHtml +=
                 "<li class='window-list-element window-list-element-item' style='background-color: " + LISTITEMS[this.inventory.itemList[inventoryIterator]].color + "'> " +
-                LISTITEMS[this.inventory.itemList[inventoryIterator]].name + "<div class='window-list-element-buttons'>";
+                LISTITEMS[this.inventory.itemList[inventoryIterator]].name;
 
             if (this.harvest != -1 && Landscape.objectList[this.harvest] != undefined && Landscape.objectList[this.harvest].storage) {
                 inventoryInnerHtml +=
@@ -1470,8 +1470,8 @@ class NewPlayer {
             }
 
             inventoryInnerHtml +=
-                "<button class='window-list-element-button window-list-element-remove' onclick='Player.dropItem(" + this.inventory.itemList[inventoryIterator] + ");'>X</button>" +
-                "</div></li>";
+                "<button title='Drop' class='window-list-element-button window-list-element-remove' onclick='Player.dropItem(" + this.inventory.itemList[inventoryIterator] + ");'>X</button>" +
+                "</li>";
         }
 
         setHTML("itemList", inventoryInnerHtml);
@@ -1564,11 +1564,11 @@ class NewPlayer {
                 LISTITEMS[itemsInStorage[storageIterator]].name;
 
             storageInnerHtml +=
-                "<div class='window-list-element-buttons'><button class='window-list-element-button' onclick='manageStorage(" + this.harvest + ", STORAGE_PUTOUT, " + storageIterator + ");'><<</button>";
+                "<button class='window-list-element-button' onclick='manageStorage(" + this.harvest + ", STORAGE_PUTOUT, " + storageIterator + ");'><<</button>";
 
             storageInnerHtml +=
-                "<button class='window-list-element-button window-list-element-remove' onclick='Landscape.objectList[" + this.harvest + "].storage.splice(" + storageIterator + ", 1);  Player.openStorage();'>X</button>" +
-                "</div></li>";
+                "<button title='Drop' class='window-list-element-button window-list-element-remove' onclick='Landscape.objectList[" + this.harvest + "].storage.splice(" + storageIterator + ", 1);  Player.openStorage();'>X</button>" +
+                "</li>";
         }
 
         setHTML("storageList", storageInnerHtml);
@@ -2596,7 +2596,7 @@ let Game = {
 } // Game
 
 /**
- * Initialize the Game. Creating the Sprites, the Fields and Setting Objects, Fields and NPCs.
+ * Initialize the Game. Creating the Sprites, the Fields and Initializing Objects, Fields and NPCs.
 */
 function initializeGame() {
     createFields();
@@ -2654,7 +2654,7 @@ function startGame() {
 
 /**
  * This Function is the Main Game-Loop. 
- * The Function will call itself recursivly until <Game.gameRunning> is false.
+ * The Function will call itself recursivly until Game.gameRunning is false.
 */
 function runGame() {
     if (Game.gameRunning) {
@@ -2714,7 +2714,7 @@ function renderGame() {
 
     textManager.render();
 
-    Mouse.render();
+    Mouse.renderBuildPreview();
 
     Player.renderStats();
 } // renderGame

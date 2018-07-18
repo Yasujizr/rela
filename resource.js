@@ -297,7 +297,7 @@ let
         {},
         {},
         {
-            obj: "SMALL_WOODEN_HOUSE",
+            obj: "HOUSE I",
             passable: false,
             size: 150,
             breakSize: 148,
@@ -329,7 +329,7 @@ let
      * color: The Color of the Item
     */
     LISTITEMS = [
-        { name: "Philosopher's Stone" },
+        { name: "Nothing" },
         { name: "Stone", color: "#909090" },
         { name: "Stick", color: "#805200" },
         { name: "Blueberry", use: { type: USE_EAT, info: 10 }, color: "#35486c" },
@@ -340,9 +340,9 @@ let
         {},
         {},
         {},
-        { name: "Acorn", use: { type: USE_BUILD, info: 1 }, color: "#722b09" },
-        { name: "Beech Seed", use: { type: USE_BUILD, info: 2 }, color: "#ae6928" },
-        { name: "Apple Seed", use: { type: USE_BUILD, info: 3 }, color: "#c64103" },
+        { name: "Seedling", use: { type: USE_BUILD, info: 1 }, color: "#722b09" },
+        { name: "Seedling", use: { type: USE_BUILD, info: 2 }, color: "#ae6928" },
+        { name: "Seedling", use: { type: USE_BUILD, info: 3 }, color: "#c64103" },
         { name: "Seedling", use: { type: USE_BUILD, info: 4 }, color: "#19548c" },
         { name: "Seedling", use: { type: USE_BUILD, info: 5 }, color: "#fe5f71" },
         {},
@@ -352,8 +352,8 @@ let
         {},
         { name: "Pickaxe", tool: 0, color: "#805200" },
         { name: "Axe", tool: 1, color: "#805200" },
-        { name: "Basic Armour", tool: 2, color: "#222222" },
-        { name: "Small Bagpack", tool: 3, color: "#444" }
+        { name: "Armour I", tool: 2, color: "#222222" },
+        { name: "Bagpack I", tool: 3, color: "#444" }
     ],
 
     /*

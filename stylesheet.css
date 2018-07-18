@@ -190,26 +190,21 @@ li {
     color: white;
 }
 
-.window-list-element-buttons {
-    width: 40%;
-    text-align: right;
-    float: right;
-}
-
 .window-list-element-button {
-    margin-left: 4%;
-    background-color: lightgray;
-    border: 1px solid white;
-    padding: 0 5px;
-    font-family: monospace;
-    font-weight: bolder;
+    margin-left: 3%;
+    padding: 0 1%;
+    font-family: "Consolas", monospace;
+    font-weight: bold;
     cursor: pointer;
 }
 
 .window-list-element-remove {
+    margin-right: 2%;
+    padding: 0 5px;
     background-color: #ff4646;
     border: 1px solid #000;
     color: white;
+    float: right;
 }
 
 .change-view-button {
@@ -328,11 +323,15 @@ li {
     .initial-menu-screens {
         width: 29%;
     }
+
+    .window-div {
+        width: 12em;
+    }
 }
 
-@media (orientation: landscape) and (max-width: 1000px) {
+/* @media (orientation: landscape) and (max-width: 1000px) {
     body {
-        font-size: 70%;
+        font-size: 80%;
     }
     .initial-menu-screens-hide {
         display: none;
@@ -341,7 +340,7 @@ li {
         width: 50%;
         padding: 0 0.5em 0.75em 0.5em;
     }
-}
+} */
 
 @media (max-width: 750px) {
     body {
@@ -353,12 +352,6 @@ li {
     .initial-menu-screens {
         width: 50%;
         padding: 0 0.5em 0.75em 0.5em;
-    }
-}
-
-@media (orientation: landscape) and (max-width: 750px) {
-    body {
-        font-size: 70%;
     }
 }
 
