@@ -135,7 +135,7 @@ function addHTML(elementId_, text_) {
 } // addHTML
 
 /**
- * Set an Attribute of an CSS-Class.
+ * Set an Attribute of a CSS-Class.
  * 
  * @param {string} selector_ - The CSS-Class to modify.
  * @param {string} cssProp_ - The Attribute to modify
@@ -299,7 +299,6 @@ function changeControl() {
         initializeComputerControl();
     }
 } // changeControl
-
 
 // ===============================================================================================
 // FRAMEWORK t_d
@@ -495,7 +494,8 @@ class NewCanvas {
 // WINDOWS t_f
 // ===============================================================================================
 /**
- * Change the Visibility of an Element.
+ * Change the Visibility of an Element. So a hidden Element will become visible, 
+ * while a visible will become hidden.
  * 
  * @param {string} elementId_ - The ID of the Element
 */
@@ -509,7 +509,7 @@ function changeWindowVisibility(elementId_) {
 } // changeWindowVisibility
 
 /**
- * Make an Element draggable.
+ * Make an Element draggable on the Screen.
  * 
  * @param {element} element_ - A DOM-Element, which should be draggable
 */
@@ -575,7 +575,7 @@ function focusElement(elementId_) {
  * Initialize the Document, when finished loading.
 */
 window.addEventListener("DOMContentLoaded", () => {
-    startMenuScreen();
+    startInitialScreen();
 }); // DOMContentLoaded
 
 /*
@@ -679,7 +679,7 @@ class NewMouse {
 */
 function processKeyboardInput() {
     if (Player.currentBuild != BUILDING_NOTHING && PRESSED_KEYLIST[17]) {
-        alignObjectWhileSetting();
+        alignObjectWhilePlacing();
     }
 
     Mouse.calculateRelativePosition();
@@ -759,7 +759,7 @@ class newText {
 // EFFECTS t_l
 // ===============================================================================================
 /**
- * Draw Lights.
+ * Draw all Lights visible on the Canvas.
 */
 function renderLight() {
     try {
@@ -2105,7 +2105,7 @@ class NewMap {
     /**
      * Create Fields on the Map.
     */
-    createFields() {
+    generateFields() {
         printMessage(SHOW_INFORMATION, "Set Fields...");
 
         for (let borderSize = 1; borderSize < 3; borderSize++) {
@@ -2183,7 +2183,7 @@ class NewMap {
         }
 
         printMessage(SHOW_INFORMATION, "Fields set.");
-    } // createFields
+    } // generateFields
 
     /**
      * Create Objects on the Map.
@@ -2496,9 +2496,9 @@ function manageStorage(objectIndex_, action_, item_) {
 } // manageStorage
 
 /**
- * Align an Object next to an other Object when building it.
+ * Align an Object next to an other Object, when placing it.
 */
-function alignObjectWhileSetting() {
+function alignObjectWhilePlacing() {
     let nearestObjectIndex = Landscape.getNearestObject(Mouse.inMapXPosition, Mouse.inMapYPosition),
         xPosition = Landscape.objectList[nearestObjectIndex].x,
         yPosition = Landscape.objectList[nearestObjectIndex].y,
@@ -2520,7 +2520,7 @@ function alignObjectWhileSetting() {
             Mouse.inCanvasXPosition = ((-Player.x + (Canvas.width / 2)) + xPosition) + ((distance + 1) * ((deltaX < 0) ? (-1) : (1)));
         }
     }
-} // alignObjectWhileSetting
+} // alignObjectWhilePlacing
 
 // ===============================================================================================
 // GENERATE t_s
@@ -2528,7 +2528,7 @@ function alignObjectWhileSetting() {
 /**
  * Create all Sprites in LIST_SPRITES.
 */
-function createSprites() {
+function generateSprites() {
     printMessage(SHOW_INFORMATION, "Creating General-Sprites...");
 
     LIST_SPRITES = [];
@@ -2538,12 +2538,12 @@ function createSprites() {
     }
 
     printMessage(SHOW_INFORMATION, "Created General-Sprites!");
-} // createSprites
+} // generateSprites
 
 /**
  * Create the Sprites for all Fields.
 */
-function createFields() {
+function generateFields() {
     printMessage(SHOW_INFORMATION, "Generating Field-Sprites...");
 
     for (let fieldIterator in createFieldList) {
@@ -2577,7 +2577,7 @@ function createFields() {
     }
 
     printMessage(SHOW_INFORMATION, "Created Field-Sprites!");
-} // createFields
+} // generateFields
 
 // ===============================================================================================
 // GAME t_t
@@ -2599,10 +2599,10 @@ let Game = {
  * Initialize the Game. Creating the Sprites, the Fields and Initializing Objects, Fields and NPCs.
 */
 function initializeGame() {
-    createFields();
-    createSprites();
+    generateFields();
+    generateSprites();
 
-    Landscape.createFields();
+    Landscape.generateFields();
     Landscape.createObjects();
 
     Player.updateWindows();
@@ -2648,7 +2648,7 @@ function startGame() {
         requestAnimationFrame(runGame);
     }
     else {
-        startEndCard();
+        startFinalScreen();
     }
 } // startGame
 
@@ -2689,7 +2689,7 @@ function runGame() {
             Game.processMouseInput = false;
             Game.processKeyboardInput = false;
 
-            startEndCard();
+            startFinalScreen();
         }
     }
 } // runGame
@@ -2802,13 +2802,13 @@ function saveGameToJSONFile() {
 // START/END t_v
 // ===============================================================================================
 /**
- * Setup Menu-Screen.
+ * Show the initial Menu-Screen.
 */
-function startMenuScreen() {
+function startInitialScreen() {
     Canvas.clear();
     Effects.clear();
 
-    setCSS("loadingAnimationDiv", "display", "block");
+    setCSS("load", "display", "block");
     setCSS(Effects.canvas, "opacity", 1);
     setCSS(Effects.canvas, "backgroundColor", "#000");
 
@@ -2823,14 +2823,14 @@ function startMenuScreen() {
     Landscape.renderObjects(0);
     Landscape.renderObjects(1);
 
-    setCSS("loadingAnimationDiv", "display", "none");
+    setCSS("load", "display", "none");
     setCSS(Effects.canvas, "opacity", 0);
-} // startMenuScreen
+} // startInitialScreen
 
 /**
- * Start the EndCard.
+ * Show the final Endcard.
 */
-function startEndCard() {
+function startFinalScreen() {
     localStorage.clear();
 
     Canvas.clear();
@@ -2839,46 +2839,10 @@ function startEndCard() {
     setCSS(Effects.canvas, "opacity", 1);
     setCSS(Effects.canvas, "backgroundColor", "#131313");
     setCSS(Effects.canvas, "transitionDuration", "0ms");
-    setCSS("window", "display", "none");
+    setCSS("windows", "display", "none");
     setCSS("menuButtons", "display", "none");
     setCSS("end", "display", "block");
-
-    // /**
-    //  * Load the YT-Video.
-    // */
-    // function loadVideo() {
-    //     let linkList = [
-    //         "TkLT5krv_6c",
-    //         "ALZHF5UqnU4",
-    //         "S3fTw_D3l10",
-    //         "8PIPyPMNnp8"
-    //     ];
-
-    //     let linkIndex = Math.floor(Math.random() * linkList.length);
-
-    //     setHTML("videoPart", "<iframe id='ytVideoScreen' src='https://www.youtube-nocookie.com/embed/" + (linkList[linkIndex]) + "?autoplay=1&controls=0&showinfo=0' allow='autoplay; encrypted-media;'>");
-    // } // loadVideo
-
-    // /**
-    //  * Update the Size of the Video.
-    // */
-    // function updateVideoSize() {
-    //     let videoWidth = window.innerWidth * 0.4,
-    //         videoHeight = videoWidth * 0.56;
-
-    //     let videoElement = getEle("ytVideoScreen");
-    //     videoElement.width = videoWidth;
-    //     videoElement.height = videoHeight;
-    //     videoElement.style.width = videoWidth + "px";
-    //     videoElement.style.height = videoHeight + "px";
-
-    // } // updateVideoSize
-
-    // loadVideo();
-    // updateVideoSize();
-
-    // window.addEventListener("resize", updateVideoSize);
-} // startEndCard
+} // startFinalScreen
 
 // ===============================================================================================
 // CREATE OBJECTS t_w

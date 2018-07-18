@@ -18,7 +18,7 @@
 </head>
 
 <body oncontextmenu="return (false);">
-    <div id="load">
+    <div id="load" class="whole-window window-frame">
         <span id="loadingAnimationDiv">
             <div id="loadingAnimation"></div>
             Loading...
@@ -97,104 +97,99 @@
     </div>
 
     <div id="game" class="whole-window window-frame">
-        <div id="gameDiv">
-            <header id="gameHeader"></header>
+        <header id="gameHeader"></header>
 
-            <canvas id="AnimationCanvas" class="whole-window window-frame"></canvas>
+        <canvas id="AnimationCanvas" class="whole-window window-frame"></canvas>
 
-            <canvas id="EffectCanvas" class="whole-window window-frame"></canvas>
+        <canvas id="EffectCanvas" class="whole-window window-frame"></canvas>
 
-            <span id="menuButtons" style="display: none;">
-                <button id="open_a" style="position: absolute; top: 0.5em; right: 0.75em; width: 4em; height: 4em;" class="menu-button change-window-button"
-                    title="Menu (Esc)"></button>
+        <span id="menuButtons" style="display: none;">
+            <button id="open_a" style="position: absolute; top: 0.5em; right: 0.75em; width: 4em; height: 4em;" class="menu-button change-window-button"
+                title="Menu (Esc)"></button>
 
-                <div class="menu-buttons">
-                    <button id="open_b" class="menu-button change-window-button" title="Inventory (E)"></button>
-                    <button id="open_c" class="menu-button change-window-button" title="Recipes (R)"></button>
-                    <button id="open_d" class="menu-button change-window-button" title="Constructions (C)"></button>
-                    <button id="open_e" class="menu-button change-window-button" title="Evolutions (F)"></button>
-                    <button id="open_f" class="menu-button change-window-button" title="Equipment (T)"></button>
-                </div>
-            </span>
+            <div class="menu-buttons">
+                <button id="open_b" class="menu-button change-window-button" title="Inventory (E)"></button>
+                <button id="open_c" class="menu-button change-window-button" title="Recipes (R)"></button>
+                <button id="open_d" class="menu-button change-window-button" title="Constructions (C)"></button>
+                <button id="open_e" class="menu-button change-window-button" title="Evolutions (F)"></button>
+                <button id="open_f" class="menu-button change-window-button" title="Equipment (T)"></button>
+            </div>
+        </span>
 
-            <div id="windows">
-                <div name="Menu" id="a" style="display: none; z-index: 12;" class="menu-div">
-                    <ul id="aheader" class="window-header" style="display: inline-block; text-align: left; cursor: default; height: 6%; margin-bottom: 0.2em;">
-                        <li id="close_a" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Menu:</li>
-                    </ul>
-                    <div class="window-content" style="height: 94%; padding: 1em 0;">
-                        <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="saveGameToJSONFile();">Save Game!</button>
-                        <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="window.location.reload();">Exit</button>
-                    </div>
+        <div id="windows">
+            <div name="Menu" id="a" style="display: none; z-index: 12;" class="menu-div">
+                <ul id="aheader" class="window-header" style="display: inline-block; text-align: left; cursor: default; height: 6%; margin-bottom: 0.2em;">
+                    <li id="close_a" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Menu:</li>
+                </ul>
+                <div class="window-content" style="height: 94%; padding: 1em 0;">
+                    <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="saveGameToJSONFile();">Save Game!</button>
+                    <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="window.location.reload();">Exit</button>
                 </div>
+            </div>
 
-                <div name="Inventory" id="b" style="display: none;" class="window-div draggable">
-                    <ul id="bheader" class="window-header" style="display: inline-block; text-align: left;">
-                        <li id="close_b" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Inventory:</li>
-                    </ul>
-                    <div class="window-content">
-                        <ul id="itemList" class="window-list" style="display: block; height: 100%;"></ul>
-                    </div>
+            <div name="Inventory" id="b" style="display: none;" class="window-div draggable">
+                <ul id="bheader" class="window-header" style="display: inline-block; text-align: left;">
+                    <li id="close_b" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Inventory:</li>
+                </ul>
+                <div class="window-content">
+                    <ul id="itemList" class="window-list" style="display: block; height: 100%;"></ul>
                 </div>
-                <div name="Recipe" id="c" style="display: none; top: 13em;" class="window-div draggable">
-                    <ul id="cheader" class="window-header" style="display: inline-block; text-align: left;">
-                        <li id="close_c" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Recipes:</li>
-                    </ul>
-                    <div class="window-content">
-                        <ul id="recipeList" class="window-list" style="display: block; height: 100%;"></ul>
-                    </div>
+            </div>
+            <div name="Recipe" id="c" style="display: none; top: 13em;" class="window-div draggable">
+                <ul id="cheader" class="window-header" style="display: inline-block; text-align: left;">
+                    <li id="close_c" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Recipes:</li>
+                </ul>
+                <div class="window-content">
+                    <ul id="recipeList" class="window-list" style="display: block; height: 100%;"></ul>
                 </div>
-                <div name="Construction" id="d" style="display: none; top: 26em;" class="window-div draggable">
-                    <ul id="dheader" class="window-header" style="display: inline-block; text-align: left;">
-                        <li id="close_d" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Build:</li>
-                    </ul>
-                    <div class="window-content">
-                        <ul id="constructionList" class="window-list" style="display: block; height: 100%;"></ul>
-                    </div>
+            </div>
+            <div name="Construction" id="d" style="display: none; top: 26em;" class="window-div draggable">
+                <ul id="dheader" class="window-header" style="display: inline-block; text-align: left;">
+                    <li id="close_d" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Build:</li>
+                </ul>
+                <div class="window-content">
+                    <ul id="constructionList" class="window-list" style="display: block; height: 100%;"></ul>
                 </div>
-                <div name="Evolutions" id="e" style="display: none; left: 10em;" class="window-div draggable">
-                    <ul id="eheader" class="window-header" style="display: inline-block; text-align: left;">
-                        <li id="close_e" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Evolutions:</li>
-                    </ul>
-                    <div class="window-content">
-                        <p id="evolutionPoints" style="height: 10%;"></p>
-                        <ul id="evolutionList" class="window-list" style="display: block; height: 90%;"></ul>
-                    </div>
+            </div>
+            <div name="Evolutions" id="e" style="display: none; left: 10em;" class="window-div draggable">
+                <ul id="eheader" class="window-header" style="display: inline-block; text-align: left;">
+                    <li id="close_e" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Evolutions:</li>
+                </ul>
+                <div class="window-content">
+                    <p id="evolutionPoints" style="height: 10%;"></p>
+                    <ul id="evolutionList" class="window-list" style="display: block; height: 90%;"></ul>
                 </div>
-                <div name="Equipment" id="f" style="display: none; top: 13em; left: 10em;" class="window-div draggable">
-                    <ul id="fheader" class="window-header" style="display: inline-block; text-align: left;">
-                        <li id="close_f" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Equiped:</li>
-                    </ul>
-                    <div class="window-content">
-                        <ul id="equipedList" class="window-list" style="display: block; height: 100%;"></ul>
-                    </div>
+            </div>
+            <div name="Equipment" id="f" style="display: none; top: 13em; left: 10em;" class="window-div draggable">
+                <ul id="fheader" class="window-header" style="display: inline-block; text-align: left;">
+                    <li id="close_f" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Equiped:</li>
+                </ul>
+                <div class="window-content">
+                    <ul id="equipedList" class="window-list" style="display: block; height: 100%;"></ul>
                 </div>
+            </div>
 
-                <div name="Storage" id="g" style="display: none; top: 13em; left: 20em;" class="window-div draggable">
-                    <ul id="gheader" class="window-header" style="display: inline-block; text-align: left;">
-                        <li id="close_g" class="change-window-button window-close-button">[X]</li>
-                        <li class="window-title">Storage:</li>
-                    </ul>
-                    <div class="window-content">
-                        <ul id="storageList" class="window-list" style="display: block; height: 100%;"></ul>
-                    </div>
+            <div name="Storage" id="g" style="display: none; top: 13em; left: 20em;" class="window-div draggable">
+                <ul id="gheader" class="window-header" style="display: inline-block; text-align: left;">
+                    <li id="close_g" class="change-window-button window-close-button">[X]</li>
+                    <li class="window-title">Storage:</li>
+                </ul>
+                <div class="window-content">
+                    <ul id="storageList" class="window-list" style="display: block; height: 100%;"></ul>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="end" class="whole-window window-frame" style="display: none;">
-        <h1 style="margin-top: 4%; color: red;font-size: 5em;">Game Over!</h1>
+        <h1 style="margin-top: 10%; color: red;font-size: 5em;">Game Over!</h1>
         <a href="/" style="color: white; font-size: 1.5em; text-decoration: none;">- Go Back -</a>
-
-        <h3 style="margin-top: 5%; color: white;">Here's a video to cheer you up!</h3>
-        <div id="videoPart" style="width: 100%; height: fit-content;"></div>
     </div>
 </body>
 
