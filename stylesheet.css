@@ -249,7 +249,7 @@ li {
     animation: spin 1s linear infinite;
 }
 
-#initialMenu {
+#initial {
     z-index: 20;
 }
 
@@ -307,7 +307,7 @@ li {
     background-color: #fff;
 }
 
-#endcard {
+#end {
     z-index: 666;
     text-align: center;
 }

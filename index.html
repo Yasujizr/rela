@@ -10,23 +10,22 @@
     <meta http-equiv="language" content="en">
 
     <meta name="google-site-verification" content="gbi-sGkZlGI2TYVpgceIjR-5DVAcYk3EXmbutaiWeMs" />
-    <meta name="author" content="unrealGuthrie">
-    <meta name="keywords" content="recursive laughter, recursion, game, harvesting, evolution, html, css, javascript, dynamic, rela. unrelGruthrie">
-
+    <meta name="author" content="unreal_guthrie">
+    <meta name="keywords" content="recursive laughter, recursion, game, harvesting, evolution, html, css, javascript, dynamic, rela. unrelGruthrie, unreal_guthrie, f2p">
     <meta name="description" content="Build a World. Be the one Hero.">
 
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 </head>
 
 <body oncontextmenu="return (false);">
-    <div>
+    <div id="load">
         <span id="loadingAnimationDiv">
             <div id="loadingAnimation"></div>
             Loading...
         </span>
     </div>
 
-    <div id="initialMenu" class="whole-window window-frame" style="display: none;">
+    <div id="initial" class="whole-window window-frame" style="display: none;">
         <p id="daysLeft">
             <script>
                 let ele = document.getElementById("daysLeft"),
@@ -127,12 +126,6 @@
                     <div class="window-content" style="height: 94%; padding: 1em 0;">
                         <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="saveGameToJSONFile();">Save Game!</button>
                         <button style="display: block; width: 90%;" class="init-buttons center-element" onclick="window.location.reload();">Exit</button>
-
-                        <!-- <div>
-                            <h3>Options:</h3>
-                            <button onclick="changeControl();">Change Control</button>
-                            <label id="currentControlMode"></label>
-                        </div> -->
                     </div>
                 </div>
 
@@ -196,14 +189,14 @@
         </div>
     </div>
 
-    <div id="endcard" class="whole-window window-frame" style="display: none;">
+    <div id="end" class="whole-window window-frame" style="display: none;">
         <h1 style="margin-top: 4%; color: red;font-size: 5em;">Game Over!</h1>
         <a href="/" style="color: white; font-size: 1.5em; text-decoration: none;">- Go Back -</a>
 
         <h3 style="margin-top: 5%; color: white;">Here's a video to cheer you up!</h3>
         <div id="videoPart" style="width: 100%; height: fit-content;"></div>
     </div>
-
-    <script src="/resource.js"></script>
-    <script src="/application.js"></script>
 </body>
+
+<script src="/resource.js"></script>
+<script src="/application.js"></script>

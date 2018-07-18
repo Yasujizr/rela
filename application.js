@@ -2631,7 +2631,7 @@ function startGame() {
         makeElementDraggable(elementList[elementIterator]);
     }
 
-    setCSS("initialMenu", "display", "none");
+    setCSS("initial", "display", "none");
     setCSS("windows", "display", "block");
     setCSS("menuButtons", "display", "block");
 
@@ -2812,10 +2812,10 @@ function startMenuScreen() {
     setCSS(Effects.canvas, "opacity", 1);
     setCSS(Effects.canvas, "backgroundColor", "#000");
 
-    setCSS("initialMenu", "display", "block");
+    setCSS("initial", "display", "block");
     setCSS("windows", "display", "none");
     setCSS("menuButtons", "display", "none");
-    setCSS("endcard", "display", "none");
+    setCSS("end", "display", "none");
     
     initializeGame();
 
@@ -2841,7 +2841,7 @@ function startEndCard() {
     setCSS(Effects.canvas, "transitionDuration", "0ms");
     setCSS("window", "display", "none");
     setCSS("menuButtons", "display", "none");
-    setCSS("endcard", "display", "block");
+    setCSS("end", "display", "block");
 
     // /**
     //  * Load the YT-Video.
