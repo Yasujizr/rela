@@ -223,21 +223,11 @@ li {
  *  ELEMENTS
 */
 
-#loadingAnimationDiv {
-    position: absolute;
-    left: 1%;
-    top: 1%;
+#load {
+    padding: 0.5%;
     z-index: 666;
     color: white;
-}
-
-#daysLeft {
-    position: absolute;
-    top: 0.1em;
-    left: 0.3em;
-    color: #fff;
-    font-size: 0.9em;
-    font-family: Consolas, monospace;
+    text-align: left;
 }
 
 #loadingAnimation {
@@ -253,17 +243,13 @@ li {
     z-index: 20;
 }
 
-#initHeader {
-    width: 100%;
+#daysLeft {
     position: absolute;
-    background-color: #222;
-    font-size: 1.1em;
-    font-family: monospace;
-    color: #e2e2e2;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
+    top: 0.1em;
+    left: 0.3em;
+    color: #fff;
+    font-size: 0.9em;
+    font-family: Consolas, monospace;
 }
 
 #gameButtons {
@@ -274,21 +260,18 @@ li {
     justify-content: space-between
 }
 
+#loadFileInput {
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    overflow: hidden;
+}
+
 #loadingMessages {
     color: #ff0000;
     font-weight: bold;
-}
-
-#EffectCanvas {
-    z-index: 11;
-    background-color: #000;
-    pointer-events: none;
-    transition-duration: 300ms;
-}
-
-#AnimationCanvas {
-    z-index: 10;
-    background-color: #206b2c;
 }
 
 #gameHeader {
@@ -301,6 +284,18 @@ li {
     font-weight: 100;
     font-size: 1.8em;
     pointer-events: none;
+}
+
+#AnimationCanvas {
+    z-index: 10;
+    background-color: #206b2c;
+}
+
+#EffectCanvas {
+    z-index: 11;
+    background-color: #000;
+    pointer-events: none;
+    transition-duration: 300ms;
 }
 
 #information-header {

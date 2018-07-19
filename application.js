@@ -63,7 +63,7 @@ let
     CLOCKTIMER = Date.now(),
 
     LIST_FIELDS = [],
-    LIST_SPRITES = [], ;
+    LIST_SPRITES = [];
 
 // ===============================================================================================
 // GENERAL_FUNCTIONS t_b
