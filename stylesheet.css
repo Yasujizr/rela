@@ -153,18 +153,18 @@ li {
     cursor: pointer;
 }
 
-.window-title {
-    display: inline;
-    margin-left: 10px;
-    font-family: monospace, fantasy;
-    font-weight: bold;
-}
-
 .window-close-button {
     display: inline;
     font-family: monospace;
     font-weight: bolder;
     font-size: 1.2em;
+}
+
+.window-title {
+    display: inline;
+    margin-left: 10px;
+    font-family: monospace, fantasy;
+    font-weight: bold;
 }
 
 .window-content {
@@ -205,18 +205,6 @@ li {
     border: 1px solid #000;
     color: white;
     float: right;
-}
-
-.change-view-button {
-    margin-left: auto;
-    margin-right: auto;
-    font-style: italic;
-    cursor: pointer;
-    transition-duration: 600ms;
-}
-
-.change-view-button:hover {
-    text-decoration: underline;
 }
 
 /*
