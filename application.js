@@ -3,13 +3,13 @@
 
 /*
  * Structure (select the Shortcut, and then Press Ctrl+D or Ctrl+F):
- * - t_a: GLOBAL / CONSTANT     Global Variables
- * - t_b: GENERAL FUNCTIONS     General Functions
+ * - t_a: GLOBAL                Global Variables
+ * - t_b: GENERAL_FUNCTIONS     General Functions
  * - t_c: DEVICE                Initialize and Manage the Device
  * - t_d: FRAMEWORK             The Main Framework, for Image-Generation and Rendering
  * - t_e: CANVAS                The Canvas-Class
  * - t_f: WINDOWS               Manage and Control Subwindows, like the Inventory
- * - t_g: GENERAL EVENTS        General Events, like Loading the DOM or Resizing the Window
+ * - t_g: GENERAL_EVENTS        General Events, like Loading the DOM or Resizing the Window
  * - t_h: BUTTONS               Initialize and Manage all Button-Events
  * - t_i: MOUSE                 Manage and Control Mouse-Inputs
  * - t_j: KEYBOARD              Manage and Control Keyboard-Inputs
@@ -25,11 +25,11 @@
  * - t_t: GAME                  The Game-Class
  * - t_u: SAVE                  Manage Saving and Loading the Game
  * - t_v: START/END             Manage the Beginning and the End of the Episode
- * - t_w: CREATE OBJECTS        Create all Main-Objects, like the Player and the Map
+ * - t_w: CREATE_OBJECTS        Create all Main-Objects, like the Player and the Map
 */
 
 // ===============================================================================================
-// GLOBAL/CONSTANT t_a
+// GLOBAL t_a
 // ===============================================================================================
 let
     FRAMERATE = (1000 / 55),
@@ -56,29 +56,17 @@ let
     STORAGE_PUTOUT = 0,
     STORAGE_PUTIN = 1,
 
-    LIST_FIELDS = [],
-    LIST_SPRITES = [],
-
     SOUNDCONTEXT = new (window.AudioContext || window.webkitAudioContext || window.Audio)(),
     PRESSED_KEYLIST = [],
 
     GAMETIMER = Date.now(),
     CLOCKTIMER = Date.now(),
 
-    HOURLENGTH = 3000,
-    DROPPED_REMOVE_TIME = 10000,
-
-    FIELD_SIZE = 500,
-    FIELD_AMOUNT = 100,
-
-    PUNCHING_DISTANCE = 20,
-    DROPPED_SIZE = 12,
-    INVENTORY_SIZE = 10,
-
-    HUNGERTIMER = 8000;
+    LIST_FIELDS = [],
+    LIST_SPRITES = [],;
 
 // ===============================================================================================
-// GENERAL FUNCTIONS t_b
+// GENERAL_FUNCTIONS t_b
 // ===============================================================================================
 /**
  * Get a HTML-Element.
@@ -141,7 +129,7 @@ function addHTML(elementId_, text_) {
  * @param {string} cssProp_ - The Attribute to modify
  * @param {string} cssVal_ - The new Value of the Attribute
 */
-function changeCSSStyle(selector_, cssProp_, cssVal_) {
+function changeCSSClassStyle(selector_, cssProp_, cssVal_) {
     let ssMain = 0,
         cssRules = (document.all) ? 'rules' : 'cssRules';
 
@@ -151,7 +139,7 @@ function changeCSSStyle(selector_, cssProp_, cssVal_) {
             return;
         }
     }
-} // changeCSSStyle
+} // changeCSSClassStyle
 
 // ===============================================================================================
 // DEVICE t_c
@@ -574,7 +562,7 @@ function focusElement(elementId_) {
 } // focusElement
 
 // ===============================================================================================
-// GENERAL EVENTS t_g
+// GENERAL_EVENTS t_g
 // ===============================================================================================
 /*
  * Initialize the Document, when finished loading.
@@ -1185,11 +1173,11 @@ class NewPlayer {
             rightHandMovement = 0;
         // The Left Hand
         if (this.hittingCycleCounter >= 0 && this.hittingCycleCounter <= 100) {
-            leftHandMovement = Math.abs(Math.sin((this.hittingCycleCounter / 100) * Math.PI) * PUNCHING_DISTANCE);
+            leftHandMovement = Math.abs(Math.sin((this.hittingCycleCounter / 100) * Math.PI) * 20);
         }
         // The Right Hand
         else if (this.hittingCycleCounter >= 100 && this.hittingCycleCounter <= 200) {
-            rightHandMovement = Math.abs(Math.sin((this.hittingCycleCounter / 100) * Math.PI) * PUNCHING_DISTANCE);
+            rightHandMovement = Math.abs(Math.sin((this.hittingCycleCounter / 100) * Math.PI) * 20);
         }
 
         // Only hit with one Hand, if only one Item is equiped
@@ -1593,7 +1581,7 @@ class NewPlayer {
                     delY = this.y - Landscape.droppedItems[droppedIterator].y,
                     distance = Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2));
 
-                if (distance <= (this.size + DROPPED_SIZE)) {
+                if (distance <= (this.size + 12)) {
                     this.checkIfDiscovered(Landscape.droppedItems[droppedIterator].item);
                     this.inventory.add(Landscape.droppedItems[droppedIterator].item);
                     removeList.push(droppedIterator);
@@ -2334,7 +2322,7 @@ class NewMap {
             }
             else {
                 Canvas.context.beginPath();
-                Canvas.context.arc(currentItem.x, currentItem.y, DROPPED_SIZE, 0, 2 * Math.PI);
+                Canvas.context.arc(currentItem.x, currentItem.y, 12, 0, 2 * Math.PI);
                 Canvas.context.fillStyle = LISTITEMS[currentItem.item].color;
                 Canvas.context.strokeStyle = "#222";
                 Canvas.context.lineWidth = "5";
@@ -2850,7 +2838,7 @@ function startFinalScreen() {
 } // startFinalScreen
 
 // ===============================================================================================
-// CREATE OBJECTS t_w
+// CREATE_OBJECTS t_w
 // ===============================================================================================
 let
     Canvas = new NewCanvas("AnimationCanvas"),

@@ -1,4 +1,7 @@
 let
+    FIELD_SIZE = 500,
+    FIELD_AMOUNT = 100,
+
     USE_EAT = 0,
     USE_BUILD = 1,
 
@@ -8,6 +11,12 @@ let
     IMPROV_EVOL = 0,
     IMPROV_RECI = 1,
     IMPROV_CONS = 2,
+
+    INVENTORY_SIZE = 10,
+
+    HOURLENGTH = 3000,
+    DROPPED_REMOVE_TIME = 10000,
+    HUNGERTIMER = 8000,
 
 
     /**
