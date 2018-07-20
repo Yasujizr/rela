@@ -159,11 +159,11 @@ let
      * All the Linkbutton-Sprites.
     */
     LIST_LINKBUTTONS = [
-        [{"name":"Background","shape":0,"size":80,"position":[0,0],"fillStyle":"#7289da","lineWidth":"1"},{"name":"Text","shape":4,"position":[30,70],"text":"d","font":"60px Consolas","fontColor":"#fff"}],
-        [{"name":"Background","shape":0,"size":80,"position":[0,0],"fillStyle":"#e75f27","lineWidth":"1"},{"name":"Text","shape":4,"position":[30,70],"text":"i","font":"60px Consolas","fontColor":"#fff"}],
-        [{"name":"Background","shape":0,"size":80,"position":[0,0],"fillStyle":"#8fdaf4","lineWidth":"1"},{"name":"Text","shape":4,"position":[30,70],"text":"t","font":"60px Consolas","fontColor":"#fff"}],
-        [{"name":"Background","shape":0,"size":80,"position":[0,0],"fillStyle":"#f05033","lineWidth":"1"},{"name":"Text","shape":4,"position":[30,60],"text":"g","font":"60px Consolas","fontColor":"#fff"}],
-        [{"name":"Background","shape":0,"size":80,"position":[0,0],"fillStyle":"#f96855","lineWidth":"1"},{"name":"Text","shape":4,"position":[30,60],"text":"p","font":"60px Consolas","fontColor":"#fff"}]
+        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#7289da", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 70], "text": "d", "font": "60px Consolas", "fontColor": "#fff" }],
+        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#e75f27", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 70], "text": "i", "font": "60px Consolas", "fontColor": "#fff" }],
+        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#8fdaf4", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 70], "text": "t", "font": "60px Consolas", "fontColor": "#fff" }],
+        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#f05033", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 60], "text": "g", "font": "60px Consolas", "fontColor": "#fff" }],
+        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#f96855", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 60], "text": "p", "font": "60px Consolas", "fontColor": "#fff" }]
     ],
 
     /**

@@ -175,13 +175,13 @@
                             <input id="yposition" type="number" style="width: 40%;">
                         </div>
                     </li>
-                    <li id="c" class="input-list-element">fillStyle:
+                    <li id="c" class="input-list-element">FillStyle:
                         <input id="fillStyle" type="text">
                     </li>
-                    <li id="d" class="input-list-element">strokeStyle:
+                    <li id="d" class="input-list-element">StrokeStyle:
                         <input id="strokeStyle" type="text">
                     </li>
-                    <li id="e" class="input-list-element">lineWidth:
+                    <li id="e" class="input-list-element">LineWidth:
                         <input id="lineWidth" type="text">
                     </li>
                     <li id="f" class="input-list-element">Start:
@@ -202,7 +202,7 @@
                     <li id="i" class="input-list-element">Font:
                         <input id="fontStyle" type="text">
                     </li>
-                    <li id="j" class="input-list-element">Color:
+                    <li id="j" class="input-list-element">FontColor:
                         <input id="fontColor" type="text">
                     </li>
                 </ul>
@@ -329,20 +329,18 @@
         }
         if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3 || createShapeType == 4) {
             newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
-        }
-        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3 || createShapeType == 4) {
             if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+        }
+        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 2 || createShapeType == 3) {
+            if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
+            if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
+            else { newObject.lineWidth = "1"; }
         }
         else if (createShapeType == 2) {
             newObject.startX = Number(startXIn.value);
             newObject.startY = Number(startYIn.value);
             newObject.endX = Number(endXIn.value);
             newObject.endY = Number(endYIn.value);
-        }
-        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 2 || createShapeType == 3) {
-            if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
-            if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
-            else { newObject.lineWidth = "1"; }
         }
         if (createShapeType == 4) {
             newObject.text = textIn.value;
@@ -440,7 +438,9 @@
             if (shapeList[currentShapeIndex].font) {
                 context.font = shapeList[currentShapeIndex].font;
 
-                context.fillStyle = shapeList[currentShapeIndex].fontColor;
+                if (shapeList[currentShapeIndex].fontColor) {
+                    context.fillStyle = shapeList[currentShapeIndex].fontColor;
+                }
             }
 
             switch (shapeList[currentShapeIndex].shape) {
@@ -498,5 +498,6 @@
         }
     }, (1000 / 30));
 
+    // Initialize rect as the first Shape
     changeShape(0);
 </script>
