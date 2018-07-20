@@ -209,7 +209,7 @@
             </form>
 
             <div style="margin-top: 2%; text-align: center;">
-                <button style="background-color: #60ff60;" onclick="createShape();" class="menu-operation-buttons">Create!</button>
+                <button id="funButton0" style="background-color: #60ff60;" onclick="createShape();" class="menu-operation-buttons">Create!</button>
                 <button style="background-color: #ff5f5f;" onclick="document.getElementById('createForm').reset();" class="menu-operation-buttons">Reset!</button>
             </div>
         </li>
@@ -237,6 +237,7 @@
 
         shapeList = [],
         createShapeType = 0,
+        editShapeIndex = -1,
 
         PRESSED_KEYLIST = [],
 
@@ -348,8 +349,17 @@
             newObject.fontColor = fontColor.value;
         }
 
-        shapeList.push(newObject);
+        if (editShapeIndex == -1) {
+            shapeList.push(newObject);
 
+        }
+        else {
+            newObject.name = shapeList[editShapeIndex].name;
+            shapeList[editShapeIndex] = newObject;
+            editShapeIndex = -1;
+            document.getElementById("funButton0").style.backgroundColor = "#60ff60";
+            document.getElementById("funButton0").innerHTML = "Create!";
+        }
         updateShapeList();
     } // createShape
 
@@ -372,9 +382,12 @@
      * @param {number} index_ - The Index of the shape to edit
     */
     function editShape(index_) {
+        document.getElementById("funButton0").style.backgroundColor = "#ffeb00";
+        document.getElementById("funButton0").innerHTML = "Edit!";
         changeShape(shapeList[index_].shape);
         document.getElementById('createForm').reset();
 
+        editShapeIndex = index_;
         let currentShape = shapeList[index_];
 
         if (currentShape.size != undefined) sizeIn.value = currentShape.size;
