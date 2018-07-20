@@ -94,7 +94,7 @@
 
         .shape-choose-button {
             display: inline-block;
-            width: 22%;
+            width: 18%;
             border: none;
         }
 
@@ -158,6 +158,10 @@
                 <button id="shapeButton_3" title="hexagon" class="shape-choose-button" onclick="changeShape(3);">
                     hexa
                 </button>
+
+                <button id="shapeButton_4" title="text" class="shape-choose-button" onclick="changeShape(4);">
+                    text
+                </button>
             </div>
 
             <form id="createForm">
@@ -191,6 +195,15 @@
                             <input id="endX" type="number" style="width: 40%;">
                             <input id="endY" type="number" style="width: 40%;">
                         </div>
+                    </li>
+                    <li id="h" class="input-list-element">Text:
+                        <input id="text" type="text">
+                    </li>
+                    <li id="i" class="input-list-element">Font:
+                        <input id="fontStyle" type="text">
+                    </li>
+                    <li id="j" class="input-list-element">Color:
+                        <input id="fontColor" type="text">
                     </li>
                 </ul>
             </form>
@@ -236,7 +249,10 @@
         startXIn = document.getElementById("startX"),
         startYIn = document.getElementById("startY"),
         endXIn = document.getElementById("endX"),
-        endYIn = document.getElementById("endY");
+        endYIn = document.getElementById("endY"),
+        textIn = document.getElementById("text"),
+        fontIn = document.getElementById("fontStyle"),
+        colorIn = document.getElementById("fontColor");
 
     /*
      * If a Key is Pressed.
@@ -279,6 +295,7 @@
     function changeShape(shapeType_) {
         let showList_ = "abcde";
         if (shapeType_ == 2) { showList_ = "defg"; }
+        if (shapeType_ == 4) { showList_ = "bhij"; }
 
         document.getElementById("shapeButton_" + createShapeType).style.border = "none";
 
@@ -286,7 +303,7 @@
 
         document.getElementById("shapeButton_" + createShapeType).style.border = "2px solid black";
 
-        for (let inputIterator = 0; inputIterator < 7; inputIterator++) {
+        for (let inputIterator = 0; inputIterator < 10; inputIterator++) {
             let currentChar = String.fromCharCode(97 + inputIterator);
 
             document.getElementById(currentChar).style.display = "none";
@@ -309,7 +326,11 @@
 
         if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3) {
             newObject.size = Number(sizeIn.value);
+        }
+        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3 || createShapeType == 4) {
             newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
+        }
+        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3 || createShapeType == 4) {
             if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
         }
         else if (createShapeType == 2) {
@@ -318,10 +339,16 @@
             newObject.endX = Number(endXIn.value);
             newObject.endY = Number(endYIn.value);
         }
-
-        if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
-        if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
-        else { newObject.lineWidth = "1"; }
+        if (createShapeType == 0 || createShapeType == 1 || createShapeType == 2 || createShapeType == 3) {
+            if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
+            if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
+            else { newObject.lineWidth = "1"; }
+        }
+        if (createShapeType == 4) {
+            newObject.text = textIn.value;
+            newObject.font = fontIn.value;
+            newObject.fontColor = fontColor.value;
+        }
 
         shapeList.push(newObject);
 
@@ -361,6 +388,9 @@
         if (currentShape.startY != undefined) startYIn.value = currentShape.startY;
         if (currentShape.endX != undefined) endXIn.value = currentShape.endX;
         if (currentShape.endY != undefined) endYIn.value = currentShape.endY;
+        if (currentShape.text != undefined) textIn.value = currentShape.text;
+        if (currentShape.fontColor != undefined) colorIn.value = currentShape.fontColor;
+        if (currentShape.font != undefined) fontIn.value = currentShape.font;
     } // editShape
 
     /**
@@ -407,6 +437,12 @@
                 xPosition = (typeof (position) == typeof []) ? (position[0]) : (position),
                 yPosition = (typeof (position) == typeof []) ? (position[1]) : (position);
 
+            if (shapeList[currentShapeIndex].font) {
+                context.font = shapeList[currentShapeIndex].font;
+
+                context.fillStyle = shapeList[currentShapeIndex].fontColor;
+            }
+
             switch (shapeList[currentShapeIndex].shape) {
                 // Draw a Rectangle
                 case (0):
@@ -433,6 +469,11 @@
                     context.lineTo(delX + xPosition, delY + yPosition);
                     context.lineTo(xPosition - delX, delY + yPosition);
                     context.lineTo(xPosition - size, yPosition);
+
+                    break;
+                // Draw a Text
+                case (4):
+                    context.fillText(shapeList[currentShapeIndex].text, xPosition, yPosition);
 
                     break;
             }

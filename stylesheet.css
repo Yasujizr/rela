@@ -29,6 +29,22 @@ li {
 }
 
 /*
+ *	WEBKIT
+*/
+
+::-webkit-scrollbar {
+    width: 8%;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #979797;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6e6e6e;
+}
+
+/*
  *  CLASSES
 */
 
@@ -48,7 +64,7 @@ li {
 }
 
 .logo-text-div {
-    margin: 5% auto 5% auto;
+    margin: 4% auto 5% auto;
 }
 
 .logo-text {
@@ -66,10 +82,20 @@ li {
 .initial-menu-screens {
     display: table;
     width: 26%;
+    max-height: 12em;
     padding: 0 1em 0.5em 1em;
     border: 3px solid rgba(61, 30, 30, 0.582);
     border-radius: 20px;
     background-color: rgba(70, 39, 39, 0.582);
+}
+
+.initial-menu-screens-title {
+    margin: 2% auto 4% auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: Verdana, monospace;
+    font-size: 1.4em;
+    text-align: center;
+    color: white;
 }
 
 .init-buttons {
@@ -89,6 +115,20 @@ li {
 
 .init-buttons:hover {
     background-color: #6c973b;
+}
+
+.further-links {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    background-size: 100%;
+    border-top-left-radius: 10px;
+    transition-duration: 300ms;
+    box-shadow: 3px 2px black;
+}
+
+.further-links:hover, .further-links:focus {
+    box-shadow: 6px 4px black;
 }
 
 .menu-buttons {
@@ -115,7 +155,7 @@ li {
 
 .menu-button:hover, .menu-button:focus {
     border: 3px solid #000;
-    transform: rotate(-90deg);
+    /* transform: rotate(-90deg); */
 }
 
 .menu-div {
@@ -240,6 +280,13 @@ li {
     font-family: Consolas, monospace;
 }
 
+#description {
+    font-family: Verdana, monospace;
+    font-size: 0.9em;
+    line-height: 1.35em;
+    text-align: justify;
+}
+
 #gameButtons {
     width: 80%;
     margin: auto;
@@ -336,7 +383,3 @@ li {
         transform: rotate(360deg);
     }
 }
-
-/*
- *  Test
-*/

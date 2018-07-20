@@ -12,7 +12,7 @@
     <meta name="google-site-verification" content="gbi-sGkZlGI2TYVpgceIjR-5DVAcYk3EXmbutaiWeMs" />
     <meta name="author" content="unreal_guthrie">
     <meta name="keywords" content="recursive laughter, recursion, game, harvesting, evolution, html, css, javascript, dynamic, rela. unrelGruthrie, unreal_guthrie, f2p">
-    <meta name="description" content="Build a World. Be the one Hero.">
+    <meta name="description" content="You see how fake it all is. It's not even hard enough to be made out of plastic. It's a paper town. I mean look at it Que: look at all those cul-de-sacs, those streets that turn in on themselves, all the houses, burning the future to stay warm. All the paper kids drinking beer some bum bought for them at the paper convenience store. Everyone demented with mania of owning things. All the things paper-thin and paper-frail. And all the people too. - John Green">
 
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 </head>
@@ -33,7 +33,7 @@
                     currentDateUTC = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
                 ele.innerHTML = " - " + (275 - ((((currentDateUTC - initialdateUTC) / 1000) / 3600) / 24)) + " Days left - " +
-                    "Last Update: 13. July 2018 -";
+                    "Last Update: 20. July 2018 -";
             </script>
         </p>
 
@@ -44,24 +44,17 @@
 
         <div class="initial-menu-list">
             <div class="initial-menu-screens initial-menu-screens-hide" style="color: white;text-align: left;">
-                <h2 style="margin-top: 5px; margin-bottom: 5px;">How to play:</h2>
-                <ul>
-                    <li style="margin-top: 5px;">
-                        <b>Walk:</b>
-                        <b>W, A, S, D</b>
-                    </li>
-                    <li style="margin-top: 5px;">
-                        <b>Punch:</b>
-                        <b>Left Mouse-Button</b>
-                    </li>
-                    <li style="margin-top: 8px;">
-                        <b>Basic Game-Mechanic:</b>
-                        <p>Every time you discover a new Item, you get
-                            <b>ExperiencePoints</b>. With enough
-                            <b>ExperiencePoints</b> you can buy a new
-                            <b>Evolution</b>, to get more Evolutions, Recipes and Constructions.</p>
-                    </li>
-                </ul>
+                <p class="initial-menu-screens-title">What's RecursiveLaughter?</p>
+
+                <div id="description">
+                    <b>RecursiveLaughter</b> is a new kind of Browser-Game. 
+                    Because, <b>Everything</b> you see has been generated dynamically on your PC 
+                    and you can change <b>Everything</b> the way you want!<br>
+                    <p style="text-align: center; margin: 0.1em 0;"><b>- Literally, Everything! -</b></p>
+                    The point being, that this should be your personal World. That's why we even made it possible, 
+                    to play this Game offline (press <b>Ctrl+S</b>) or have an easy way for Creating and Including Modifications.
+                    If you have further questions, then just contact us.
+                </div>
             </div>
 
             <div class="initial-menu-screens">
@@ -75,20 +68,19 @@
                     </button>
                 </div>
 
-                <input onchange="loadJSONFile(this.files[0]);" accept="application/json" type="file" id="loadFileInput"
-                />
+                <input onchange="loadJSONFile(this.files[0]);" accept="application/json" type="file" id="loadFileInput" />
                 <p id="loadingMessages"></p>
             </div>
 
             <div class="initial-menu-screens initial-menu-screens-hide" style="color: white;">
-                <h2 style="margin-top: 5px; margin-bottom: 5px;">Get in Contact!</h2>
+                <p class="initial-menu-screens-title">Get in Contact!</p>
 
-                <div style="display: flex; justify-content: space-around;text-align: center;">
-                    <a style="display: inline-block; width: 3em; height: 3em; background-size: 100% 100%;" href="https://discord.gg/b5Bum5E"></a>
-                    <a style="display: inline-block; width: 3em; height: 3em; background-size: 100% 100%;" href="https://www.instagram.com/recursivelaughter/"></a>
-                    <a style="display: inline-block; width: 3em; height: 3em; background-size: 100% 100%;" href="https://twitter.com/unreal_guthrie"></a>
-                    <a style="display: inline-block; width: 3em; height: 3em; background-size: 100% 100%;" href="https://github.com/unrealGuthrie/rela"></a>
-                    <a style="display: inline-block; width: 3em; height: 3em; background-size: 100% 100%;" href="https://patreon.com/rela"></a>
+                <div style="display: flex; justify-content: space-around;text-align: center; margin-top: 1em; margin-bottom: 0.5em;">
+                    <a class="further-links" href="https://discord.gg/b5Bum5E"></a>
+                    <a class="further-links" href="https://www.instagram.com/recursivelaughter/"></a>
+                    <a class="further-links" href="https://twitter.com/unreal_guthrie"></a>
+                    <a class="further-links" href="https://github.com/unrealGuthrie/rela"></a>
+                    <a class="further-links" href="https://patreon.com/rela"></a>
                 </div>
             </div>
         </div>
@@ -106,11 +98,11 @@
                 title="Menu (Esc)"></button>
 
             <div class="menu-buttons">
-                <button id="open_b" class="menu-button change-window-button" title="Inventory (E)"></button>
-                <button id="open_c" class="menu-button change-window-button" title="Recipes (R)"></button>
-                <button id="open_d" class="menu-button change-window-button" title="Constructions (C)"></button>
-                <button id="open_e" class="menu-button change-window-button" title="Evolutions (F)"></button>
-                <button id="open_f" class="menu-button change-window-button" title="Equipment (T)"></button>
+                <button id="open_b" class="menu-button change-window-button" title="Inventory (E)">I</button>
+                <button id="open_c" class="menu-button change-window-button" title="Recipes (R)">R</button>
+                <button id="open_d" class="menu-button change-window-button" title="Constructions (C)">C</button>
+                <button id="open_e" class="menu-button change-window-button" title="Evolutions (F)">F</button>
+                <button id="open_f" class="menu-button change-window-button" title="Equipment (T)">T</button>
             </div>
         </span>
 

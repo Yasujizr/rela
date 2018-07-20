@@ -328,6 +328,12 @@ function createImage(canvasSize_, shapeList_) {
             xPosition = (typeof (position) == typeof []) ? (position[0]) : (position),
             yPosition = (typeof (position) == typeof []) ? (position[1]) : (position);
 
+        if (shapeList_[currentShapeIndex].font) {
+            context.font = shapeList_[currentShapeIndex].font;
+
+            context.fillStyle = shapeList_[currentShapeIndex].fontColor;
+        }
+
         switch (shapeList_[currentShapeIndex].shape) {
             // Draw a Rectangle
             case (0):
@@ -356,6 +362,11 @@ function createImage(canvasSize_, shapeList_) {
                 context.lineTo(xPosition - size, yPosition);
 
                 break;
+            // Draw a Text
+            case (4):
+                context.fillText(shapeList_[currentShapeIndex].text, xPosition, yPosition);
+
+                break;
         }
 
         if (shapeList_[currentShapeIndex].fillStyle) {
@@ -372,6 +383,7 @@ function createImage(canvasSize_, shapeList_) {
 
             context.stroke();
         }
+
 
         context.closePath();
         context.restore();
@@ -609,7 +621,7 @@ function initializeButtons() {
         });
     }
 
-    for (let buttonIterator = 0; buttonIterator < LIST_MENUBUTTONS.length; buttonIterator++) {
+    for (let buttonIterator = 0; buttonIterator < 1; buttonIterator++) {
         let image = "url(" + createImage(100, LIST_MENUBUTTONS[buttonIterator]).toDataURL("image/png") + ")"
         setCSS("open_" + String.fromCharCode(buttonIterator + 97), "backgroundImage", image);
     }
@@ -2800,6 +2812,13 @@ function saveGameToJSONFile() {
 function startInitialScreen() {
     Canvas.clear();
     Effects.clear();
+
+    let linkList = document.getElementsByClassName("further-links");
+
+    for (let linkIterator = 0; linkIterator < linkList.length; linkIterator++) {
+        let image = "url(" + createImage(80, LIST_LINKBUTTONS[linkIterator]).toDataURL("image/png") + ")";
+        linkList[linkIterator].style.backgroundImage = image;
+    }
 
     setCSS("load", "display", "block");
     setCSS(Effects.canvas, "opacity", 1);
