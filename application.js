@@ -2639,7 +2639,6 @@ function startGame() {
     setCSS("initial", "display", "none");
     setCSS("windows", "display", "block");
     setCSS("menuButtons", "display", "block");
-    document.body.oncontextmenu = "return (false);";
 
     initializeButtons();
 
