@@ -80,6 +80,26 @@ function getEle(elementId_) {
 } // getEle
 
 /**
+ * Set innerHTML-Text of a DOM-Element.
+ * 
+ * @param {string} elementId_ - The ID of the Element
+ * @param {string} text_ - The Inner-HTML-Text to set
+*/
+function setHTML(elementId_, text_) {
+    getEle(elementId_).innerHTML = text_;
+} // setHTML
+
+/**
+ * Add a Text to the innerHTML-Text of a DOM-Element.
+ * 
+ * @param {string} elementId_ - The ID of the Element
+ * @param {string} text_ - The Text to add to the innerHTML-Text
+*/
+function addHTML(elementId_, text_) {
+    getEle(elementId_).innerHTML += text_;
+} // addHTML
+
+/**
  * Set the CSS-Style of an Element.
  * 
  * @param {string} elementId_ - The ID of the HTML-Element
@@ -101,26 +121,6 @@ function getCSS(elementId_, cssStyle_) {
     let element = (typeof (elementId_) == typeof ("")) ? getEle(elementId_) : (elementId_);
     return (element.style[cssStyle_]);
 } // getCSS
-
-/**
- * Set innerHTML-Text of a DOM-Element.
- * 
- * @param {string} elementId_ - The ID of the Element
- * @param {string} text_ - The Inner-HTML-Text to set
-*/
-function setHTML(elementId_, text_) {
-    getEle(elementId_).innerHTML = text_;
-} // setHTML
-
-/**
- * Add a Text to the innerHTML-Text of a DOM-Element.
- * 
- * @param {string} elementId_ - The ID of the Element
- * @param {string} text_ - The Text to add to the innerHTML-Text
-*/
-function addHTML(elementId_, text_) {
-    getEle(elementId_).innerHTML += text_;
-} // addHTML
 
 /**
  * Set an Attribute of a CSS-Class.
@@ -149,9 +149,9 @@ function changeCSSClassStyle(selector_, cssProp_, cssVal_) {
  * 
  * @returns {bool} Is the Device using Touch?
 */
-function checkIfTouch() {
+function checkIfDeviceHasTouch() {
     return ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
-} // checkIfTouch
+} // checkIfDeviceHasTouch
 
 /**
  * Initialize the Normal Controls for Computers, with a Mouse and a Keyboard.
@@ -2592,7 +2592,7 @@ function generateFields() {
 */
 let Game = {
     // Is the Device using Touch? (Smartphones and Tablets)
-    controlType: CONTROL_NORMAL, //(checkIfTouch()) ? (CONTROL_TOUCH) : (CONTROL_NORMAL),
+    controlType: CONTROL_NORMAL, //(checkIfDeviceHasTouch()) ? (CONTROL_TOUCH) : (CONTROL_NORMAL),
 
     gameRunning: false,
 
