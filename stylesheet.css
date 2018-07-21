@@ -226,7 +226,7 @@ li {
 
 .window-list-element {
     margin-top: 0.15em;
-    padding: 0.1em 0 0.15em 0.3em;
+    padding: 0.05em 0 0.15em 0.3em;
     border-bottom: 1px solid #b1b1b1;
     text-align: left;
     font-family: monospace;

@@ -32,7 +32,8 @@
 // GLOBAL t_a
 // ===============================================================================================
 let
-    FRAMERATE = (1000 / 55),
+    FRAMERATE = 55,
+    FRAMERATEDELAY = (1000 / FRAMERATE),
     CANVAS_SCALING_FACTOR = 2,
 
     CONTROL_NORMAL = 0,
@@ -837,7 +838,7 @@ class NewProjectile {
      * Process the Movement of the Particle.
     */
     processMovement() {
-        let passedTime = ((Date.now() - this.movingTimer) / FRAMERATE);
+        let passedTime = ((Date.now() - this.movingTimer) / FRAMERATEDELAY);
         this.movingTimer = Date.now();
 
         this.x += (this.velX * passedTime);
@@ -1349,7 +1350,7 @@ class NewPlayer {
      * Move the Player on the Map.
     */
     processMovement() {
-        let factor = ((Date.now() - this.lastMovementTimer) / FRAMERATE);
+        let factor = ((Date.now() - this.lastMovementTimer) / FRAMERATEDELAY);
         this.lastMovementTimer = Date.now();
 
         this.x += (this.velX * factor);
@@ -1952,7 +1953,7 @@ class NewNPC {
      * Move the NPC on the Map.
     */
     processMovement() {
-        let factor = ((Date.now() - this.lastMovementTimer) / FRAMERATE);
+        let factor = ((Date.now() - this.lastMovementTimer) / FRAMERATEDELAY);
         this.lastMovementTimer = Date.now();
 
         this.x += (this.velX * factor);
@@ -2667,8 +2668,8 @@ function runGame() {
     }
 
     let passedTime = (Date.now() - GAMETIMER);
-    if (GAMETIMER >= FRAMERATE) {
-        GAMETIMER = (Date.now() - (passedTime % FRAMERATE));
+    if (GAMETIMER >= FRAMERATEDELAY) {
+        GAMETIMER = (Date.now() - (passedTime % FRAMERATEDELAY));
 
         processTime();
 
