@@ -26,7 +26,6 @@
  * - t_u: SAVE                  Manage Saving and Loading the Game
  * - t_v: START/END             Manage the Beginning and the End of the Episode
  * - t_w: CREATE_OBJECTS        Create all Main-Objects, like the Player and the Map
- * - t_x: INSTANT               These Functions will be executed immediately, when opening the HTML-File
 */
 
 // ===============================================================================================
@@ -1078,6 +1077,7 @@ class NewPlayer {
 
         this.inventory = new NewContainer();
         this.harvest = HARVESTING_NOTHING;
+        this.harvestEffects = [];
 
         this.constructions = [];
         this.currentBuild = BUILDING_NOTHING;
@@ -1304,6 +1304,7 @@ class NewPlayer {
      * Reset all Effects of the equiped tools.
     */
     resetEffects() {
+        this.harvestEffects = [];
         this.inventory.maxSize = INVENTORY_SIZE;
 
         for (let equipmentIterator in this.equipment) {
@@ -1314,6 +1315,23 @@ class NewPlayer {
                     let currentEffect = LISTEQUIPMENT[currentEquipment].effects[effectIterator];
 
                     switch (currentEffect.type) {
+                        case (EFFECT_HARVESTINCREASE):
+                            for(let effectObjectIterator in currentEffect.info.i) {
+                                let currentObjectEffectExisting = false;
+
+                                for(let extistingObjectEffectsIterator in this.harvestEffects) {
+                                    if(this.harvestEffects[extistingObjectEffectsIterator].object == currentEffect.info.i[effectObjectIterator]) {
+                                        this.harvestEffects[extistingObjectEffectsIterator].factor += currentEffect.info.f;
+                                        currentObjectEffectExisting = true;
+                                        break;
+                                    }
+                                }
+
+                                if(!currentObjectEffectExisting) {
+                                    this.harvestEffects.push({object: currentEffect.info.i[effectObjectIterator], factor: currentEffect.info.f});
+                                }
+                            }
+                            break;
                         case (EFFECT_INVENTORY):
                             this.inventory.maxSize = (INVENTORY_SIZE + currentEffect.info);
                             break;
@@ -1631,34 +1649,25 @@ class NewPlayer {
      * Gather new Items.
     */
     gatherItem() {
+        // If the Player is not punhing yet
         if (!this.isPunching) {
             if (this.harvest != HARVESTING_NOTHING) {
-                Landscape.objectList[this.harvest].size -= LISTOBJECTS[Landscape.objectList[this.harvest].type].damaging;
+                let currentObject = Landscape.objectList[this.harvest],
+                    currentObjectType = currentObject.type;
 
-                let currentObjectType = Landscape.objectList[this.harvest].type;
+                currentObject.size -= LISTOBJECTS[currentObjectType].damaging;
 
-                if (LISTOBJECTS[currentObjectType].item != undefined) {
+                if (LISTOBJECTS[currentObjectType].item) {
                     let probability = Math.random();
 
                     for (let itemGatherIterator in LISTOBJECTS[currentObjectType].item) {
                         if (probability >= LISTOBJECTS[currentObjectType].item[itemGatherIterator].get) {
                             let harvestItemAmount = 1;
 
-                            if (this.equipment) {
-                                for (let evolutionIterator in this.equipment) {
-                                    if (this.equipment[evolutionIterator] != EQUIPED_NOTHING) {
-                                        let effects = LISTEQUIPMENT[this.equipment[evolutionIterator]].effects;
-
-                                        for (let effectIterator in effects) {
-                                            if (effects[effectIterator].type == EFFECT_HARVESTINCREASE) {
-                                                for (let effectObjectIterator in effects[effectIterator].info.i) {
-                                                    if (Landscape.objectList[this.harvest].type == effects[effectIterator].info.i[effectObjectIterator]) {
-                                                        harvestItemAmount += effects[effectIterator].info.f;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                            for(let effectsIterator in this.harvestEffects) {
+                                if(this.harvestEffects[effectsIterator].object == currentObjectType) {
+                                    harvestItemAmount += this.harvestEffects[effectsIterator].factor;
+                                    break;
                                 }
                             }
 
