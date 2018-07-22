@@ -1649,7 +1649,6 @@ class NewPlayer {
      * Gather new Items.
     */
     gatherItem() {
-        // If the Player is not punhing yet
         if (!this.isPunching) {
             if (this.harvest != HARVESTING_NOTHING) {
                 let currentObject = Landscape.objectList[this.harvest],
@@ -1658,10 +1657,8 @@ class NewPlayer {
                 currentObject.size -= LISTOBJECTS[currentObjectType].damaging;
 
                 if (LISTOBJECTS[currentObjectType].item) {
-                    let probability = Math.random();
-
                     for (let itemGatherIterator in LISTOBJECTS[currentObjectType].item) {
-                        if (probability >= LISTOBJECTS[currentObjectType].item[itemGatherIterator].get) {
+                        if (Math.random() >= LISTOBJECTS[currentObjectType].item[itemGatherIterator].get) {
                             let harvestItemAmount = 1;
 
                             for(let effectsIterator in this.harvestEffects) {
@@ -1896,9 +1893,9 @@ class NewNPC {
         this.velY = 0;
 
         this.rotate = 0;
-        this.size = 30;
+        this.size = 35;
 
-        this.sprite = createImage(60, [{ "name": "Body", "shape": 3, "size": 28, "position": 30, "fillStyle": "#707070", "strokeStyle": "#373737", "lineWidth": "4" }, { "name": "Shape_2", "shape": 2, "startX": 22, "startY": 35, "endX": 22, "endY": 45, "strokeStyle": "#fff", "lineWidth": "10" }, { "name": "Shape_2", "shape": 2, "startX": 22, "startY": 15, "endX": 22, "endY": 25, "strokeStyle": "#fff", "lineWidth": "10" }]);
+        this.inventory = new NewContainer();
 
         this.lastMovementTimer = performance.now();
         this.pathMovementTimer = performance.now();
@@ -1936,9 +1933,62 @@ class NewNPC {
 
         Canvas.context.translate(xpos, ypos);
 
-        Canvas.context.rotate(this.rotate);
+        Canvas.context.rotate(this.rotation);
 
-        renderImage(this.sprite, 0, 0, 1);
+        // Draw Body
+        Canvas.context.beginPath();
+        Canvas.context.rect(-(this.size / 2), -(this.size / 2), this.size, this.size);
+        // Canvas.context.lineWidth = "1";
+        Canvas.context.fillStyle = "#fff";
+        Canvas.context.fill();
+        Canvas.context.strokeStyle = "#222";
+        Canvas.context.stroke();
+        Canvas.context.closePath();
+
+        // Movement
+        let handSize = 10;
+
+        // // Punching-Animation
+        // let leftHandMovement = 0,
+        //     rightHandMovement = 0;
+        // // The Left Hand
+        // if (this.hittingCycleCounter >= 0 && this.hittingCycleCounter <= 100) {
+        //     leftHandMovement = Math.abs(Math.sin((this.hittingCycleCounter / 100) * Math.PI) * 20);
+        // }
+        // // The Right Hand
+        // else if (this.hittingCycleCounter >= 100 && this.hittingCycleCounter <= 200) {
+        //     rightHandMovement = Math.abs(Math.sin((this.hittingCycleCounter / 100) * Math.PI) * 20);
+        // }
+
+        // // Only hit with one Hand, if only one Item is equiped
+        // if (this.equipment[0] == EQUIPED_NOTHING && this.equipment[1] != EQUIPED_NOTHING) {
+        //     leftHandMovement = Math.max(leftHandMovement, rightHandMovement);
+        //     rightHandMovement = 0;
+        // }
+        // if (this.equipment[0] != EQUIPED_NOTHING && this.equipment[1] == EQUIPED_NOTHING) {
+        //     rightHandMovement = Math.max(leftHandMovement, rightHandMovement);
+        //     leftHandMovement = 0;
+        // }
+
+        // // Draw Tools
+        // for (let equipmentIterator in this.equipment) {
+        //     if (this.equipment[equipmentIterator] != EQUIPED_NOTHING) {
+        //         let movementPosition = 0;
+        //         if (equipmentIterator == 0) { movementPosition = rightHandMovement; }
+        //         if (equipmentIterator == 1) { movementPosition = leftHandMovement; }
+        //         renderImage(LIST_SPRITES[LISTEQUIPMENT[this.equipment[equipmentIterator]].sprite], -movementPosition, 0, RENDER_NORMALSIZE);
+        //     }
+        // }
+
+        // Draw Hands
+        Canvas.context.beginPath();
+        Canvas.context.fillStyle = "#fff";
+        Canvas.context.strokeStyle = "#222";
+        Canvas.context.rect(-(handSize / 2), ((this.size / 2) - (handSize / 2) + 2), handSize, handSize);
+        Canvas.context.rect(-(handSize / 2), (-(this.size / 2) - (handSize / 2) - 2), handSize, handSize);
+        Canvas.context.fill();
+        Canvas.context.stroke();
+        Canvas.context.closePath();
 
         Canvas.context.restore();
     } // render
@@ -1957,22 +2007,7 @@ class NewNPC {
      * Update the Path and the Direction of the NPC.
     */
     updatePath() {
-        if (this.velX == 0 && this.velY == 0) {
-            if ((performance.now() - this.pathMovementTimer) >= 6000) {
-                this.velX = (Math.round(Math.random() * 4) - 2),
-                    this.velY = (Math.round(Math.random() * 4) - 2);
-
-                this.pathMovementTimer = performance.now();
-            }
-        }
-        else {
-            if ((performance.now() - this.pathMovementTimer) >= 1000) {
-                this.velX = 0;
-                this.velY = 0;
-
-                this.pathMovementTimer = performance.now();
-            }
-        }
+        
     } // updatePath
 
     /**
@@ -1986,93 +2021,6 @@ class NewNPC {
         this.y += (this.velY * factor);
     } // processMovement
 } // NewNPC
-
-/**
- * Create NPC and place them on the Map.
-*/
-function createNPCs() {
-    printMessage(SHOW_INFORMATION, "Set NPCs...");
-
-    for (let currentNPCIterator in createNPCList) {
-        let currentNPC = createNPCList[currentNPCIterator],
-            minPosition = (currentNPC.minPos) ? (currentNPC.minPos) : (0),
-            maxPosition = (currentNPC.maxPos) ? (currentNPC.maxPos) : (FIELD_AMOUNT * FIELD_SIZE);
-
-        for (let currentNPCAmount = 0; currentNPCAmount < currentNPC.amount;) {
-            let xpos = ((Math.random() * (maxPosition - minPosition)) + minPosition),
-                ypos = ((Math.random() * (maxPosition - minPosition)) + minPosition),
-                canbePlaced = true;
-
-            for (let objectIterator in Landscape.objectList) {
-                let delX = (xpos - Landscape.objectList[objectIterator].x),
-                    delY = (ypos - Landscape.objectList[objectIterator].y),
-                    distance = Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2));
-
-                if (distance <= (50 + Landscape.objectList[objectIterator].size)) {
-                    canbePlaced = false;
-                    break;
-                }
-            }
-
-            for (let npcIterator in NPCList) {
-                let delX = (xpos - NPCList[npcIterator].x),
-                    delY = (ypos - NPCList[npcIterator].y),
-                    distance = Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2));
-
-                if (distance <= 70) {
-                    canbePlaced = false;
-                    break;
-                }
-            }
-
-            if (canbePlaced) {
-                NPCList.push(new NewNPC(xpos, ypos));
-
-                currentNPCAmount++;
-            }
-        }
-    }
-
-    printMessage(SHOW_INFORMATION, "NPCs set!");
-} // createNPCs
-
-/**
- * Load all NPC.
- * 
- * @param {Array} savedList_ - The Savefile-Data
-*/
-function loadNPCs(savedList_) {
-    for (let npcIterator in savedList_) {
-        let currentNPC = savedList_[npcIterator];
-        let newNPCObject = new NewNPC(0, 0);
-        newNPCObject.load(currentNPC);
-        NPCList.push(newNPCObject);
-    }
-} // loadNPCs
-
-/**
- * Update all NPCs on the Map.
-*/
-function updateNPCs() {
-    for (let npcIterator in NPCList) {
-        let currentNPC = NPCList[npcIterator];
-        if (Player.checkIfNearPlayer(currentNPC.x, currentNPC.y)) {
-            currentNPC.update();
-        }
-    }
-} // updateNPCs
-
-/**
- * Render all NPCs on the Map.
-*/
-function renderNPCs() {
-    for (let npcIterator in NPCList) {
-        let currentNPC = NPCList[npcIterator];
-        if (Player.checkIfNearPlayer(currentNPC.x, currentNPC.y)) {
-            currentNPC.render();
-        }
-    }
-} // renderNPCs
 
 // ===============================================================================================
 // MAP t_r
@@ -2706,6 +2654,8 @@ function runGame() {
 
         processKeyboardInput();
 
+        Margo.update();
+
         if (!Game.deviceIsTouch) {
             Player.processInput();
         }
@@ -2745,6 +2695,8 @@ function renderGame() {
 
     Player.render();
 
+    Margo.render();
+
     Landscape.renderObjects(1);
 
     textManager.render();
@@ -2767,11 +2719,11 @@ function loadLocalStorage() {
         if (localStorage) {
             let loadPlayer = JSON.parse(localStorage.getItem("player")),
                 loadMap = JSON.parse(localStorage.getItem("map")),
-                loadNPCList = JSON.parse(localStorage.getItem("npc"));
+                loadNPC = JSON.parse(localStorage.getItem("npc"));
 
             Player.load(loadPlayer);
             Landscape.load(loadMap);
-            loadNPCs(loadNPCList);
+            Margo.load(loadNPC);
 
             startGame();
         }
@@ -2797,7 +2749,7 @@ function loadJSONFile(file) {
             }
             Player.load(fileDate.player);
             Landscape.load(fileDate.map);
-            loadNPCs(fileDate.npc);
+            Margo.load(fileDate.npc);
 
             startGame();
         }
@@ -2813,11 +2765,11 @@ function saveToLocalStorage() {
     if (localStorage) {
         let JSON_savePlayer = JSON.stringify(Player),
             JSON_saveMap = JSON.stringify(Landscape),
-            JSON_saveNPCs = JSON.stringify(NPCList);
+            JSON_saveNPC = JSON.stringify(Margo);
 
         localStorage.setItem("player", JSON_savePlayer);
         localStorage.setItem("map", JSON_saveMap);
-        localStorage.setItem("npc", JSON_saveNPCs);
+        localStorage.setItem("npc", JSON_saveNPC);
     }
 } // saveToLocalStorage
 
@@ -2826,7 +2778,7 @@ function saveToLocalStorage() {
 */
 function saveGameToJSONFile() {
     let a = document.createElement("a"),
-        file = new Blob([JSON.stringify({ player: Player, map: Landscape, npc: NPCList })], { type: 'text/plain' });
+        file = new Blob([JSON.stringify({ player: Player, map: Landscape, npc: Margo })], { type: 'text/plain' });
 
     a.href = URL.createObjectURL(file);
     a.download = "save.json";
@@ -2900,6 +2852,6 @@ let
 
     Player = new NewPlayer(),
 
-    NPCList = [],
+    Margo = new NewNPC(Player.x + 100, Player.y),
 
     DynamicList = [];
