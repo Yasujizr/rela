@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 </head>
 
-<body oncontextmenu = "return (false);">
+<body>
     <div id="load" class="whole-window window-frame">
         <div id="loadingAnimation"></div>
         Loading...
@@ -47,9 +47,9 @@
                 <p class="initial-menu-screens-title">What's RecursiveLaughter?</p>
 
                 <div id="description">
-                    <b>RecursiveLaughter</b> is a new kind of Browser-Game. 
-                    Because, <b>Everything</b> you see has been generated dynamically on your PC 
-                    and can be changed as much as you want! <br>
+                    <b>RecursiveLaughter</b> is a new kind of Browser-Game. Because,
+                    <b>Everything</b> you see has been generated dynamically on your PC and can be changed as much as you want!
+                    <br>
                     <b>Literally, Everything!</b>
                 </div>
             </div>
@@ -80,8 +80,8 @@
                     <a class="further-links" href="https://patreon.com/rela"></a>
                 </div>
 
-                <p oncontextmenu="" class="selectable" style="color: #cdd6c4; font-family: Courier, monospace; font-size: 0.8em; margin-top: 1em;">or 
-                    <a href="mailto:recursivelaughter@gmail.com" class="selectable" style="color: #cdd6c4; font-weight: bolder; font-size: 0.9em; text-decoration: underline;">recursivelaughter@gmail.com</a>
+                <p oncontextmenu="" class="selectable" style="color: #cdd6c4; font-family: Courier, monospace; font-size: 0.95em; margin-top: 1em;">or
+                    <a id="emailLink" href="mailto:recursivelaughter@gmail.com" class="selectable">recursivelaughter@gmail.com</a>
                 </p>
             </div>
         </div>
@@ -176,6 +176,8 @@
                 </div>
             </div>
         </div>
+
+        <p style="position: absolute; bottom: 0; left: 0;z-index: 50" id="fpsCounterBar"></p>
     </div>
 
     <div id="end" class="whole-window window-frame" style="display: none;">
@@ -184,5 +186,13 @@
     </div>
 </body>
 
+<script>
+    /**
+     * This code wil be executed instantely, when reaching while loading.
+    */
+    (function () {
+        document.getElementById("load").style.display = "block";
+    })();
+</script>
 <script src="/resource.js"></script>
 <script src="/application.js"></script>

@@ -26,6 +26,7 @@
  * - t_u: SAVE                  Manage Saving and Loading the Game
  * - t_v: START/END             Manage the Beginning and the End of the Episode
  * - t_w: CREATE_OBJECTS        Create all Main-Objects, like the Player and the Map
+ * - t_x: INSTANT               These Functions will be executed immediately, when opening the HTML-File
 */
 
 // ===============================================================================================
@@ -35,6 +36,9 @@ let
     FRAMERATE = 55,
     FRAMERATEDELAY = (1000 / FRAMERATE),
     CANVAS_SCALING_FACTOR = 2,
+
+    LASTUPDATECALL = performance.now(),
+    LASTFPSRATE = 60,
 
     CONTROL_NORMAL = 0,
     CONTROL_TOUCH = 1,
@@ -60,8 +64,8 @@ let
     SOUNDCONTEXT = new (window.AudioContext || window.webkitAudioContext || window.Audio)(),
     PRESSED_KEYLIST = [],
 
-    GAMETIMER = Date.now(),
-    CLOCKTIMER = Date.now(),
+    GAMETIMER = performance.now(),
+    CLOCKTIMER = performance.now(),
 
     LIST_FIELDS = [],
     LIST_SPRITES = [];
@@ -141,6 +145,18 @@ function changeCSSClassStyle(selector_, cssProp_, cssVal_) {
         }
     }
 } // changeCSSClassStyle
+
+/**
+ * Round a number, to a specific amount of decimal places.
+ * 
+ * @returns {number} The rounded Number
+ * 
+ * @param {number} number_ - The Number to round
+ * @param {number} decimal_ - The Amount of decimal Places
+*/
+function round(number_, decimal_) {
+    return (Math.floor(number_ * Math.pow(10, decimal_)) / Math.pow(10, decimal_));
+} // round
 
 // ===============================================================================================
 // DEVICE t_c
@@ -578,7 +594,7 @@ function focusElement(elementId_) {
 // GENERAL_EVENTS t_g
 // ===============================================================================================
 /*
- * Initialize the Document, when finished loading.
+ * Initialize the Document instantly.
 */
 window.addEventListener("DOMContentLoaded", () => {
     startInitialScreen();
@@ -701,7 +717,7 @@ class newText {
     */
     constructor() {
         this.textList = [{ str: "", x: -10, y: -10, t: 1000 }];
-        this.textTimer = Date.now();
+        this.textTimer = performance.now();
     } // constructor
 
     /**
@@ -739,12 +755,12 @@ class newText {
      * Update the Text-Object.
     */
     update() {
-        if (this.textList.length == 0) { this.textTimer = Date.now(); }
+        if (this.textList.length == 0) { this.textTimer = performance.now(); }
         else {
             // If the time has passed
-            if ((Date.now() - this.textTimer) >= this.textList[0].t) {
+            if ((performance.now() - this.textTimer) >= this.textList[0].t) {
                 this.removeCurrentText();
-                this.textTimer = (Date.now() - 10);
+                this.textTimer = (performance.now() - 10);
             }
         }
     } // update
@@ -822,7 +838,7 @@ class NewProjectile {
         this.range = range_;
         this.damage = damage_;
 
-        this.movingTimer = Date.now();
+        this.movingTimer = performance.now();
     } // constructor
 
     /**
@@ -838,8 +854,8 @@ class NewProjectile {
      * Process the Movement of the Particle.
     */
     processMovement() {
-        let passedTime = ((Date.now() - this.movingTimer) / FRAMERATEDELAY);
-        this.movingTimer = Date.now();
+        let passedTime = ((performance.now() - this.movingTimer) / FRAMERATEDELAY);
+        this.movingTimer = performance.now();
 
         this.x += (this.velX * passedTime);
         this.y += (this.velY * passedTime);
@@ -1075,8 +1091,8 @@ class NewPlayer {
             EQUIPED_NOTHING, EQUIPED_NOTHING];
 
         this.clockTime = 0;
-        this.hungerTimer = Date.now();
-        this.lastMovementTimer = Date.now();
+        this.hungerTimer = performance.now();
+        this.lastMovementTimer = performance.now();
     } // constructor
 
     /**
@@ -1090,8 +1106,8 @@ class NewPlayer {
         this.inventory = new NewContainer();
         this.inventory.load(savefile_.inventory);
 
-        this.lastMovementTimer = Date.now();
-        this.hungerTimer = Date.now();
+        this.lastMovementTimer = performance.now();
+        this.hungerTimer = performance.now();
     } // load
 
     /**
@@ -1153,7 +1169,7 @@ class NewPlayer {
             }
         }
         else {
-            this.lastMovementTimer = Date.now();
+            this.lastMovementTimer = performance.now();
             this.velX = 0;
             this.velY = 0;
         }
@@ -1260,9 +1276,9 @@ class NewPlayer {
             if (this.rotation < 0) this.rotation = ((2 * Math.PI) + this.rotation);
         }
 
-        let passedHungerTime = Date.now() - this.hungerTimer;
+        let passedHungerTime = performance.now() - this.hungerTimer;
         if (passedHungerTime > HUNGERTIMER) {
-            this.hungerTimer = (Date.now() - (passedHungerTime % HUNGERTIMER));
+            this.hungerTimer = (performance.now() - (passedHungerTime % HUNGERTIMER));
 
             if (this.hunger > 0) {
                 this.hunger -= 1;
@@ -1351,8 +1367,8 @@ class NewPlayer {
      * Move the Player on the Map.
     */
     processMovement() {
-        let factor = ((Date.now() - this.lastMovementTimer) / FRAMERATEDELAY);
-        this.lastMovementTimer = Date.now();
+        let factor = ((performance.now() - this.lastMovementTimer) / FRAMERATEDELAY);
+        this.lastMovementTimer = performance.now();
 
         this.x += (this.velX * factor);
         this.y += (this.velY * factor);
@@ -1652,7 +1668,7 @@ class NewPlayer {
                                     this.inventory.add(LISTOBJECTS[currentObjectType].item[itemGatherIterator].item);
                                 }
                                 else {
-                                    Landscape.droppedItems.push({ x: Player.x, y: Player.y, item: LISTOBJECTS[currentObjectType].item[itemGatherIterator].item, time: Date.now() });
+                                    Landscape.droppedItems.push({ x: Player.x, y: Player.y, item: LISTOBJECTS[currentObjectType].item[itemGatherIterator].item, time: performance.now() });
                                     textManager.addText("I can't carry more!", (Canvas.width / 2 - 95), (Canvas.height / 2 - 50), 400);
                                 }
                             }
@@ -1672,7 +1688,7 @@ class NewPlayer {
      * @param {number} item_ - The Type of Item to drop
     */
     dropItem(item_) {
-        Landscape.droppedItems.push({ x: this.x, y: this.y, item: item_, time: Date.now() });
+        Landscape.droppedItems.push({ x: this.x, y: this.y, item: item_, time: performance.now() });
         this.inventory.remove([{ item: item_, amount: 1 }]);
 
         this.updateWindows();
@@ -1875,8 +1891,8 @@ class NewNPC {
 
         this.sprite = createImage(60, [{ "name": "Body", "shape": 3, "size": 28, "position": 30, "fillStyle": "#707070", "strokeStyle": "#373737", "lineWidth": "4" }, { "name": "Shape_2", "shape": 2, "startX": 22, "startY": 35, "endX": 22, "endY": 45, "strokeStyle": "#fff", "lineWidth": "10" }, { "name": "Shape_2", "shape": 2, "startX": 22, "startY": 15, "endX": 22, "endY": 25, "strokeStyle": "#fff", "lineWidth": "10" }]);
 
-        this.lastMovementTimer = Date.now();
-        this.pathMovementTimer = Date.now();
+        this.lastMovementTimer = performance.now();
+        this.pathMovementTimer = performance.now();
     } // constructor
 
     /**
@@ -1933,19 +1949,19 @@ class NewNPC {
     */
     updatePath() {
         if (this.velX == 0 && this.velY == 0) {
-            if ((Date.now() - this.pathMovementTimer) >= 6000) {
+            if ((performance.now() - this.pathMovementTimer) >= 6000) {
                 this.velX = (Math.round(Math.random() * 4) - 2),
                     this.velY = (Math.round(Math.random() * 4) - 2);
 
-                this.pathMovementTimer = Date.now();
+                this.pathMovementTimer = performance.now();
             }
         }
         else {
-            if ((Date.now() - this.pathMovementTimer) >= 1000) {
+            if ((performance.now() - this.pathMovementTimer) >= 1000) {
                 this.velX = 0;
                 this.velY = 0;
 
-                this.pathMovementTimer = Date.now();
+                this.pathMovementTimer = performance.now();
             }
         }
     } // updatePath
@@ -1954,8 +1970,8 @@ class NewNPC {
      * Move the NPC on the Map.
     */
     processMovement() {
-        let factor = ((Date.now() - this.lastMovementTimer) / FRAMERATEDELAY);
-        this.lastMovementTimer = Date.now();
+        let factor = ((performance.now() - this.lastMovementTimer) / FRAMERATEDELAY);
+        this.lastMovementTimer = performance.now();
 
         this.x += (this.velX * factor);
         this.y += (this.velY * factor);
@@ -2331,7 +2347,7 @@ class NewMap {
         for (let itemIterator = (this.droppedItems.length - 1); itemIterator >= 0; itemIterator--) {
             let currentItem = this.droppedItems[itemIterator];
 
-            if ((Date.now() - currentItem.time) >= DROPPED_REMOVE_TIME) {
+            if ((performance.now() - currentItem.time) >= DROPPED_REMOVE_TIME) {
                 this.droppedItems.splice(itemIterator, 1);
             }
             else {
@@ -2467,9 +2483,9 @@ class NewMap {
  * Process the In-Game-Time.
 */
 function processTime() {
-    let passedHourTime = (Date.now() - CLOCKTIMER);
+    let passedHourTime = (performance.now() - CLOCKTIMER);
     if (passedHourTime >= HOURLENGTH) {
-        CLOCKTIMER = (Date.now() - (passedHourTime % HOURLENGTH));
+        CLOCKTIMER = (performance.now() - (passedHourTime % HOURLENGTH));
 
         Player.clockTime = (Player.clockTime + 0.001);
 
@@ -2638,6 +2654,9 @@ function startGame() {
         makeElementDraggable(elementList[elementIterator]);
     }
 
+    // Deactive Right-Click-Menu
+    document.oncontextmenu = function () { return (false); }
+
     setCSS("initial", "display", "none");
     setCSS("windows", "display", "block");
     setCSS("menuButtons", "display", "block");
@@ -2668,9 +2687,9 @@ function runGame() {
         requestAnimationFrame(runGame);
     }
 
-    let passedTime = (Date.now() - GAMETIMER);
+    let passedTime = (performance.now() - GAMETIMER);
     if (GAMETIMER >= FRAMERATEDELAY) {
-        GAMETIMER = (Date.now() - (passedTime % FRAMERATEDELAY));
+        GAMETIMER = (performance.now() - (passedTime % FRAMERATEDELAY));
 
         processTime();
 
@@ -2822,7 +2841,6 @@ function startInitialScreen() {
         linkList[linkIterator].style.backgroundImage = image;
     }
 
-    setCSS("load", "display", "block");
     setCSS(Effects.canvas, "opacity", 1);
     setCSS(Effects.canvas, "backgroundColor", "#000");
 

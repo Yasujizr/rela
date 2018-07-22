@@ -114,14 +114,15 @@ li {
     background-color: #83af50;
     font-size: 1em;
     font-weight: bold;
-    font-family: Verdana, monospace;
+    font-family: Consolas, monospace;
     color: #fff;
     box-shadow: 0 2px #536f32;
     transition-duration: 200ms;
 }
 
-.init-buttons:hover {
+.init-buttons:hover, .init-buttons:focus {
     background-color: #6c973b;
+    box-shadow: 0px 4px #acd879cc;
 }
 
 .further-links {
@@ -247,11 +248,13 @@ li {
 
 .window-list-element-remove {
     margin-right: 2%;
+    margin-top: 0.0745em;
     padding: 0 5px;
     background-color: #ff4646;
     border: 1px solid #000;
     color: white;
     float: right;
+    font-size: 0.7em;
 }
 
 /*
@@ -261,6 +264,7 @@ li {
 #load {
     padding: 0.5%;
     z-index: 666;
+    background-color: #000;
     color: white;
     text-align: left;
 }
@@ -271,7 +275,7 @@ li {
     border: 3px solid #f3f3f3;
     border-top: 3px solid #3498db;
     border-radius: 100%;
-    animation: spin 1s linear infinite;
+    animation: loadingSpin 1s linear infinite;
 }
 
 #initial {
@@ -314,6 +318,17 @@ li {
 #loadingMessages {
     color: #ff0000;
     font-weight: bold;
+}
+
+#emailLink {
+    color: #cdd6c4;
+    font-weight: bolder;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+#emailLink:hover, #emailLink:focus {
+    text-decoration: underline;
 }
 
 #gameHeader {
@@ -382,7 +397,7 @@ li {
  *  Keyframe
 */
 
-@keyframes spin {
+@keyframes loadingSpin {
     0% {
         transform: rotate(0deg);
     }
