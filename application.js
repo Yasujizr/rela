@@ -1172,9 +1172,10 @@ class NewPlayer {
         // Draw Body
         Canvas.context.beginPath();
         Canvas.context.rect(-(this.size / 2), -(this.size / 2), this.size, this.size);
+        // Canvas.context.lineWidth = "1";
         Canvas.context.fillStyle = "#969696";
         Canvas.context.fill();
-        Canvas.context.strokeStyle = "#000";
+        Canvas.context.strokeStyle = "#171717";
         Canvas.context.stroke();
         Canvas.context.closePath();
 
@@ -1695,6 +1696,7 @@ class NewPlayer {
 
                             if (LISTITEMS[item_].use.responseItem) {
                                 this.inventory.add(LISTITEMS[item_].use.responseItem);
+                                this.checkIfDiscovered(LISTITEMS[item_].use.responseItem);
                             }
                         }
                         break;
@@ -1808,7 +1810,6 @@ class NewPlayer {
                     textManager.addText("I don't have enough Points!", (Canvas.width / 2 - 135), (Canvas.height / 2 - 50), 800);
                 }
             }
-            break;
         }
     } // getEvolution
 

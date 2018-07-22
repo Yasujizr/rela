@@ -71,6 +71,12 @@ let
             list: [{ "name": "Bottom", "shape": 1, "size": 28, "position": [32, 32], "fillStyle": "#824100", "strokeStyle": "#552b00", "lineWidth": "4" }, { "name": "Top", "shape": 1, "size": 14, "position": [32, 32], "fillStyle": "#c16100", "strokeStyle": "#6f3700", "lineWidth": "4" }]
         },
 
+        // TORCH
+        {
+            cs: 64,
+            list: [{ "name": "Stick", "shape": 1, "size": 10, "position": [32, 32], "fillStyle": "#532900", "strokeStyle": "#341A00", "lineWidth": "5" }, { "name": "Red_Fire", "shape": 1, "size": 16, "position": [32, 32], "fillStyle": "#ff5e0055", "lineWidth": "1" }]
+        },
+
         // CAMPFIRE
         {
             cs: 60,
@@ -95,7 +101,6 @@ let
             list: [{ "name": "Base", "shape": 1, "size": 148, "position": [150, 150], "fillStyle": "#ffa54f", "strokeStyle": "#8b5a2b", "lineWidth": "7" }]
         },
 
-        { cs: 0, list: [] },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
         { cs: 0, list: [] },
@@ -264,8 +269,27 @@ let
         {},
         {},
         {},
-        {},
 
+        {
+            obj: "TORCH",
+            passable: false,
+            size: 10,
+            breakSize: 9,
+            damaging: 0.5,
+            light: 100,
+            position: 0,
+            sprite: 8
+        },
+        {
+            obj: "CAMPFIRE",
+            passable: false,
+            size: 40,
+            breakSize: 30,
+            damaging: 0.5,
+            light: 210,
+            position: 0,
+            sprite: 9
+        },
         {
             obj: "BASKET",
             passable: false,
@@ -278,16 +302,6 @@ let
             sprite: 7
         },
         {
-            obj: "CAMPFIRE",
-            passable: false,
-            size: 40,
-            breakSize: 30,
-            damaging: 0.5,
-            light: 210,
-            position: 0,
-            sprite: 8
-        },
-        {
             obj: "BARREL",
             passable: false,
             size: 30,
@@ -295,7 +309,7 @@ let
             damaging: 0.5,
             position: 0,
             storage: 10,
-            sprite: 9
+            sprite: 10
         },
         {
             obj: "WOOD_WALL",
@@ -304,7 +318,7 @@ let
             breakSize: 15,
             damaging: 0.1,
             position: 1,
-            sprite: 10
+            sprite: 11
         },
         {},
         {},
@@ -323,7 +337,7 @@ let
             breakSize: 148,
             damaging: 0.1,
             position: 0,
-            sprite: 11
+            sprite: 12
         }
     ],
 
@@ -404,12 +418,14 @@ let
         {
             name: "Fire",
             neededPoints: 20,
-            improvements: [{ type: IMPROV_EVOL, index: 1 }, { type: IMPROV_EVOL, index: 2 }, { type: IMPROV_EVOL, index: 3 }, { type: IMPROV_CONS, index: 1 }]
+            improvements: [{ type: IMPROV_EVOL, index: 1 }, { type: IMPROV_EVOL, index: 2 }, { type: IMPROV_EVOL, index: 3 },
+            { type: IMPROV_CONS, index: 0 }, { type: IMPROV_CONS, index: 1 }]
         },
         {
             name: "Lumberjacking",
             neededPoints: 20,
-            improvements: [{ type: IMPROV_RECI, index: 0 }, { type: IMPROV_RECI, index: 1 }, { type: IMPROV_RECI, index: 2 }, { type: IMPROV_RECI, index: 3 }, { type: IMPROV_CONS, index: 0 }, { type: IMPROV_CONS, index: 2 }]
+            improvements: [{ type: IMPROV_RECI, index: 0 }, { type: IMPROV_RECI, index: 1 }, { type: IMPROV_RECI, index: 2 }, { type: IMPROV_RECI, index: 3 }, 
+                { type: IMPROV_CONS, index: 2 }, { type: IMPROV_CONS, index: 3 }]
         },
         {
             name: "Hunting",
@@ -419,7 +435,7 @@ let
         {
             name: "Basic Architecture",
             neededPoints: 40,
-            improvements: [{ type: IMPROV_CONS, index: 3 }, { type: IMPROV_CONS, index: 4 }]
+            improvements: [{ type: IMPROV_CONS, index: 4 }, { type: IMPROV_CONS, index: 5 }]
         }
     ],
 
@@ -432,8 +448,9 @@ let
      * necessary[].amount: The Amount of this specific Item
     */
     LISTCONSTRUCTIONS = [
-        { object: 13, necessary: [{ item: 2, amount: 2 }] },
-        { object: 14, necessary: [{ item: 2, amount: 5 }] },
+        { object: 12, necessary: [{ item: 2, amount: 2 }] },
+        { object: 13, necessary: [{ item: 2, amount: 5 }] },
+        { object: 14, necessary: [{ item: 2, amount: 2 }] },
         { object: 15, necessary: [{ item: 2, amount: 8 }] },
         { object: 16, necessary: [{ item: 2, amount: 1 }] },
         { object: 27, necessary: [{ item: 2, amount: 10 }] }
