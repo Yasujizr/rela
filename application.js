@@ -636,12 +636,18 @@ function initializeButtons() {
             changeWindowVisibility(buttonList[buttonIterator].id[buttonList[buttonIterator].id.length - 1]);
         });
     }
-
-    for (let buttonIterator = 0; buttonIterator < 1; buttonIterator++) {
-        let image = "url(" + createImage(100, LIST_MENUBUTTONS[buttonIterator]).toDataURL("image/png") + ")"
-        setCSS("open_" + String.fromCharCode(buttonIterator + 97), "backgroundImage", image);
-    }
 } // initializeButtons
+
+/**
+ * Initialize the Background-Images of some spezified Elements. The Sprites will be created and set up, with LIST_BACKGROUNDSPRITES.
+*/
+function initializeBackgroundSprites() {
+    for (let spriteListIterator in LIST_BACKGROUNDSPRITES) {
+        let currentSprite = LIST_BACKGROUNDSPRITES[spriteListIterator],
+            newImage = "url(" + createImage(currentSprite.size, currentSprite.list).toDataURL("image/png") + ")";
+        setCSS(currentSprite.element, "backgroundImage", newImage);
+    }
+} // initializeBackgroundSprites
 
 // ===============================================================================================
 // MOUSE t_i
@@ -1316,19 +1322,19 @@ class NewPlayer {
 
                     switch (currentEffect.type) {
                         case (EFFECT_HARVESTINCREASE):
-                            for(let effectObjectIterator in currentEffect.info.i) {
+                            for (let effectObjectIterator in currentEffect.info.i) {
                                 let currentObjectEffectExisting = false;
 
-                                for(let extistingObjectEffectsIterator in this.harvestEffects) {
-                                    if(this.harvestEffects[extistingObjectEffectsIterator].object == currentEffect.info.i[effectObjectIterator]) {
+                                for (let extistingObjectEffectsIterator in this.harvestEffects) {
+                                    if (this.harvestEffects[extistingObjectEffectsIterator].object == currentEffect.info.i[effectObjectIterator]) {
                                         this.harvestEffects[extistingObjectEffectsIterator].factor += currentEffect.info.f;
                                         currentObjectEffectExisting = true;
                                         break;
                                     }
                                 }
 
-                                if(!currentObjectEffectExisting) {
-                                    this.harvestEffects.push({object: currentEffect.info.i[effectObjectIterator], factor: currentEffect.info.f});
+                                if (!currentObjectEffectExisting) {
+                                    this.harvestEffects.push({ object: currentEffect.info.i[effectObjectIterator], factor: currentEffect.info.f });
                                 }
                             }
                             break;
@@ -1661,8 +1667,8 @@ class NewPlayer {
                         if (Math.random() >= LISTOBJECTS[currentObjectType].item[itemGatherIterator].get) {
                             let harvestItemAmount = 1;
 
-                            for(let effectsIterator in this.harvestEffects) {
-                                if(this.harvestEffects[effectsIterator].object == currentObjectType) {
+                            for (let effectsIterator in this.harvestEffects) {
+                                if (this.harvestEffects[effectsIterator].object == currentObjectType) {
                                     harvestItemAmount += this.harvestEffects[effectsIterator].factor;
                                     break;
                                 }
@@ -2007,7 +2013,7 @@ class NewNPC {
      * Update the Path and the Direction of the NPC.
     */
     updatePath() {
-        
+
     } // updatePath
 
     /**
@@ -2792,15 +2798,10 @@ function saveGameToJSONFile() {
  * Show the initial Menu-Screen.
 */
 function startInitialScreen() {
+    initializeBackgroundSprites();
+
     Canvas.clear();
     Effects.clear();
-
-    let linkList = document.getElementsByClassName("further-links");
-
-    for (let linkIterator = 0; linkIterator < linkList.length; linkIterator++) {
-        let image = "url(" + createImage(80, LIST_LINKBUTTONS[linkIterator]).toDataURL("image/png") + ")";
-        linkList[linkIterator].style.backgroundImage = image;
-    }
 
     setCSS(Effects.canvas, "opacity", 1);
     setCSS(Effects.canvas, "backgroundColor", "#000");
@@ -2870,5 +2871,5 @@ let
     Margo = new NewNPC(Player.x + 100, Player.y),
 
     DynamicList = [],
-    
+
     StoryScript = new NewStory();

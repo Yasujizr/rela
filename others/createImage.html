@@ -384,24 +384,24 @@
     function editShape(index_) {
         document.getElementById("funButton0").style.backgroundColor = "#ffeb00";
         document.getElementById("funButton0").innerHTML = "Edit!";
-        changeShape(shapeList[index_].shape);
+        changeShape(shapeList[index_].sh);
         document.getElementById('createForm').reset();
 
         editShapeIndex = index_;
         let currentShape = shapeList[index_];
 
-        if (currentShape.size != undefined) sizeIn.value = currentShape.si;
-        if (currentShape.position != undefined) { xPositionIn.value = currentShape.pos[0]; yPositionIn.value = currentShape.pos[1]; }
-        if (currentShape.fillStyle != undefined) fillIn.value = currentShape.fis;
-        if (currentShape.strokeStyle != undefined) strokeIn.value = currentShape.sts;
-        if (currentShape.lineWidth != undefined) lineIn.value = currentShape.lw;
-        if (currentShape.startX != undefined) startXIn.value = currentShape.sx;
-        if (currentShape.startY != undefined) startYIn.value = currentShape.sy;
-        if (currentShape.endX != undefined) endXIn.value = currentShape.ex;
-        if (currentShape.endY != undefined) endYIn.value = currentShape.ey;
-        if (currentShape.text != undefined) textIn.value = currentShape.te;
-        if (currentShape.fontColor != undefined) colorIn.value = currentShape.foc;
-        if (currentShape.font != undefined) fontIn.value = currentShape.fo;
+        if (currentShape.si != undefined) sizeIn.value = currentShape.si;
+        if (currentShape.pos != undefined) { xPositionIn.value = currentShape.pos[0]; yPositionIn.value = currentShape.pos[1]; }
+        if (currentShape.fis != undefined) fillIn.value = currentShape.fis;
+        if (currentShape.sts != undefined) strokeIn.value = currentShape.sts;
+        if (currentShape.lw != undefined) lineIn.value = currentShape.lw;
+        if (currentShape.sx != undefined) startXIn.value = currentShape.sx;
+        if (currentShape.sy != undefined) startYIn.value = currentShape.sy;
+        if (currentShape.ex != undefined) endXIn.value = currentShape.ex;
+        if (currentShape.ey != undefined) endYIn.value = currentShape.ey;
+        if (currentShape.te != undefined) textIn.value = currentShape.te;
+        if (currentShape.foc != undefined) colorIn.value = currentShape.foc;
+        if (currentShape.fo != undefined) fontIn.value = currentShape.fo;
     } // editShape
 
     /**

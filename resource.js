@@ -148,27 +148,68 @@ let
         }
     ],
 
-    /**
-     * All the Menubutton-Sprites.
-    */
-    LIST_MENUBUTTONS = [
-        [{ "name": "sh_0", "sh": 1, "si": 5, "pos": [30, 30], "fis": "#000", "lw": "1" }, { "name": "sh_1", "sh": 1, "si": 5, "pos": [30, 70], "fis": "#000", "lw": "1" }, { "name": "sh_2", "sh": 1, "si": 5, "pos": [30, 50], "fis": "#000", "lw": "1" }, { "name": "sh_3", "sh": 2, "sx": 38, "sy": 30, "ex": 70, "ey": 30, "sts": "#000", "lw": "10" }, { "name": "sh_4", "sh": 2, "sx": 38, "sy": 50, "ex": 70, "ey": 50, "sts": "#000", "lw": "10" }, { "name": "sh_5", "sh": 2, "sx": 38, "sy": 70, "ex": 70, "ey": 70, "sts": "#000", "lw": "10" }],
-        [],
-        [{ "name": "Blob", "sh": 1, "si": 20, "pos": [50, 70], "fis": "#1cf3ff", "sts": "#000", "lw": "3" }, { "name": "sh_2", "sh": 2, "sx": 45, "sy": 30, "ex": 45, "ey": 60, "sts": "#000", "lw": "3" }, { "name": "sh_2", "sh": 2, "sx": 55, "sy": 30, "ex": 55, "ey": 60, "sts": "#000", "lw": "3" }, { "name": "sh_3", "sh": 2, "sx": 40, "sy": 30, "ex": 60, "ey": 30, "sts": "#000", "lw": "6" }],
-        [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Stick", "sh": 2, "sx": 25, "sy": 75, "ex": 80, "ey": 20, "sts": "#804000", "lw": "9" }, { "name": "Stone_Background", "sh": 2, "sx": 62, "sy": 38, "ex": 78, "ey": 22, "sts": "#000", "lw": "34" }, { "name": "Stone", "sh": 2, "sx": 65, "sy": 35, "ex": 75, "ey": 25, "sts": "#404040", "lw": "30" }],
-        [{ "name": "sh_0", "sh": 2, "sx": 70, "sy": 20, "ex": 40, "ey": 40, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_1", "sh": 2, "sx": 40, "sy": 40, "ex": 60, "ey": 50, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_2", "sh": 2, "sx": 60, "sy": 50, "ex": 30, "ey": 80, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_3", "sh": 2, "sx": 60, "sy": 50, "ex": 30, "ey": 80, "sts": "#fcfaff", "lw": "6" }, { "name": "sh_4", "sh": 2, "sx": 40, "sy": 40, "ex": 60, "ey": 50, "sts": "#fcfaff", "lw": "8" }, { "name": "sh_5", "sh": 2, "sx": 70, "sy": 20, "ex": 40, "ey": 40, "sts": "#fcfaff", "lw": "8" }],
-        [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Shaft", "sh": 2, "sx": 23, "sy": 77, "ex": 40, "ey": 60, "sts": "#804000", "lw": "10" }, { "name": "Blade", "sh": 2, "sx": 40, "sy": 60, "ex": 81, "ey": 19, "sts": "#c9c9c9", "lw": "10" }, { "name": "Middle", "sh": 2, "sx": 30, "sy": 45, "ex": 55, "ey": 70, "sts": "#222", "lw": "8" }, { "name": "End", "sh": 1, "si": 10, "pos": [25, 75], "fis": "#222", "lw": "1" }]
-    ],
 
     /**
-     * All the Linkbutton-Sprites.
+     * The Backgrounds of HTML-Elements.
+     * 
+     * element: The ID of the Element
+     * size: The Size of the Sprite
+     * list: The List of all Shapes
     */
-    LIST_LINKBUTTONS = [
-        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#7289da", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "d", "fo": "60px Consolas", "foc": "#fff" }],
-        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#e75f27", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "i", "fo": "60px Consolas", "foc": "#fff" }],
-        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#8fdaf4", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "t", "fo": "60px Consolas", "foc": "#fff" }],
-        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#f05033", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 60], "te": "g", "fo": "60px Consolas", "foc": "#fff" }],
-        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#f96855", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 60], "te": "p", "fo": "60px Consolas", "foc": "#fff" }]
+    LIST_BACKGROUNDSPRITES = [
+        // LINKS
+        {
+            element: "furtherLink0",
+            size: 80,
+            list: [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#7289da", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "d", "fo": "60px Consolas", "foc": "#fff" }]
+        },
+        {
+            element: "furtherLink1",
+            size: 80,
+            list: [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#e75f27", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "i", "fo": "60px Consolas", "foc": "#fff" }]
+        },
+        {
+            element: "furtherLink2",
+            size: 80,
+            list: [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#8fdaf4", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "t", "fo": "60px Consolas", "foc": "#fff" }]
+        },
+        {
+            element: "furtherLink3",
+            size: 80,
+            list: [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#f05033", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 60], "te": "g", "fo": "60px Consolas", "foc": "#fff" }]
+        },
+        {
+            element: "furtherLink4",
+            size: 80,
+            list: [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#f96855", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 60], "te": "p", "fo": "60px Consolas", "foc": "#fff" }]
+        },
+
+        // MENUBUTTONS
+        {
+            element: "open_a",
+            size: 100,
+            list: [{ "name": "sh_0", "sh": 1, "si": 5, "pos": [30, 30], "fis": "#000", "lw": "1" }, { "name": "sh_1", "sh": 1, "si": 5, "pos": [30, 70], "fis": "#000", "lw": "1" }, { "name": "sh_2", "sh": 1, "si": 5, "pos": [30, 50], "fis": "#000", "lw": "1" }, { "name": "sh_3", "sh": 2, "sx": 38, "sy": 30, "ex": 70, "ey": 30, "sts": "#000", "lw": "10" }, { "name": "sh_4", "sh": 2, "sx": 38, "sy": 50, "ex": 70, "ey": 50, "sts": "#000", "lw": "10" }, { "name": "sh_5", "sh": 2, "sx": 38, "sy": 70, "ex": 70, "ey": 70, "sts": "#000", "lw": "10" }]
+        },
+        {
+            element: "open_b",
+            size: 100,
+            list: [{ "name": "Blob", "sh": 1, "si": 20, "pos": [50, 70], "fis": "#1cf3ff", "sts": "#000", "lw": "3" }, { "name": "sh_2", "sh": 2, "sx": 45, "sy": 30, "ex": 45, "ey": 60, "sts": "#000", "lw": "3" }, { "name": "sh_2", "sh": 2, "sx": 55, "sy": 30, "ex": 55, "ey": 60, "sts": "#000", "lw": "3" }, { "name": "sh_3", "sh": 2, "sx": 40, "sy": 30, "ex": 60, "ey": 30, "sts": "#000", "lw": "6" }]
+        },
+        {
+            element: "open_d",
+            size: 100,
+            list: [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Stick", "sh": 2, "sx": 25, "sy": 75, "ex": 80, "ey": 20, "sts": "#804000", "lw": "9" }, { "name": "Stone_Background", "sh": 2, "sx": 62, "sy": 38, "ex": 78, "ey": 22, "sts": "#000", "lw": "34" }, { "name": "Stone", "sh": 2, "sx": 65, "sy": 35, "ex": 75, "ey": 25, "sts": "#404040", "lw": "30" }]
+        },
+        {
+            element: "open_e",
+            size: 100,
+            list: [{ "name": "sh_0", "sh": 2, "sx": 70, "sy": 20, "ex": 40, "ey": 40, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_1", "sh": 2, "sx": 40, "sy": 40, "ex": 60, "ey": 50, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_2", "sh": 2, "sx": 60, "sy": 50, "ex": 30, "ey": 80, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_3", "sh": 2, "sx": 60, "sy": 50, "ex": 30, "ey": 80, "sts": "#fcfaff", "lw": "6" }, { "name": "sh_4", "sh": 2, "sx": 40, "sy": 40, "ex": 60, "ey": 50, "sts": "#fcfaff", "lw": "8" }, { "name": "sh_5", "sh": 2, "sx": 70, "sy": 20, "ex": 40, "ey": 40, "sts": "#fcfaff", "lw": "8" }]
+        },
+        {
+            element: "open_f",
+            size: 100,
+            list: [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Shaft", "sh": 2, "sx": 23, "sy": 77, "ex": 40, "ey": 60, "sts": "#804000", "lw": "10" }, { "name": "Blade", "sh": 2, "sx": 40, "sy": 60, "ex": 81, "ey": 19, "sts": "#c9c9c9", "lw": "10" }, { "name": "Middle", "sh": 2, "sx": 30, "sy": 45, "ex": 55, "ey": 70, "sts": "#222", "lw": "8" }, { "name": "End", "sh": 1, "si": 10, "pos": [25, 75], "fis": "#222", "lw": "1" }]
+        }
     ],
 
     /**
