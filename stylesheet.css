@@ -335,11 +335,11 @@ li {
     width: 100%;
     position: absolute;
     z-index: 13;
-    margin-top: 0.8em;
+    margin-top: 1em;
     text-align: center;
-    font-family: Impact, monospace;
+    font-family: Consolas, monospace;
     font-weight: 100;
-    font-size: 1.8em;
+    font-size: 1.4em;
     pointer-events: none;
 }
 

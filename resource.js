@@ -26,79 +26,79 @@ let
         // SIGN
         {
             cs: 50,
-            list: [{ "name": "Stick", "shape": 1, "size": 8, "position": [25, 25], "fillStyle": "#ae5700", "strokeStyle": "#000", "lineWidth": "5" }, { "name": "Base_Black", "shape": 2, "startX": 0, "startY": 25, "endX": 50, "endY": 25, "strokeStyle": "#000", "lineWidth": "13" }, { "name": "Base_Brown", "shape": 2, "startX": 2, "startY": 25, "endX": 48, "endY": 25, "strokeStyle": "#ae5700", "lineWidth": "9" }]
+            list: [{ "name": "Stick", "sh": 1, "si": 8, "pos": [25, 25], "fis": "#ae5700", "sts": "#000", "lw": "5" }, { "name": "Base_Black", "sh": 2, "sx": 0, "sy": 25, "ex": 50, "ey": 25, "sts": "#000", "lw": "13" }, { "name": "Base_Brown", "sh": 2, "sx": 2, "sy": 25, "ex": 48, "ey": 25, "sts": "#ae5700", "lw": "9" }]
         },
 
         // STONE
         {
             cs: 124,
-            list: [{ "name": "Kreis", "shape": 1, "size": 60, "position": 62, "fillStyle": "#909090", "strokeStyle": "#565656", "lineWidth": "4" }]
+            list: [{ "name": "Kreis", "sh": 1, "si": 60, "pos": 62, "fis": "#909090", "sts": "#565656", "lw": "4" }]
         },
 
         // OAK
         {
             cs: 240,
-            list: [{ "name": "Stump", "shape": 1, "size": 40, "position": 120, "fillStyle": "#805200", "strokeStyle": "#644100", "lineWidth": "4" }, { "name": "Leaves", "shape": 1, "size": 110, "position": 120, "fillStyle": "#366e3fb4", "strokeStyle": "#24492A", "lineWidth": "4" }]
+            list: [{ "name": "Stump", "sh": 1, "si": 40, "pos": 120, "fis": "#805200", "sts": "#644100", "lw": "4" }, { "name": "Leaves", "sh": 1, "si": 110, "pos": 120, "fis": "#366e3fb4", "sts": "#24492A", "lw": "4" }]
         },
 
         // BEECH
         {
             cs: 240,
-            list: [{ "name": "Stump", "shape": 1, "size": 30, "position": 120, "fillStyle": "#98612a", "strokeStyle": "#000", "lineWidth": "4" }, { "name": "Leaves", "shape": 1, "size": 90, "position": 120, "fillStyle": "#286332b4", "strokeStyle": "#24492A", "lineWidth": "4" }]
+            list: [{ "name": "Stump", "sh": 1, "si": 30, "pos": 120, "fis": "#98612a", "sts": "#000", "lw": "4" }, { "name": "Leaves", "sh": 1, "si": 90, "pos": 120, "fis": "#286332b4", "sts": "#24492A", "lw": "4" }]
         },
 
         // APPLE TREE
         {
             cs: 240,
-            list: [{ "name": "Stump", "shape": 1, "size": 40, "position": 120, "fillStyle": "#805200", "strokeStyle": "#644100", "lineWidth": "4" }, { "name": "Leaves", "shape": 1, "size": 110, "position": 120, "fillStyle": "#366e3fb4", "strokeStyle": "#24492A", "lineWidth": "4" }, { "name": "Apple_1", "shape": 1, "size": 12, "position": [65, 55], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_2", "shape": 1, "size": 12, "position": [125, 200], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_3", "shape": 1, "size": 12, "position": [200, 110], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_4", "shape": 1, "size": 12, "position": [40, 170], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }, { "name": "Apple_5", "shape": 1, "size": 12, "position": [140, 50], "fillStyle": "#d50000b4", "strokeStyle": "#aa00002A", "lineWidth": "3" }]
+            list: [{ "name": "Stump", "sh": 1, "si": 40, "pos": 120, "fis": "#805200", "sts": "#644100", "lw": "4" }, { "name": "Leaves", "sh": 1, "si": 110, "pos": 120, "fis": "#366e3fb4", "sts": "#24492A", "lw": "4" }, { "name": "Apple_1", "sh": 1, "si": 12, "pos": [65, 55], "fis": "#d50000b4", "sts": "#aa00002A", "lw": "3" }, { "name": "Apple_2", "sh": 1, "si": 12, "pos": [125, 200], "fis": "#d50000b4", "sts": "#aa00002A", "lw": "3" }, { "name": "Apple_3", "sh": 1, "si": 12, "pos": [200, 110], "fis": "#d50000b4", "sts": "#aa00002A", "lw": "3" }, { "name": "Apple_4", "sh": 1, "si": 12, "pos": [40, 170], "fis": "#d50000b4", "sts": "#aa00002A", "lw": "3" }, { "name": "Apple_5", "sh": 1, "si": 12, "pos": [140, 50], "fis": "#d50000b4", "sts": "#aa00002A", "lw": "3" }]
         },
 
         // BLUEBERRY_BUSCH
         {
             cs: 64,
-            list: [{ "name": "Bush", "shape": 1, "size": 30, "position": [32, 32], "fillStyle": "#176635", "strokeStyle": "#24492A", "lineWidth": "2" }, { "name": "Berry_3", "shape": 1, "size": 5, "position": [48, 24], "fillStyle": "#35486C", "strokeStyle": "#000077", "lineWidth": "2" }, { "name": "Berry_2", "shape": 1, "size": 5, "position": [28, 50], "fillStyle": "#35486C", "strokeStyle": "#000077", "lineWidth": "2" }, { "name": "Berry_1", "shape": 1, "size": 5, "position": [20, 18], "fillStyle": "#344E7E", "strokeStyle": "#000077", "lineWidth": "2" }]
+            list: [{ "name": "Bush", "sh": 1, "si": 30, "pos": [32, 32], "fis": "#176635", "sts": "#24492A", "lw": "2" }, { "name": "Berry_3", "sh": 1, "si": 5, "pos": [48, 24], "fis": "#35486C", "sts": "#000077", "lw": "2" }, { "name": "Berry_2", "sh": 1, "si": 5, "pos": [28, 50], "fis": "#35486C", "sts": "#000077", "lw": "2" }, { "name": "Berry_1", "sh": 1, "si": 5, "pos": [20, 18], "fis": "#344E7E", "sts": "#000077", "lw": "2" }]
         },
 
         // RASPBERRY_BUSH
         {
             cs: 64,
-            list: [{ "name": "Bush", "shape": 1, "size": 30, "position": [32, 32], "fillStyle": "#176635", "strokeStyle": "#24492A", "lineWidth": "2" }, { "name": "Berry_3", "shape": 1, "size": 5, "position": [45, 40], "fillStyle": "#bb0720", "strokeStyle": "#000077", "lineWidth": "2" }, { "name": "Berry_2", "shape": 1, "size": 5, "position": [21, 37], "fillStyle": "#bb0720", "strokeStyle": "#000077", "lineWidth": "2" }, { "name": "Berry_1", "shape": 1, "size": 5, "position": [35, 16], "fillStyle": "#bb0720", "strokeStyle": "#000077", "lineWidth": "2" }]
+            list: [{ "name": "Bush", "sh": 1, "si": 30, "pos": [32, 32], "fis": "#176635", "sts": "#24492A", "lw": "2" }, { "name": "Berry_3", "sh": 1, "si": 5, "pos": [45, 40], "fis": "#bb0720", "sts": "#000077", "lw": "2" }, { "name": "Berry_2", "sh": 1, "si": 5, "pos": [21, 37], "fis": "#bb0720", "sts": "#000077", "lw": "2" }, { "name": "Berry_1", "sh": 1, "si": 5, "pos": [35, 16], "fis": "#bb0720", "sts": "#000077", "lw": "2" }]
         },
 
         // POT
         {
             cs: 64,
-            list: [{ "name": "Bottom", "shape": 1, "size": 28, "position": [32, 32], "fillStyle": "#824100", "strokeStyle": "#552b00", "lineWidth": "4" }, { "name": "Top", "shape": 1, "size": 14, "position": [32, 32], "fillStyle": "#c16100", "strokeStyle": "#6f3700", "lineWidth": "4" }]
+            list: [{ "name": "Bottom", "sh": 1, "si": 28, "pos": [32, 32], "fis": "#824100", "sts": "#552b00", "lw": "4" }, { "name": "Top", "sh": 1, "si": 14, "pos": [32, 32], "fis": "#c16100", "sts": "#6f3700", "lw": "4" }]
         },
 
         // TORCH
         {
             cs: 64,
-            list: [{ "name": "Stick", "shape": 1, "size": 10, "position": [32, 32], "fillStyle": "#532900", "strokeStyle": "#341A00", "lineWidth": "5" }, { "name": "Red_Fire", "shape": 1, "size": 16, "position": [32, 32], "fillStyle": "#ff5e0055", "lineWidth": "1" }]
+            list: [{ "name": "Stick", "sh": 1, "si": 10, "pos": [32, 32], "fis": "#532900", "sts": "#341A00", "lw": "5" }, { "name": "Red_Fire", "sh": 1, "si": 16, "pos": [32, 32], "fis": "#ff5e0055", "lw": "1" }]
         },
 
         // CAMPFIRE
         {
             cs: 60,
-            list: [{ "name": "Stick_1", "shape": 2, "startX": 2, "startY": 58, "endX": 58, "endY": 2, "strokeStyle": "#532900", "lineWidth": "10" }, { "name": "Stick_0", "shape": 2, "startX": 2, "startY": 2, "endX": 58, "endY": 58, "strokeStyle": "#532900", "lineWidth": "10" }, { "name": "Red_Fire", "shape": 1, "size": 25, "position": 30, "fillStyle": "#da0a00b8", "lineWidth": "1" }, { "name": "Orange_Fire", "shape": 1, "size": 20, "position": 30, "fillStyle": "#ff5e00a6", "lineWidth": "1" }, { "name": "Yellow_Fire", "shape": 1, "size": 10, "position": 30, "fillStyle": "#fee6969c", "lineWidth": "1" }]
+            list: [{ "name": "Stick_1", "sh": 2, "sx": 2, "sy": 58, "ex": 58, "ey": 2, "sts": "#532900", "lw": "10" }, { "name": "Stick_0", "sh": 2, "sx": 2, "sy": 2, "ex": 58, "ey": 58, "sts": "#532900", "lw": "10" }, { "name": "Red_Fire", "sh": 1, "si": 25, "pos": 30, "fis": "#da0a00b8", "lw": "1" }, { "name": "Orange_Fire", "sh": 1, "si": 20, "pos": 30, "fis": "#ff5e00a6", "lw": "1" }, { "name": "Yellow_Fire", "sh": 1, "si": 10, "pos": 30, "fis": "#fee6969c", "lw": "1" }]
         },
 
         // BARREL
         {
             cs: 60,
-            list: [{ "name": "Barrel_Body", "shape": 1, "size": 27, "position": 30, "fillStyle": "#7d3f00", "strokeStyle": "#4d2600", "lineWidth": "4" }, { "name": "Inner_Border", "shape": 1, "size": 29, "position": 30, "strokeStyle": "#000", "lineWidth": "1" }, { "name": "Outer-Border", "shape": 1, "size": 25, "position": 30, "strokeStyle": "#000", "lineWidth": "1" }, { "name": "Line_2", "shape": 2, "startX": 10, "startY": 45, "endX": 50, "endY": 45, "strokeStyle": "#000", "lineWidth": "1" }, { "name": "Line_1", "shape": 2, "startX": 10, "startY": 15, "endX": 50, "endY": 15, "strokeStyle": "#000", "lineWidth": "1" }, { "name": "Line_0", "shape": 2, "startX": 5, "startY": 30, "endX": 55, "endY": 30, "strokeStyle": "#000", "lineWidth": "1" }]
+            list: [{ "name": "Barrel_Body", "sh": 1, "si": 27, "pos": 30, "fis": "#7d3f00", "sts": "#4d2600", "lw": "4" }, { "name": "Inner_Border", "sh": 1, "si": 29, "pos": 30, "sts": "#000", "lw": "1" }, { "name": "Outer-Border", "sh": 1, "si": 25, "pos": 30, "sts": "#000", "lw": "1" }, { "name": "Line_2", "sh": 2, "sx": 10, "sy": 45, "ex": 50, "ey": 45, "sts": "#000", "lw": "1" }, { "name": "Line_1", "sh": 2, "sx": 10, "sy": 15, "ex": 50, "ey": 15, "sts": "#000", "lw": "1" }, { "name": "Line_0", "sh": 2, "sx": 5, "sy": 30, "ex": 55, "ey": 30, "sts": "#000", "lw": "1" }]
         },
 
         // WALL
         {
             cs: 34,
-            list: [{ "name": "Outer_Circle", "shape": 1, "size": 16, "position": 17, "fillStyle": "#6a3500", "strokeStyle": "#3c1e00", "lineWidth": "3" }, { "name": "Inner_Circle", "shape": 1, "size": 5, "position": 17, "fillStyle": "#914800", "lineWidth": "1" }]
+            list: [{ "name": "Outer_Circle", "sh": 1, "si": 16, "pos": 17, "fis": "#6a3500", "sts": "#3c1e00", "lw": "3" }, { "name": "Inner_Circle", "sh": 1, "si": 5, "pos": 17, "fis": "#914800", "lw": "1" }]
         },
 
         // SMALL_HOUSE
         {
             cs: 300,
-            list: [{ "name": "Base", "shape": 1, "size": 148, "position": [150, 150], "fillStyle": "#ffa54f", "strokeStyle": "#8b5a2b", "lineWidth": "7" }]
+            list: [{ "name": "Base", "sh": 1, "si": 148, "pos": [150, 150], "fis": "#ffa54f", "sts": "#8b5a2b", "lw": "7" }]
         },
 
         { cs: 0, list: [] },
@@ -120,31 +120,31 @@ let
         // PICKAXE
         {
             cs: 64,
-            list: [{ "name": "Stick", "shape": 2, "startX": 0, "startY": 6, "endX": 45, "endY": 6, "strokeStyle": "#4e350f", "lineWidth": "6" }, { "name": "Stone", "shape": 0, "size": 10, "position": 1, "fillStyle": "#222", "lineWidth": "1" }]
+            list: [{ "name": "Stick", "sh": 2, "sx": 0, "sy": 6, "ex": 45, "ey": 6, "sts": "#4e350f", "lw": "6" }, { "name": "Stone", "sh": 0, "si": 10, "pos": 1, "fis": "#222", "lw": "1" }]
         },
 
         // AXE
         {
             cs: 64,
-            list: [{ "name": "Stick", "shape": 2, "startX": 0, "startY": 58, "endX": 45, "endY": 58, "strokeStyle": "#4e350f", "lineWidth": "6" }, { "name": "Stone", "shape": 2, "startX": 2, "startY": 58, "endX": 14, "endY": 58, "strokeStyle": "#494949", "lineWidth": "10" }]
+            list: [{ "name": "Stick", "sh": 2, "sx": 0, "sy": 58, "ex": 45, "ey": 58, "sts": "#4e350f", "lw": "6" }, { "name": "Stone", "sh": 2, "sx": 2, "sy": 58, "ex": 14, "ey": 58, "sts": "#494949", "lw": "10" }]
         },
 
         // BASIC_AMOUR
         {
             cs: 64,
-            list: [{ "name": "Amour", "shape": 0, "size": 38, "position": 13, "strokeStyle": "#000", "lineWidth": "3" }]
+            list: [{ "name": "Amour", "sh": 0, "si": 38, "pos": 13, "sts": "#000", "lw": "3" }]
         },
 
         // SMALL_BAGBACK
         {
             cs: 94,
-            list: [{ "name": "Body", "shape": 2, "startX": 70, "startY": 22, "endX": 70, "endY": 72, "strokeStyle": "#000", "lineWidth": "6" }, { "name": "Middle", "shape": 2, "startX": 80, "startY": 22, "endX": 80, "endY": 72, "strokeStyle": "#804000", "lineWidth": "14" }, { "name": "Left", "shape": 2, "startX": 70, "startY": 72, "endX": 88, "endY": 72, "strokeStyle": "#000", "lineWidth": "5" }, { "name": "Right", "shape": 2, "startX": 70, "startY": 22, "endX": 88, "endY": 22, "strokeStyle": "#000", "lineWidth": "5" }, { "name": "Shape_4", "shape": 2, "startX": 89, "startY": 22, "endX": 89, "endY": 72, "strokeStyle": "#000", "lineWidth": "4" }]
+            list: [{ "name": "Body", "sh": 2, "sx": 70, "sy": 22, "ex": 70, "ey": 72, "sts": "#000", "lw": "6" }, { "name": "Middle", "sh": 2, "sx": 80, "sy": 22, "ex": 80, "ey": 72, "sts": "#804000", "lw": "14" }, { "name": "Left", "sh": 2, "sx": 70, "sy": 72, "ex": 88, "ey": 72, "sts": "#000", "lw": "5" }, { "name": "Right", "sh": 2, "sx": 70, "sy": 22, "ex": 88, "ey": 22, "sts": "#000", "lw": "5" }, { "name": "sh_4", "sh": 2, "sx": 89, "sy": 22, "ex": 89, "ey": 72, "sts": "#000", "lw": "4" }]
         },
 
         // WOODEN_CART
         {
             cs: 200,
-            list: [{ "name": "Left_Holding", "shape": 2, "startX": 5, "startY": 130, "endX": 80, "endY": 130, "strokeStyle": "#1d1400", "lineWidth": "10" }, { "name": "Right_Holding", "shape": 2, "startX": 5, "startY": 70, "endX": 80, "endY": 70, "strokeStyle": "#1d1400", "lineWidth": "10" }, { "name": "Left_Wheel", "shape": 2, "startX": 80, "startY": 155, "endX": 140, "endY": 155, "strokeStyle": "#3b230f", "lineWidth": "30" }, { "name": "Right_Wheel", "shape": 2, "startX": 80, "startY": 45, "endX": 140, "endY": 45, "strokeStyle": "#3b230f", "lineWidth": "30" }, { "name": "Base", "shape": 0, "size": 110, "position": [45, 45], "fillStyle": "#ab6740", "strokeStyle": "#4d1d02", "lineWidth": "10" }]
+            list: [{ "name": "Left_Holding", "sh": 2, "sx": 5, "sy": 130, "ex": 80, "ey": 130, "sts": "#1d1400", "lw": "10" }, { "name": "Right_Holding", "sh": 2, "sx": 5, "sy": 70, "ex": 80, "ey": 70, "sts": "#1d1400", "lw": "10" }, { "name": "Left_Wheel", "sh": 2, "sx": 80, "sy": 155, "ex": 140, "ey": 155, "sts": "#3b230f", "lw": "30" }, { "name": "Right_Wheel", "sh": 2, "sx": 80, "sy": 45, "ex": 140, "ey": 45, "sts": "#3b230f", "lw": "30" }, { "name": "Base", "sh": 0, "si": 110, "pos": [45, 45], "fis": "#ab6740", "sts": "#4d1d02", "lw": "10" }]
         }
     ],
 
@@ -152,23 +152,23 @@ let
      * All the Menubutton-Sprites.
     */
     LIST_MENUBUTTONS = [
-        [{ "name": "Shape_0", "shape": 1, "size": 5, "position": [30, 30], "fillStyle": "#000", "lineWidth": "1" }, { "name": "Shape_1", "shape": 1, "size": 5, "position": [30, 70], "fillStyle": "#000", "lineWidth": "1" }, { "name": "Shape_2", "shape": 1, "size": 5, "position": [30, 50], "fillStyle": "#000", "lineWidth": "1" }, { "name": "Shape_3", "shape": 2, "startX": 38, "startY": 30, "endX": 70, "endY": 30, "strokeStyle": "#000", "lineWidth": "10" }, { "name": "Shape_4", "shape": 2, "startX": 38, "startY": 50, "endX": 70, "endY": 50, "strokeStyle": "#000", "lineWidth": "10" }, { "name": "Shape_5", "shape": 2, "startX": 38, "startY": 70, "endX": 70, "endY": 70, "strokeStyle": "#000", "lineWidth": "10" }],
+        [{ "name": "sh_0", "sh": 1, "si": 5, "pos": [30, 30], "fis": "#000", "lw": "1" }, { "name": "sh_1", "sh": 1, "si": 5, "pos": [30, 70], "fis": "#000", "lw": "1" }, { "name": "sh_2", "sh": 1, "si": 5, "pos": [30, 50], "fis": "#000", "lw": "1" }, { "name": "sh_3", "sh": 2, "sx": 38, "sy": 30, "ex": 70, "ey": 30, "sts": "#000", "lw": "10" }, { "name": "sh_4", "sh": 2, "sx": 38, "sy": 50, "ex": 70, "ey": 50, "sts": "#000", "lw": "10" }, { "name": "sh_5", "sh": 2, "sx": 38, "sy": 70, "ex": 70, "ey": 70, "sts": "#000", "lw": "10" }],
         [],
-        [{ "name": "Blob", "shape": 1, "size": 20, "position": [50, 70], "fillStyle": "#1cf3ff", "strokeStyle": "#000", "lineWidth": "3" }, { "name": "Shape_2", "shape": 2, "startX": 45, "startY": 30, "endX": 45, "endY": 60, "strokeStyle": "#000", "lineWidth": "3" }, { "name": "Shape_2", "shape": 2, "startX": 55, "startY": 30, "endX": 55, "endY": 60, "strokeStyle": "#000", "lineWidth": "3" }, { "name": "Shape_3", "shape": 2, "startX": 40, "startY": 30, "endX": 60, "endY": 30, "strokeStyle": "#000", "lineWidth": "6" }],
-        [{ "name": "Stick_Background", "shape": 2, "startX": 22, "startY": 78, "endX": 82, "endY": 18, "strokeStyle": "#000", "lineWidth": "12" }, { "name": "Stick", "shape": 2, "startX": 25, "startY": 75, "endX": 80, "endY": 20, "strokeStyle": "#804000", "lineWidth": "9" }, { "name": "Stone_Background", "shape": 2, "startX": 62, "startY": 38, "endX": 78, "endY": 22, "strokeStyle": "#000", "lineWidth": "34" }, { "name": "Stone", "shape": 2, "startX": 65, "startY": 35, "endX": 75, "endY": 25, "strokeStyle": "#404040", "lineWidth": "30" }],
-        [{ "name": "Shape_0", "shape": 2, "startX": 70, "startY": 20, "endX": 40, "endY": 40, "strokeStyle": "#c1bae4", "lineWidth": "10" }, { "name": "Shape_1", "shape": 2, "startX": 40, "startY": 40, "endX": 60, "endY": 50, "strokeStyle": "#c1bae4", "lineWidth": "10" }, { "name": "Shape_2", "shape": 2, "startX": 60, "startY": 50, "endX": 30, "endY": 80, "strokeStyle": "#c1bae4", "lineWidth": "10" }, { "name": "Shape_3", "shape": 2, "startX": 60, "startY": 50, "endX": 30, "endY": 80, "strokeStyle": "#fcfaff", "lineWidth": "6" }, { "name": "Shape_4", "shape": 2, "startX": 40, "startY": 40, "endX": 60, "endY": 50, "strokeStyle": "#fcfaff", "lineWidth": "8" }, { "name": "Shape_5", "shape": 2, "startX": 70, "startY": 20, "endX": 40, "endY": 40, "strokeStyle": "#fcfaff", "lineWidth": "8" }],
-        [{ "name": "Stick_Background", "shape": 2, "startX": 22, "startY": 78, "endX": 82, "endY": 18, "strokeStyle": "#000", "lineWidth": "12" }, { "name": "Shaft", "shape": 2, "startX": 23, "startY": 77, "endX": 40, "endY": 60, "strokeStyle": "#804000", "lineWidth": "10" }, { "name": "Blade", "shape": 2, "startX": 40, "startY": 60, "endX": 81, "endY": 19, "strokeStyle": "#c9c9c9", "lineWidth": "10" }, { "name": "Middle", "shape": 2, "startX": 30, "startY": 45, "endX": 55, "endY": 70, "strokeStyle": "#222", "lineWidth": "8" }, { "name": "End", "shape": 1, "size": 10, "position": [25, 75], "fillStyle": "#222", "lineWidth": "1" }]
+        [{ "name": "Blob", "sh": 1, "si": 20, "pos": [50, 70], "fis": "#1cf3ff", "sts": "#000", "lw": "3" }, { "name": "sh_2", "sh": 2, "sx": 45, "sy": 30, "ex": 45, "ey": 60, "sts": "#000", "lw": "3" }, { "name": "sh_2", "sh": 2, "sx": 55, "sy": 30, "ex": 55, "ey": 60, "sts": "#000", "lw": "3" }, { "name": "sh_3", "sh": 2, "sx": 40, "sy": 30, "ex": 60, "ey": 30, "sts": "#000", "lw": "6" }],
+        [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Stick", "sh": 2, "sx": 25, "sy": 75, "ex": 80, "ey": 20, "sts": "#804000", "lw": "9" }, { "name": "Stone_Background", "sh": 2, "sx": 62, "sy": 38, "ex": 78, "ey": 22, "sts": "#000", "lw": "34" }, { "name": "Stone", "sh": 2, "sx": 65, "sy": 35, "ex": 75, "ey": 25, "sts": "#404040", "lw": "30" }],
+        [{ "name": "sh_0", "sh": 2, "sx": 70, "sy": 20, "ex": 40, "ey": 40, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_1", "sh": 2, "sx": 40, "sy": 40, "ex": 60, "ey": 50, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_2", "sh": 2, "sx": 60, "sy": 50, "ex": 30, "ey": 80, "sts": "#c1bae4", "lw": "10" }, { "name": "sh_3", "sh": 2, "sx": 60, "sy": 50, "ex": 30, "ey": 80, "sts": "#fcfaff", "lw": "6" }, { "name": "sh_4", "sh": 2, "sx": 40, "sy": 40, "ex": 60, "ey": 50, "sts": "#fcfaff", "lw": "8" }, { "name": "sh_5", "sh": 2, "sx": 70, "sy": 20, "ex": 40, "ey": 40, "sts": "#fcfaff", "lw": "8" }],
+        [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Shaft", "sh": 2, "sx": 23, "sy": 77, "ex": 40, "ey": 60, "sts": "#804000", "lw": "10" }, { "name": "Blade", "sh": 2, "sx": 40, "sy": 60, "ex": 81, "ey": 19, "sts": "#c9c9c9", "lw": "10" }, { "name": "Middle", "sh": 2, "sx": 30, "sy": 45, "ex": 55, "ey": 70, "sts": "#222", "lw": "8" }, { "name": "End", "sh": 1, "si": 10, "pos": [25, 75], "fis": "#222", "lw": "1" }]
     ],
 
     /**
      * All the Linkbutton-Sprites.
     */
     LIST_LINKBUTTONS = [
-        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#7289da", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 70], "text": "d", "font": "60px Consolas", "fontColor": "#fff" }],
-        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#e75f27", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 70], "text": "i", "font": "60px Consolas", "fontColor": "#fff" }],
-        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#8fdaf4", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 70], "text": "t", "font": "60px Consolas", "fontColor": "#fff" }],
-        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#f05033", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 60], "text": "g", "font": "60px Consolas", "fontColor": "#fff" }],
-        [{ "name": "Background", "shape": 0, "size": 80, "position": [0, 0], "fillStyle": "#f96855", "lineWidth": "1" }, { "name": "Text", "shape": 4, "position": [30, 60], "text": "p", "font": "60px Consolas", "fontColor": "#fff" }]
+        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#7289da", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "d", "fo": "60px Consolas", "foc": "#fff" }],
+        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#e75f27", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "i", "fo": "60px Consolas", "foc": "#fff" }],
+        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#8fdaf4", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 70], "te": "t", "fo": "60px Consolas", "foc": "#fff" }],
+        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#f05033", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 60], "te": "g", "fo": "60px Consolas", "foc": "#fff" }],
+        [{ "name": "Background", "sh": 0, "si": 80, "pos": [0, 0], "fis": "#f96855", "lw": "1" }, { "name": "te", "sh": 4, "pos": [30, 60], "te": "p", "fo": "60px Consolas", "foc": "#fff" }]
     ],
 
     /**
@@ -424,8 +424,8 @@ let
         {
             name: "Lumberjacking",
             neededPoints: 20,
-            improvements: [{ type: IMPROV_RECI, index: 0 }, { type: IMPROV_RECI, index: 1 }, { type: IMPROV_RECI, index: 2 }, { type: IMPROV_RECI, index: 3 }, 
-                { type: IMPROV_CONS, index: 2 }, { type: IMPROV_CONS, index: 3 }]
+            improvements: [{ type: IMPROV_RECI, index: 0 }, { type: IMPROV_RECI, index: 1 }, { type: IMPROV_RECI, index: 2 }, { type: IMPROV_RECI, index: 3 },
+            { type: IMPROV_CONS, index: 2 }, { type: IMPROV_CONS, index: 3 }]
         },
         {
             name: "Hunting",

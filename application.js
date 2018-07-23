@@ -25,7 +25,8 @@
  * - t_t: GAME                  The Game-Class
  * - t_u: SAVE                  Manage Saving and Loading the Game
  * - t_v: START/END             Manage the Beginning and the End of the Episode
- * - t_w: CREATE_OBJECTS        Create all Main-Objects, like the Player and the Map
+ * - t_w: STORY                 The Story-Class
+ * - t_z: CREATE_OBJECTS        Create all Main-Objects, like the Player and the Map
 */
 
 // ===============================================================================================
@@ -339,18 +340,18 @@ function createImage(canvasSize_, shapeList_) {
         context.save();
         context.beginPath();
 
-        let size = shapeList_[currentShapeIndex].size,
-            position = shapeList_[currentShapeIndex].position,
+        let size = shapeList_[currentShapeIndex].si,
+            position = shapeList_[currentShapeIndex].pos,
             xPosition = (typeof (position) == typeof []) ? (position[0]) : (position),
             yPosition = (typeof (position) == typeof []) ? (position[1]) : (position);
 
-        if (shapeList_[currentShapeIndex].font) {
-            context.font = shapeList_[currentShapeIndex].font;
+        if (shapeList_[currentShapeIndex].fo) {
+            context.font = shapeList_[currentShapeIndex].fo;
 
-            context.fillStyle = shapeList_[currentShapeIndex].fontColor;
+            context.fillStyle = shapeList_[currentShapeIndex].foc;
         }
 
-        switch (shapeList_[currentShapeIndex].shape) {
+        switch (shapeList_[currentShapeIndex].sh) {
             // Draw a Rectangle
             case (0):
                 context.rect(xPosition, yPosition, size, size);
@@ -361,8 +362,8 @@ function createImage(canvasSize_, shapeList_) {
                 break;
             // Draw a Line
             case (2):
-                context.moveTo(shapeList_[currentShapeIndex].startX, shapeList_[currentShapeIndex].startY);
-                context.lineTo(shapeList_[currentShapeIndex].endX, shapeList_[currentShapeIndex].endY);
+                context.moveTo(shapeList_[currentShapeIndex].sx, shapeList_[currentShapeIndex].sy);
+                context.lineTo(shapeList_[currentShapeIndex].ex, shapeList_[currentShapeIndex].ey);
                 break;
             // Draw a Hexagon
             case (3):
@@ -380,26 +381,25 @@ function createImage(canvasSize_, shapeList_) {
                 break;
             // Draw a Text
             case (4):
-                context.fillText(shapeList_[currentShapeIndex].text, xPosition, yPosition);
+                context.fillText(shapeList_[currentShapeIndex].te, xPosition, yPosition);
 
                 break;
         }
 
-        if (shapeList_[currentShapeIndex].fillStyle) {
-            context.fillStyle = shapeList_[currentShapeIndex].fillStyle;
+        if (shapeList_[currentShapeIndex].fis) {
+            context.fillStyle = shapeList_[currentShapeIndex].fis;
             context.fill();
         }
 
-        if (shapeList_[currentShapeIndex].strokeStyle) {
-            context.strokeStyle = shapeList_[currentShapeIndex].strokeStyle;
+        if (shapeList_[currentShapeIndex].sts) {
+            context.strokeStyle = shapeList_[currentShapeIndex].sts;
 
-            if (shapeList_[currentShapeIndex].lineWidth) {
-                context.lineWidth = shapeList_[currentShapeIndex].lineWidth;
+            if (shapeList_[currentShapeIndex].lw) {
+                context.lineWidth = shapeList_[currentShapeIndex].lw;
             }
 
             context.stroke();
         }
-
 
         context.closePath();
         context.restore();
@@ -2563,7 +2563,7 @@ function generateFields() {
 // GAME t_t
 // ===============================================================================================
 /*
- * The Game-Object.
+ * The Game-Object, containing all Information, about the Device of the User and the Controls.
 */
 let Game = {
     // Is the Device using Touch? (Smartphones and Tablets)
@@ -2838,7 +2838,22 @@ function startFinalScreen() {
 } // startFinalScreen
 
 // ===============================================================================================
-// CREATE_OBJECTS t_w
+// STORY t_w
+// ===============================================================================================
+/**
+ * The Story-Class.
+*/
+class NewStory {
+    /**
+     * Create a new Story-Line.
+    */
+    constructor() {
+        this.skriptLine = [];
+    } // constructor
+} // NewStory
+
+// ===============================================================================================
+// CREATE_OBJECTS t_z
 // ===============================================================================================
 let
     Canvas = new NewCanvas("AnimationCanvas"),
@@ -2854,4 +2869,6 @@ let
 
     Margo = new NewNPC(Player.x + 100, Player.y),
 
-    DynamicList = [];
+    DynamicList = [],
+    
+    StoryScript = new NewStory();

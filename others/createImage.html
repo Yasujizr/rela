@@ -323,30 +323,30 @@
     function createShape() {
         let newObject = {};
         newObject.name = "Shape_" + shapeList.length;
-        newObject.shape = createShapeType;
+        newObject.sh = createShapeType;
 
         if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3) {
-            newObject.size = Number(sizeIn.value);
+            newObject.si = Number(sizeIn.value);
         }
         if (createShapeType == 0 || createShapeType == 1 || createShapeType == 3 || createShapeType == 4) {
-            newObject.position = [Number(xPositionIn.value), Number(yPositionIn.value)];
-            if (fillIn.value != "") { newObject.fillStyle = fillIn.value; }
+            newObject.pos = [Number(xPositionIn.value), Number(yPositionIn.value)];
+            if (fillIn.value != "") { newObject.fis = fillIn.value; }
         }
         if (createShapeType == 0 || createShapeType == 1 || createShapeType == 2 || createShapeType == 3) {
-            if (strokeIn.value != "") { newObject.strokeStyle = strokeIn.value; }
-            if (lineIn.value != "") { newObject.lineWidth = lineIn.value; }
-            else { newObject.lineWidth = "1"; }
+            if (strokeIn.value != "") { newObject.sts = strokeIn.value; }
+            if (lineIn.value != "") { newObject.lw = lineIn.value; }
+            else { newObject.lw = "1"; }
         }
-        else if (createShapeType == 2) {
-            newObject.startX = Number(startXIn.value);
-            newObject.startY = Number(startYIn.value);
-            newObject.endX = Number(endXIn.value);
-            newObject.endY = Number(endYIn.value);
+        if (createShapeType == 2) {
+            newObject.sx = Number(startXIn.value);
+            newObject.sy = Number(startYIn.value);
+            newObject.ex = Number(endXIn.value);
+            newObject.ey = Number(endYIn.value);
         }
         if (createShapeType == 4) {
-            newObject.text = textIn.value;
-            newObject.font = fontIn.value;
-            newObject.fontColor = fontColor.value;
+            newObject.te = textIn.value;
+            newObject.fo = fontIn.value;
+            newObject.foc = fontColor.value;
         }
 
         if (editShapeIndex == -1) {
@@ -390,18 +390,18 @@
         editShapeIndex = index_;
         let currentShape = shapeList[index_];
 
-        if (currentShape.size != undefined) sizeIn.value = currentShape.size;
-        if (currentShape.position != undefined) { xPositionIn.value = currentShape.position[0]; yPositionIn.value = currentShape.position[1]; }
-        if (currentShape.fillStyle != undefined) fillIn.value = currentShape.fillStyle;
-        if (currentShape.strokeStyle != undefined) strokeIn.value = currentShape.strokeStyle;
-        if (currentShape.lineWidth != undefined) lineIn.value = currentShape.lineWidth;
-        if (currentShape.startX != undefined) startXIn.value = currentShape.startX;
-        if (currentShape.startY != undefined) startYIn.value = currentShape.startY;
-        if (currentShape.endX != undefined) endXIn.value = currentShape.endX;
-        if (currentShape.endY != undefined) endYIn.value = currentShape.endY;
-        if (currentShape.text != undefined) textIn.value = currentShape.text;
-        if (currentShape.fontColor != undefined) colorIn.value = currentShape.fontColor;
-        if (currentShape.font != undefined) fontIn.value = currentShape.font;
+        if (currentShape.size != undefined) sizeIn.value = currentShape.si;
+        if (currentShape.position != undefined) { xPositionIn.value = currentShape.pos[0]; yPositionIn.value = currentShape.pos[1]; }
+        if (currentShape.fillStyle != undefined) fillIn.value = currentShape.fis;
+        if (currentShape.strokeStyle != undefined) strokeIn.value = currentShape.sts;
+        if (currentShape.lineWidth != undefined) lineIn.value = currentShape.lw;
+        if (currentShape.startX != undefined) startXIn.value = currentShape.sx;
+        if (currentShape.startY != undefined) startYIn.value = currentShape.sy;
+        if (currentShape.endX != undefined) endXIn.value = currentShape.ex;
+        if (currentShape.endY != undefined) endYIn.value = currentShape.ey;
+        if (currentShape.text != undefined) textIn.value = currentShape.te;
+        if (currentShape.fontColor != undefined) colorIn.value = currentShape.foc;
+        if (currentShape.font != undefined) fontIn.value = currentShape.fo;
     } // editShape
 
     /**
@@ -413,7 +413,7 @@
         for (let currentShapeIndex = (shapeList.length - 1); currentShapeIndex >= 0; currentShapeIndex--) {
             try {
                 listText +=
-                    "<li class='shape-list-element'> <input onchange='shapeList[" + currentShapeIndex + "].name = this.value; updateShapeList();' value='" + shapeList[currentShapeIndex].name + "' type='text'/>" + shapeList[currentShapeIndex].shape + " - ";
+                    "<li class='shape-list-element'> <input onchange='shapeList[" + currentShapeIndex + "].name = this.value; updateShapeList();' value='" + shapeList[currentShapeIndex].name + "' type='text'/>" + shapeList[currentShapeIndex].sh + " - ";
 
                 listText += "<button onclick='shapeList.splice(" + currentShapeIndex + ", 1); updateShapeList();'>Remove</button>";
 
@@ -443,20 +443,18 @@
             context.save();
             context.beginPath();
 
-            let size = shapeList[currentShapeIndex].size,
-                position = shapeList[currentShapeIndex].position,
+            let size = shapeList[currentShapeIndex].si,
+                position = shapeList[currentShapeIndex].pos,
                 xPosition = (typeof (position) == typeof []) ? (position[0]) : (position),
                 yPosition = (typeof (position) == typeof []) ? (position[1]) : (position);
 
-            if (shapeList[currentShapeIndex].font) {
-                context.font = shapeList[currentShapeIndex].font;
+            if (shapeList[currentShapeIndex].fo) {
+                context.font = shapeList[currentShapeIndex].fo;
 
-                if (shapeList[currentShapeIndex].fontColor) {
-                    context.fillStyle = shapeList[currentShapeIndex].fontColor;
-                }
+                context.fillStyle = shapeList[currentShapeIndex].foc;
             }
 
-            switch (shapeList[currentShapeIndex].shape) {
+            switch (shapeList[currentShapeIndex].sh) {
                 // Draw a Rectangle
                 case (0):
                     context.rect(xPosition, yPosition, size, size);
@@ -467,8 +465,8 @@
                     break;
                 // Draw a Line
                 case (2):
-                    context.moveTo(shapeList[currentShapeIndex].startX, shapeList[currentShapeIndex].startY);
-                    context.lineTo(shapeList[currentShapeIndex].endX, shapeList[currentShapeIndex].endY);
+                    context.moveTo(shapeList[currentShapeIndex].sx, shapeList[currentShapeIndex].sy);
+                    context.lineTo(shapeList[currentShapeIndex].ex, shapeList[currentShapeIndex].ey);
                     break;
                 // Draw a Hexagon
                 case (3):
@@ -486,20 +484,21 @@
                     break;
                 // Draw a Text
                 case (4):
-                    context.fillText(shapeList[currentShapeIndex].text, xPosition, yPosition);
+                    context.fillText(shapeList[currentShapeIndex].te, xPosition, yPosition);
+
                     break;
             }
 
-            if (shapeList[currentShapeIndex].fillStyle) {
-                context.fillStyle = shapeList[currentShapeIndex].fillStyle;
+            if (shapeList[currentShapeIndex].fis) {
+                context.fillStyle = shapeList[currentShapeIndex].fis;
                 context.fill();
             }
 
-            if (shapeList[currentShapeIndex].strokeStyle) {
-                context.strokeStyle = shapeList[currentShapeIndex].strokeStyle;
+            if (shapeList[currentShapeIndex].sts) {
+                context.strokeStyle = shapeList[currentShapeIndex].sts;
 
-                if (shapeList[currentShapeIndex].lineWidth) {
-                    context.lineWidth = shapeList[currentShapeIndex].lineWidth;
+                if (shapeList[currentShapeIndex].lw) {
+                    context.lineWidth = shapeList[currentShapeIndex].lw;
                 }
 
                 context.stroke();
