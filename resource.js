@@ -148,7 +148,6 @@ let
         }
     ],
 
-
     /**
      * The Backgrounds of HTML-Elements.
      * 
@@ -209,6 +208,13 @@ let
             element: "open_f",
             size: 100,
             list: [{ "name": "Stick_Background", "sh": 2, "sx": 22, "sy": 78, "ex": 82, "ey": 18, "sts": "#000", "lw": "12" }, { "name": "Shaft", "sh": 2, "sx": 23, "sy": 77, "ex": 40, "ey": 60, "sts": "#804000", "lw": "10" }, { "name": "Blade", "sh": 2, "sx": 40, "sy": 60, "ex": 81, "ey": 19, "sts": "#c9c9c9", "lw": "10" }, { "name": "Middle", "sh": 2, "sx": 30, "sy": 45, "ex": 55, "ey": 70, "sts": "#222", "lw": "8" }, { "name": "End", "sh": 1, "si": 10, "pos": [25, 75], "fis": "#222", "lw": "1" }]
+        },
+
+        // ICONS
+        {
+            element: "healthIcon",
+            size: 50,
+            list: [{ "name": "Shape_0", "sh": 1, "si": 11, "pos": [15, 14], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_1", "sh": 1, "si": 11, "pos": [35, 14], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_2", "sh": 1, "si": 11, "pos": [32, 20], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_3", "sh": 1, "si": 11, "pos": [18, 20], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_4", "sh": 1, "si": 11, "pos": [22, 26], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_5", "sh": 1, "si": 11, "pos": [28, 26], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_6", "sh": 1, "si": 11, "pos": [25, 30], "fis": "#ff0000", "lw": "1" }]
         }
     ],
 

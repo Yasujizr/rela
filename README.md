@@ -10,6 +10,7 @@ And that's it.
 
 # Author / Supporter
 - **unrealGuthrie**, as the *GUY-FOR-LITERALLY-EVERYTHING*
+- **Yasujizr**, as the *Logo-Designer* (see https://github.com/Yasujizr)
 
 Of course, we're always looking for some more Contributors. So, if you have some interesting ideas or want to add new features yourself, then contact us via  Discord.
 But we also need some money. That's why we created a Patreon-Page (https://www.patreon.com/rela)
