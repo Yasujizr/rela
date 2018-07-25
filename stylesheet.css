@@ -365,7 +365,7 @@ li {
     height: 9em;
     position: absolute;
     z-index: 13;
-    /* pointer-events: none; */
+    pointer-events: none;
 }
 
 #statusBar {

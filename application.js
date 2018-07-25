@@ -1310,8 +1310,8 @@ class NewPlayer {
             }
             else {
                 this.health -= 1;
-                
-            setCSS("healthBarValue", "width", this.health + "%");
+
+                setCSS("healthBarValue", "width", this.health + "%");
             }
         }
 
