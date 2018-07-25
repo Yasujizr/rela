@@ -88,7 +88,7 @@ let
     STORAGE_PUTOUT = 0,
     STORAGE_PUTIN = 1,
 
-    SOUNDCONTEXT = new (window.AudioContext || window.webkitAudioContext || window.Audio)(),
+    SOUNDCONTEXT = new (window.AudioContext || window.webkitAudioContext || window.Audio) (),
     PRESSED_KEYLIST = [],
 
     GAMETIMER = performance.now(),
