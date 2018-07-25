@@ -198,6 +198,7 @@ li {
     width: 6em;
     height: 0.9em;
     margin: 0.2em 0;
+    border: 2px solid #ffffff;
     border-radius: 20px;
 }
 
@@ -379,7 +380,8 @@ li {
     width: 8em;
     height: 8em;
     margin: 0.5em 0.5em;
-    border: 1px solid black;
+    background-color: #ffa81f;
+    border: 5px solid #d4b67c;
     border-radius: 0.8em;
     float: left;
 }
