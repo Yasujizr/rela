@@ -1183,12 +1183,12 @@ class NewPlayer {
             if (this.harvest == HARVESTING_NOTHING && objectInRadius != -1) {
                 this.harvest = objectInRadius;
 
-                if (Landscape.objectList[this.harvest].storage) {
-                    setHTML("gameHeader", (LISTOBJECTS[Landscape.objectList[this.harvest].type].obj + " - Press Space!"));
-                }
-                else {
-                    setHTML("gameHeader", (LISTOBJECTS[Landscape.objectList[this.harvest].type].obj));
-                }
+                // if (Landscape.objectList[this.harvest].storage) {
+                //     setHTML("currentHarvest", (LISTOBJECTS[Landscape.objectList[this.harvest].type].obj + " - Press Space!"));
+                // }
+                // else {
+                //     setHTML("currentHarvest", (LISTOBJECTS[Landscape.objectList[this.harvest].type].obj));
+                // }
             }
 
             this.processMovement();
@@ -1277,16 +1277,6 @@ class NewPlayer {
     } // render
 
     /**
-     * Render the current Stats of the Player.
-    */
-    renderStats() {
-        Canvas.context.fillStyle = "#A00101";
-        Canvas.context.fillRect((window.innerWidth / 2), 5, (window.innerWidth * 0.3) * (this.health / this.maxHealth), (window.innerHeight * 0.02));
-        Canvas.context.fillStyle = "#0DA702";
-        Canvas.context.fillRect((window.innerWidth / 2) - (window.innerWidth * 0.3) * (this.hunger / this.maxHunger), 5, (window.innerWidth * 0.3) * (this.hunger / this.maxHunger), (window.innerHeight * 0.02));
-    } // renderStats
-
-    /**
      * Reset and Update Values and Parameters.
     */
     resetStats() {
@@ -1315,9 +1305,13 @@ class NewPlayer {
 
             if (this.hunger > 0) {
                 this.hunger -= 1;
+
+                setCSS("hungerBarValue", "width", this.hunger + "%");
             }
             else {
                 this.health -= 1;
+                
+            setCSS("healthBarValue", "width", this.health + "%");
             }
         }
 
@@ -1485,7 +1479,7 @@ class NewPlayer {
 
         if (distance > (Landscape.objectList[this.harvest].size + (this.size / 2) + 4)) {
             this.harvest = HARVESTING_NOTHING;
-            setHTML("gameHeader", "");
+            // setHTML("currentHarvest", "");
 
             setCSS("g", "display", "none");
             setHTML("storageList", "");
@@ -2650,6 +2644,7 @@ function startGame() {
     setCSS("initial", "display", "none");
     setCSS("windows", "display", "block");
     setCSS("menuButtons", "display", "block");
+    setCSS("gameHeader", "display", "flex");
 
     initializeButtons();
 
@@ -2735,8 +2730,6 @@ function renderGame() {
     textManager.render();
 
     Mouse.renderBuildPreview();
-
-    Player.renderStats();
 } // renderGame
 
 // ===============================================================================================
@@ -2836,6 +2829,7 @@ function startInitialScreen() {
     setCSS("initial", "display", "block");
     setCSS("windows", "display", "none");
     setCSS("menuButtons", "display", "none");
+    setCSS("gameHeader", "display", "none");
     setCSS("end", "display", "none");
 
     initializeGame();

@@ -215,6 +215,12 @@ let
             element: "healthIcon",
             size: 50,
             list: [{ "name": "Shape_0", "sh": 1, "si": 11, "pos": [15, 14], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_1", "sh": 1, "si": 11, "pos": [35, 14], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_2", "sh": 1, "si": 11, "pos": [32, 20], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_3", "sh": 1, "si": 11, "pos": [18, 20], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_4", "sh": 1, "si": 11, "pos": [22, 26], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_5", "sh": 1, "si": 11, "pos": [28, 26], "fis": "#ff0000", "lw": "1" }, { "name": "Shape_6", "sh": 1, "si": 11, "pos": [25, 30], "fis": "#ff0000", "lw": "1" }]
+        },
+
+        {
+            element: "hungerIcon",
+            size: 50,
+            list: [{"name":"Shape_1","sh":2,"sts":"#fff","lw":"7","sx":15,"sy":35,"ex":35,"ey":15},{"name":"Shape_1","sh":1,"si":6,"pos":[10,32],"fis":"#fff","lw":"1"},{"name":"Shape_2","sh":1,"si":6,"pos":[16,38],"fis":"#fff","lw":"1"},{"name":"Shape_3","sh":1,"si":12,"pos":[35,15],"fis":"#A22A00","sts":"#671B00","lw":"3"}]
         }
     ],
 

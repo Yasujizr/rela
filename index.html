@@ -88,11 +88,26 @@
     </div>
 
     <div id="game" class="whole-window window-frame">
-        <header id="gameHeader"></header>
+        <div id="gameHeader">
+            <div id="statusBar">
+                <span id="playerStatusIcon"></span>
 
-        <div id="statusBar">
-            <div id="healthBar"><span id="healthIcon"></span></div>
-            <div id="hungerBar"><span id="hungerIcon"></span></div>
+                <div id="statusList">
+                    <ul id="healthStatus" class="status-div">
+                        <li id="healthIcon" class="status-icon-image"></li>
+                        <li id="healthBar" class="status-bar-outer" style="background-color: #ff9c9c; border: 1px solid #9c0000;">
+                            <span id="healthBarValue" class="status-bar-inner" style="background-color: #ff0404;"></span>
+                        </li>
+                    </ul>
+                    <ul id="hungerStatus" class="status-div">
+                        <li id="hungerIcon" class="status-icon-image"></li>
+                        <li id="hungerBar" class="status-bar-outer" style="background-color: #79ff79; border: 1px solid green;">
+                                <span id="hungerBarValue" class="status-bar-inner" style="background-color: #00b700;"></span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
         </div>
 
         <canvas id="AnimationCanvas" class="whole-window window-frame"></canvas>
