@@ -1739,6 +1739,8 @@ class NewPlayer {
                                 this.inventory.add(LISTITEMS[item_].use.responseItem);
                                 this.checkIfDiscovered(LISTITEMS[item_].use.responseItem);
                             }
+
+                            setCSS("hungerBarValue", "width", this.hunger + "%");
                         }
                         break;
                     case (USE_BUILD):
@@ -2646,6 +2648,8 @@ function startGame() {
         Game.processKeyboardInput = true;
 
         Player.updateWindows();
+        setCSS("hungerBarValue", "width", Player.hunger + "%");
+        setCSS("healthBarValue", "width", Player.health + "%");
 
         printMessage(SHOW_INFORMATION, "Start Game!");
         requestAnimationFrame(runGame);

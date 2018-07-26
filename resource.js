@@ -382,16 +382,7 @@ let
         {},
         {},
         {},
-        {},
-        {
-            obj: "HOUSE I",
-            passable: false,
-            size: 150,
-            breakSize: 148,
-            damaging: 0.1,
-            position: 0,
-            sprite: 12
-        }
+        {}
     ],
 
     /**
@@ -488,7 +479,7 @@ let
         {
             name: "Basic Architecture",
             neededPoints: 40,
-            improvements: [{ type: IMPROV_CONS, index: 4 }, { type: IMPROV_CONS, index: 5 }]
+            improvements: [{ type: IMPROV_CONS, index: 4 }]
         }
     ],
 
@@ -505,8 +496,7 @@ let
         { object: 13, necessary: [{ item: 2, amount: 5 }] },
         { object: 14, necessary: [{ item: 2, amount: 2 }] },
         { object: 15, necessary: [{ item: 2, amount: 8 }] },
-        { object: 16, necessary: [{ item: 2, amount: 1 }] },
-        { object: 27, necessary: [{ item: 2, amount: 10 }] }
+        { object: 16, necessary: [{ item: 2, amount: 1 }] }
     ],
 
     /**
