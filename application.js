@@ -1182,13 +1182,6 @@ class NewPlayer {
             let objectInRadius = Landscape.checkRadiusForObject(this.x, this.y, ((this.size / 2) + 4));
             if (this.harvest == HARVESTING_NOTHING && objectInRadius != -1) {
                 this.harvest = objectInRadius;
-
-                // if (Landscape.objectList[this.harvest].storage) {
-                //     setHTML("currentHarvest", (LISTOBJECTS[Landscape.objectList[this.harvest].type].obj + " - Press Space!"));
-                // }
-                // else {
-                //     setHTML("currentHarvest", (LISTOBJECTS[Landscape.objectList[this.harvest].type].obj));
-                // }
             }
 
             this.processMovement();
@@ -1479,8 +1472,7 @@ class NewPlayer {
 
         if (distance > (Landscape.objectList[this.harvest].size + (this.size / 2) + 4)) {
             this.harvest = HARVESTING_NOTHING;
-            // setHTML("currentHarvest", "");
-
+            
             setCSS("g", "display", "none");
             setHTML("storageList", "");
 
@@ -1606,7 +1598,7 @@ class NewPlayer {
 
         for (let evolutionIterator in this.evolutions) {
             evolutionsInnerHtml +=
-                "<li class='window-list-element'>" +
+                "<li class='window-list-element' title='" + LISTEVOLUTIONS[this.evolutions[evolutionIterator]].neededPoints + " Points'>" +
                 LISTEVOLUTIONS[this.evolutions[evolutionIterator]].name +
                 "<button class='window-list-element-button' onclick='Player.getEvolution(" +
                 this.evolutions[evolutionIterator] + ")'>Get</button>" +
