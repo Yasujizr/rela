@@ -391,7 +391,16 @@
         let currentShape = shapeList[index_];
 
         if (currentShape.si != undefined) sizeIn.value = currentShape.si;
-        if (currentShape.pos != undefined) { xPositionIn.value = currentShape.pos[0]; yPositionIn.value = currentShape.pos[1]; }
+        if (currentShape.pos != undefined) { 
+            if(typeof (currentShape.pos) == typeof([])) {
+                xPositionIn.value = currentShape.pos[0]; 
+                yPositionIn.value = currentShape.pos[1];
+            }
+            else {
+                xPositionIn.value = currentShape.pos; 
+                yPositionIn.value = currentShape.pos;
+            }
+        }
         if (currentShape.fis != undefined) fillIn.value = currentShape.fis;
         if (currentShape.sts != undefined) strokeIn.value = currentShape.sts;
         if (currentShape.lw != undefined) lineIn.value = currentShape.lw;

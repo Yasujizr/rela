@@ -120,13 +120,13 @@ let
         // PICKAXE
         {
             cs: 64,
-            list: [{ "name": "Stick", "sh": 2, "sx": 0, "sy": 6, "ex": 45, "ey": 6, "sts": "#4e350f", "lw": "6" }, { "name": "Stone", "sh": 0, "si": 10, "pos": 1, "fis": "#222", "lw": "1" }]
+            list: [{ "name": "Shape_2", "sh": 2, "sts": "#000", "lw": "8", "sx": 0, "sy": 6, "ex": 47, "ey": 6 }, { "name": "Stick", "sh": 2, "sts": "#4e350f", "lw": "6", "sx": 1, "sy": 6, "ex": 46, "ey": 6 }, { "name": "Stone", "sh": 0, "si": 10, "pos": [1, 1], "fis": "#222", "sts": "#000", "lw": "1" }]
         },
 
         // AXE
         {
             cs: 64,
-            list: [{ "name": "Stick", "sh": 2, "sx": 0, "sy": 58, "ex": 45, "ey": 58, "sts": "#4e350f", "lw": "6" }, { "name": "Stone", "sh": 2, "sx": 2, "sy": 58, "ex": 14, "ey": 58, "sts": "#494949", "lw": "10" }]
+            list: [{ "name": "Shape_2", "sh": 2, "sts": "#000", "lw": "8", "sx": 0, "sy": 58, "ex": 47, "ey": 58 }, { "name": "Stick", "sh": 2, "sts": "#4e350f", "lw": "6", "sx": 1, "sy": 58, "ex": 46, "ey": 58 }, { "name": "Shape_3", "sh": 2, "sts": "#000", "lw": "12", "sx": 1, "sy": 58, "ex": 15, "ey": 58 }, { "name": "Stone", "sh": 2, "sts": "#494949", "lw": "10", "sx": 2, "sy": 58, "ex": 14, "ey": 58 }]
         },
 
         // BASIC_AMOUR
@@ -220,7 +220,7 @@ let
         {
             element: "hungerIcon",
             size: 50,
-            list: [{"name":"Shape_1","sh":2,"sts":"#fff","lw":"7","sx":15,"sy":35,"ex":35,"ey":15},{"name":"Shape_1","sh":1,"si":6,"pos":[10,32],"fis":"#fff","lw":"1"},{"name":"Shape_2","sh":1,"si":6,"pos":[16,38],"fis":"#fff","lw":"1"},{"name":"Shape_3","sh":1,"si":12,"pos":[35,15],"fis":"#A22A00","sts":"#671B00","lw":"3"}]
+            list: [{ "name": "Shape_1", "sh": 2, "sts": "#fff", "lw": "7", "sx": 15, "sy": 35, "ex": 35, "ey": 15 }, { "name": "Shape_1", "sh": 1, "si": 6, "pos": [10, 32], "fis": "#fff", "lw": "1" }, { "name": "Shape_2", "sh": 1, "si": 6, "pos": [16, 38], "fis": "#fff", "lw": "1" }, { "name": "Shape_3", "sh": 1, "si": 12, "pos": [35, 15], "fis": "#A22A00", "sts": "#671B00", "lw": "3" }]
         }
     ],
 
