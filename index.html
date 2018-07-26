@@ -81,7 +81,9 @@
                 </div>
 
                 <p oncontextmenu="" class="selectable" style="color: #cdd6c4; font-family: Courier, monospace; font-size: 0.95em; margin-top: 1em;">
-                    <p id="emailLinkLine" style="display: block;">or <a id="emailLink" href="mailto:recursivelaughter@gmail.com" class="selectable">recursivelaughter@gmail.com</a></p>
+                    <p id="emailLinkLine" style="display: block;">or
+                        <a id="emailLink" href="mailto:recursivelaughter@gmail.com" class="selectable">recursivelaughter@gmail.com</a>
+                    </p>
                     <p id="showServiceLink" style="display: block;"></p>
                 </p>
             </div>
@@ -103,7 +105,7 @@
                     <ul id="hungerStatus" class="status-div">
                         <li id="hungerIcon" class="status-icon-image"></li>
                         <li id="hungerBar" class="status-bar-outer" style="background-color: #79ff79;">
-                                <span id="hungerBarValue" class="status-bar-inner" style="background-color: #00b700;"></span>
+                            <span id="hungerBarValue" class="status-bar-inner" style="background-color: #00b700;"></span>
                         </li>
                     </ul>
 
@@ -213,6 +215,22 @@
     */
     (function () {
         document.getElementById("load").style.display = "block";
+
+        let linkList = document.getElementsByClassName("further-links");
+
+        for (let linkIterator = 0; linkIterator < linkList.length; linkIterator++) {
+            let currentLink = linkList[linkIterator];
+            currentLink.addEventListener("mouseenter", () => {
+                document.getElementById("emailLinkLine").style.display = "none";
+                document.getElementById("showServiceLink").style.display = "block";
+                document.getElementById("showServiceLink").innerHTML = "Click to open <b>" + linkList[linkIterator].name + "</b>";
+            });
+
+            currentLink.addEventListener("mouseleave", () => {
+                document.getElementById("emailLinkLine").style.display = "block";
+                document.getElementById("showServiceLink").style.display = "none";
+            });
+        }
     })();
 </script>
 <script src="/resource.js"></script>

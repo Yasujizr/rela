@@ -653,27 +653,6 @@ window.addEventListener("resize", () => {
 // BUTTONS t_h
 // ===============================================================================================
 /**
- * Initialize the Links on the main Menuscreen.
-*/
-function initializeLinks() {
-    let linkList = document.getElementsByClassName("further-links");
-
-    for(let linkIterator = 0; linkIterator < linkList.length; linkIterator++) {
-        console.log("a");
-        getEle(linkList[linkIterator].id).addEventListener("mouseenter", () => {
-            setCSS("emailLinkLine", "display", "none");
-            setCSS("showServiceLink", "display", "block");
-            setHTML("showServiceLink", "Click to open <b>" + linkList[linkIterator].name + "</b>");
-        });
-
-        getEle(linkList[linkIterator].id).addEventListener("mouseleave", () => {
-            setCSS("emailLinkLine", "display", "block");
-            setCSS("showServiceLink", "display", "none");
-        });
-    }
-} // initializeLinks
-
-/**
  * Initialize all Buttons and create the Event-Listeners.
 */
 function initializeButtons() {
@@ -2836,7 +2815,6 @@ function saveGameToJSONFile() {
 */
 function startInitialScreen() {
     initializeBackgroundSprites();
-    initializeLinks();
 
     Canvas.clear();
     Effects.clear();
