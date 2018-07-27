@@ -18,6 +18,20 @@ let
     DROPPED_REMOVE_TIME = 10000,
     HUNGERTIMER = 8000,
 
+    // PLAYER-SCRIPT
+    SCRIPT_PLAYER_WALK = 0,             // Walk to a certain position               info: {x: xpos, y: ypos}
+    SCRIPT_PLAYER_GATHER = 1,           // Get a special amount of items            info: [{item: it, amount: at}]
+    SCRIPT_PLAYER_CRAFT = 2,            // Craft an Item                            info: item
+    SCRIPT_PLAYER_BUILD = 3,            // Build one or more objects                info: object
+    SCRIPT_PLAYER_GET = 4,              // Get an Evolution                         info: evolution
+    // MARGO-SCRIPT
+    SCRIPT_MARGO_WALK = 10,             // Let Margo walk to a certain position     info: {x: xpos, y: ypos}
+    SCRIPT_MARGO_ACTION = 11,           // Let Margo do something                   info: {}
+    // Both
+    SCRIPT_SPEAK = 20,                  // Let somebody speak                       info: {who: x, text: ["Hallo"]}
+    // Gamerelated
+    SCRIPT_TIME = 30,                   // Set the Gametime                         info: time
+    SCRIPT_CHANGE = 31,                 // Set Game-Variables                       info: [{variable: "name", new: "newValue"}]
 
     /**
      * All the Sprites, that will be created with createSprite() and then stored in LISTSPRITES.
@@ -564,15 +578,8 @@ let
     ],
 
     /**
-     * What NPCs should be created, when loading the Game.
-     * 
-     * type: The Type of NPC
-     * amount: The Amount of this specific NPC
-     * [
-     * minPos: The minimal X- and Y-Position of this NPC
-     * maxPos: The maximal X- and Y-Position of this NPC
-     * ]
+     * The whole Script.
     */
-    createNPCList = [
-        { type: 0, amount: 800, minPos: 400, maxPos: (99 * 400) }
+    FINALSCRIPT = [
+        { type: SCRIPT_PLAYER_GATHER, info: [{ item: 2, amount: 5 }] },
     ];

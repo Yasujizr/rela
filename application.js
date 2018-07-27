@@ -88,7 +88,7 @@ let
     STORAGE_PUTOUT = 0,
     STORAGE_PUTIN = 1,
 
-    SOUNDCONTEXT = new (window.AudioContext || window.webkitAudioContext || window.Audio) (),
+    SOUNDCONTEXT = new (window.AudioContext || window.webkitAudioContext || window.Audio)(),
     PRESSED_KEYLIST = [],
 
     GAMETIMER = performance.now(),
@@ -817,8 +817,6 @@ class newText {
 */
 function renderLight() {
     try {
-        Effects.clear();
-
         setCSS(Effects.canvas, "opacity", Math.abs(MAXOPACITY * Math.sin(Player.clockTime)));
 
         Effects.context.translate((-Player.x + (Effects.width / 2)), (-Player.y + (Effects.height / 2)));
@@ -1303,6 +1301,7 @@ class NewPlayer {
             }
             else {
                 this.health -= 1;
+                this.checkIfAlive();
 
                 setCSS("healthBarValue", "width", this.health + "%");
             }
@@ -1444,6 +1443,19 @@ class NewPlayer {
     } // processInput
 
     /**
+     * Check if Player is still alive.
+    */
+    checkIfAlive() {
+        if (this.health <= 0) {
+            Game.gameRunning = false;
+            Game.processMouseInput = false;
+            Game.processKeyboardInput = false;
+
+            startFinalScreen();
+        }
+    } // checkIfAlive
+
+    /**
      * Check if the Position is near the Player.
      * 
      * @return {boolean} Is the Position near the Player
@@ -1472,7 +1484,7 @@ class NewPlayer {
 
         if (distance > (Landscape.objectList[this.harvest].size + (this.size / 2) + 4)) {
             this.harvest = HARVESTING_NOTHING;
-            
+
             setCSS("g", "display", "none");
             setHTML("storageList", "");
 
@@ -2672,17 +2684,20 @@ function runGame() {
     if (GAMETIMER >= FRAMERATEDELAY) {
         GAMETIMER = (performance.now() - (passedTime % FRAMERATEDELAY));
 
+        Canvas.clear();
+        Effects.clear();
+
         processTime();
 
         Mouse.calculateRelativePosition();
 
         processKeyboardInput();
 
+        StoryScript.update();
+
         Margo.update();
 
-        if (!Game.deviceIsTouch) {
-            Player.processInput();
-        }
+        Player.processInput();
 
         Player.update();
 
@@ -2690,43 +2705,18 @@ function runGame() {
 
         textManager.update();
 
-        renderGame();
+        Landscape.render();
+        Landscape.renderDroppedItems();
+        Landscape.renderObjects(0);
+        renderDynamic();
+        Player.render();
+        Margo.render();
+        Landscape.renderObjects(1);
+        textManager.render();
+        Mouse.renderBuildPreview();
         renderLight();
-
-        if (Player.health <= 0) {
-            Game.gameRunning = false;
-            Game.processMouseInput = false;
-            Game.processKeyboardInput = false;
-
-            startFinalScreen();
-        }
     }
 } // runGame
-
-/**
- * Render the Game.
-*/
-function renderGame() {
-    Canvas.clear();
-
-    Landscape.render();
-
-    Landscape.renderDroppedItems();
-
-    Landscape.renderObjects(0);
-
-    renderDynamic();
-
-    Player.render();
-
-    Margo.render();
-
-    Landscape.renderObjects(1);
-
-    textManager.render();
-
-    Mouse.renderBuildPreview();
-} // renderGame
 
 // ===============================================================================================
 // SAVE t_u
@@ -2741,11 +2731,13 @@ function loadLocalStorage() {
         if (localStorage) {
             let loadPlayer = JSON.parse(localStorage.getItem("player")),
                 loadMap = JSON.parse(localStorage.getItem("map")),
-                loadNPC = JSON.parse(localStorage.getItem("npc"));
+                loadNPC = JSON.parse(localStorage.getItem("npc")),
+                loadScript = JSON.parse(localStorage.getItem("script"));
 
             Player.load(loadPlayer);
             Landscape.load(loadMap);
             Margo.load(loadNPC);
+            StoryScript.load(loadScript);
 
             startGame();
         }
@@ -2772,6 +2764,7 @@ function loadJSONFile(file) {
             Player.load(fileDate.player);
             Landscape.load(fileDate.map);
             Margo.load(fileDate.npc);
+            StoryScript.load(fileDate.script);
 
             startGame();
         }
@@ -2785,13 +2778,10 @@ function loadJSONFile(file) {
 */
 function saveToLocalStorage() {
     if (localStorage) {
-        let JSON_savePlayer = JSON.stringify(Player),
-            JSON_saveMap = JSON.stringify(Landscape),
-            JSON_saveNPC = JSON.stringify(Margo);
-
-        localStorage.setItem("player", JSON_savePlayer);
-        localStorage.setItem("map", JSON_saveMap);
-        localStorage.setItem("npc", JSON_saveNPC);
+        localStorage.setItem("player", JSON.stringify(Player));
+        localStorage.setItem("map", JSON.stringify(Landscape));
+        localStorage.setItem("npc", JSON.stringify(Margo));
+        localStorage.setItem("script", JSON.stringify(StoryScript));
     }
 } // saveToLocalStorage
 
@@ -2800,7 +2790,7 @@ function saveToLocalStorage() {
 */
 function saveGameToJSONFile() {
     let a = document.createElement("a"),
-        file = new Blob([JSON.stringify({ player: Player, map: Landscape, npc: Margo })], { type: 'text/plain' });
+        file = new Blob([JSON.stringify({ player: Player, map: Landscape, npc: Margo, script: StoryScript })], { type: 'text/plain' });
 
     a.href = URL.createObjectURL(file);
     a.download = "save.json";
@@ -2866,8 +2856,26 @@ class NewStory {
      * Create a new Story-Line.
     */
     constructor() {
-        this.skriptLine = [];
+        this.skriptLine = FINALSCRIPT;
     } // constructor
+
+    /**
+     * Load an exitisting Script.
+     * 
+     * @param {Object} savedata_ - The Object of the existing Script
+    */
+    load(savedata_) {
+        Object.assign(this, savedata_);
+    } // load
+
+    /**
+     * Check if a new part of the Script should start,
+    */
+    update() {
+        let currentScriptPart = this.skriptLine[0];
+
+
+    } // update
 } // NewStory
 
 // ===============================================================================================
