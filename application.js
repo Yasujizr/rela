@@ -508,6 +508,9 @@ class NewCanvas {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
 
+        this.oldXZero = 0;
+        this.oldYZero = 0;
+
         this.updateResolution();
     } // constructor
 
@@ -524,6 +527,13 @@ class NewCanvas {
         this.canvas.height = Math.round(this.height * CANVAS_SCALING_FACTOR);
         this.context.scale(CANVAS_SCALING_FACTOR, CANVAS_SCALING_FACTOR);
     } // updateResolution
+
+    /**
+     * Update the Drawing-Origin-Point.
+    */
+    updateOrigin() {
+
+    } // updateOrigin
 
     /**
      * Clear the Canvas.
@@ -2294,6 +2304,7 @@ class NewMap {
      * @param {number} position_ - Which position should be rendered?
     */
     renderObjects(position_) {
+        Canvas.context.save();
         Canvas.context.translate((-Player.x + (Canvas.width / 2)), (-Player.y + (Canvas.height / 2)));
 
         let removeList = [];
@@ -2324,7 +2335,7 @@ class NewMap {
             this.removeObject(removeList[objectIterator]);
         }
 
-        Canvas.context.translate((Player.x - (Canvas.width / 2)), (Player.y - (Canvas.height / 2)));
+        Canvas.context.restore();
     } // renderObjects
 
     /**
@@ -2683,28 +2694,19 @@ function runGame() {
     let passedTime = (performance.now() - GAMETIMER);
     if (GAMETIMER >= FRAMERATEDELAY) {
         GAMETIMER = (performance.now() - (passedTime % FRAMERATEDELAY));
+        
+        processTime();
+        Mouse.calculateRelativePosition();
+        processKeyboardInput();
+        StoryScript.update();
+        Margo.update();
+        Player.processInput();
+        Player.update();
+        Landscape.update();
+        textManager.update();
 
         Canvas.clear();
         Effects.clear();
-
-        processTime();
-
-        Mouse.calculateRelativePosition();
-
-        processKeyboardInput();
-
-        StoryScript.update();
-
-        Margo.update();
-
-        Player.processInput();
-
-        Player.update();
-
-        Landscape.update();
-
-        textManager.update();
-
         Landscape.render();
         Landscape.renderDroppedItems();
         Landscape.renderObjects(0);
