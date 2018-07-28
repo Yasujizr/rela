@@ -2599,8 +2599,8 @@ function generateFields() {
  * The Game-Object, containing all Information, about the Device of the User and the Controls.
 */
 let Game = {
-    // Is the Device using Touch? (Smartphones and Tablets)
-    controlType: CONTROL_NORMAL, //(checkIfDeviceHasTouch()) ? (CONTROL_TOUCH) : (CONTROL_NORMAL),
+    // Is the Device using Touch?
+    controlType: CONTROL_NORMAL,
 
     gameRunning: false,
 
